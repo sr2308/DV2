@@ -1,0 +1,47 @@
+jurisdiction,status,count
+Australian Capital Territory,Depleted,1
+Commonwealth,Depleted,15
+Commonwealth,Depleting,2
+Commonwealth,Negligible,3
+Commonwealth,Recovering,1
+Commonwealth,Sustainable,63
+Commonwealth,Undefined,12
+New South Wales,Depleted,13
+New South Wales,Depleting,3
+New South Wales,Negligible,11
+New South Wales,Recovering,1
+New South Wales,Sustainable,52
+New South Wales,Undefined,11
+Northern Territory,Depleted,1
+Northern Territory,Negligible,5
+Northern Territory,Recovering,2
+Northern Territory,Sustainable,43
+Northern Territory,Undefined,6
+Queensland,Depleted,7
+Queensland,Depleting,1
+Queensland,Negligible,6
+Queensland,Sustainable,69
+Queensland,Undefined,31
+South Australia,Depleted,9
+South Australia,Depleting,3
+South Australia,Negligible,4
+South Australia,Recovering,2
+South Australia,Sustainable,41
+South Australia,Undefined,9
+Tasmania,Depleted,12
+Tasmania,Depleting,2
+Tasmania,Negligible,1
+Tasmania,Recovering,1
+Tasmania,Sustainable,33
+Tasmania,Undefined,6
+Victoria,Depleted,8
+Victoria,Depleting,2
+Victoria,Negligible,1
+Victoria,Recovering,4
+Victoria,Sustainable,29
+Victoria,Undefined,16
+Western Australia,Depleted,8
+Western Australia,Negligible,12
+Western Australia,Recovering,8
+Western Australia,Sustainable,104
+Western Australia,Undefined,2

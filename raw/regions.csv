@@ -1,0 +1,11 @@
+region,state,lat,lon,species,production_type,value_musd_2023_24,afas_table,note
+Huon Valley,Tasmania,-43.03,147.05,Salmonids,Farmed,1280.6,Table 10,Tasmania state total for this species
+Ayr (Burdekin),Queensland,-19.57,147.40,Prawns,Farmed,211.7,Table 7,Queensland state total for this species
+Geraldton,Western Australia,-28.77,114.61,Rock lobster,Wild-caught,285.8,Table 9,Western Australia state total for this species
+Kingston SE,South Australia,-36.83,139.85,Southern rock lobster,Wild-caught,101.3,Table 8,South Australia state total for this species
+Broome,Western Australia,-17.96,122.24,Pearls,Farmed,95.8,Table 9,Western Australia state total for this species
+Port Stephens,New South Wales,-32.72,152.10,Oysters,Farmed,78.0,Table 5,New South Wales state total for this species
+Port Lincoln,South Australia,-34.72,135.86,Southern bluefin tuna,Farmed,77.0,Table 8,South Australia state total for this species
+Karumba,Queensland,-17.49,140.84,Prawns,Wild-caught,76.7,Table 7,Queensland state-managed total (excludes Commonwealth Northern Prawn Fishery)
+Coffin Bay,South Australia,-34.62,135.47,Oysters,Farmed,54.8,Table 8,South Australia state total for this species
+Portland,Victoria,-38.34,141.60,Abalone,Wild-caught,16.4,Table 6,Victoria state total for this species

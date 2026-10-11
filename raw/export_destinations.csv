@@ -1,0 +1,13 @@
+country,lat,lon,role
+Australia,-25.274398,133.775136,origin
+Hong Kong,22.396428,114.109497,destination
+Vietnam,14.058324,108.277199,destination
+Japan,36.204824,138.252924,destination
+China,35.86166,104.195397,destination
+Singapore,1.352083,103.819836,destination
+United States,37.09024,-95.712891,destination
+Taiwan,23.69781,120.960515,destination
+Thailand,15.870032,100.992541,destination
+New Zealand,-40.900557,174.885971,destination
+Malaysia,4.210484,101.975766,destination
+Indonesia,-0.789275,113.921327,destination

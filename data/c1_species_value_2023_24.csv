@@ -1,0 +1,41 @@
+group,species,production_type,value_000
+Finfish,Australian Salmons,Wild-caught,3057.83
+Finfish,Australian Sardine,Wild-caught,36616.54
+Finfish,Barramundi,Wild-caught,15744.98
+Finfish,Breams,Wild-caught,4922.91
+Finfish,Coral Trouts,Wild-caught,26030.24
+Finfish,Dories,Wild-caught,2320.5
+Finfish,Flathead,Wild-caught,21348.81
+Finfish,Gemfishes,Wild-caught,355.19
+Finfish,Pink Ling,Wild-caught,9919.33
+Finfish,Mullets,Wild-caught,15815.1
+Finfish,Orange Roughy,Wild-caught,4841.12
+Finfish,Sharks & Rays,Wild-caught,35450.02
+Finfish,Spanish Mackerel,Wild-caught,15733.8
+Finfish,Tunas,Wild-caught,75288.0
+Finfish,Whitings,Wild-caught,19038.99
+Finfish,Other Finfish,Wild-caught,295872.82
+Crustaceans,Crabs,Wild-caught,73244.7
+Crustaceans,Prawns,Wild-caught,225311.88
+Crustaceans,Rock Lobsters,Wild-caught,489250.89
+Crustaceans,Other Crustaceans,Wild-caught,26107.44
+Molluscs,Abalone,Wild-caught,86245.54
+Molluscs,Octopus,Wild-caught,16656.38
+Molluscs,Pipis and Cockles,Wild-caught,10322.65
+Molluscs,Scallops,Wild-caught,27344.74
+Molluscs,Squids,Wild-caught,18093.35
+Molluscs,Other Molluscs,Wild-caught,15390.92
+Finfish,Salmonids,Farmed,1301216.93
+Finfish,Tunas,Farmed,76970.0
+Finfish,Silver Perch,Farmed,1620.0
+Finfish,Barramundi,Farmed,113815.1
+Finfish,Other Finfish,Farmed,78434.92
+Crustaceans,Prawns,Farmed,211661.46
+Crustaceans,Yabbies,Farmed,585.55
+Crustaceans,Marron,Farmed,2486.0
+Crustaceans,Redclaw,Farmed,371.33
+Molluscs,Oysters,Farmed,170224.0
+Molluscs,Pearls,Farmed,105865.2
+Molluscs,Abalone,Farmed,21562.0
+Molluscs,Blue Mussel,Farmed,4832.0
+Molluscs,Other Molluscs,Farmed,45275.18

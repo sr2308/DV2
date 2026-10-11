@@ -1,0 +1,677 @@
+jurisdiction,status,lon,lat
+New South Wales,Sustainable,144.925,-30.925
+New South Wales,Sustainable,145.275,-30.925
+New South Wales,Sustainable,145.625,-30.925
+New South Wales,Sustainable,145.975,-30.925
+New South Wales,Sustainable,146.325,-30.925
+New South Wales,Sustainable,146.675,-30.925
+New South Wales,Sustainable,147.025,-30.925
+New South Wales,Sustainable,147.375,-30.925
+New South Wales,Sustainable,147.725,-30.925
+New South Wales,Sustainable,148.075,-30.925
+New South Wales,Sustainable,144.925,-31.275
+New South Wales,Sustainable,145.275,-31.275
+New South Wales,Sustainable,145.625,-31.275
+New South Wales,Sustainable,145.975,-31.275
+New South Wales,Sustainable,146.325,-31.275
+New South Wales,Sustainable,146.675,-31.275
+New South Wales,Sustainable,147.025,-31.275
+New South Wales,Sustainable,147.375,-31.275
+New South Wales,Sustainable,147.725,-31.275
+New South Wales,Sustainable,148.075,-31.275
+New South Wales,Sustainable,144.925,-31.625
+New South Wales,Sustainable,145.275,-31.625
+New South Wales,Sustainable,145.625,-31.625
+New South Wales,Sustainable,145.975,-31.625
+New South Wales,Sustainable,146.325,-31.625
+New South Wales,Sustainable,146.675,-31.625
+New South Wales,Sustainable,147.025,-31.625
+New South Wales,Sustainable,147.375,-31.625
+New South Wales,Sustainable,147.725,-31.625
+New South Wales,Sustainable,148.075,-31.625
+New South Wales,Sustainable,144.925,-31.975
+New South Wales,Sustainable,145.275,-31.975
+New South Wales,Sustainable,145.625,-31.975
+New South Wales,Sustainable,145.975,-31.975
+New South Wales,Sustainable,146.325,-31.975
+New South Wales,Sustainable,146.675,-31.975
+New South Wales,Sustainable,147.025,-31.975
+New South Wales,Sustainable,147.375,-31.975
+New South Wales,Sustainable,147.725,-31.975
+New South Wales,Sustainable,148.075,-31.975
+New South Wales,Sustainable,144.925,-32.325
+New South Wales,Sustainable,145.275,-32.325
+New South Wales,Sustainable,145.625,-32.325
+New South Wales,Sustainable,145.975,-32.325
+New South Wales,Sustainable,146.325,-32.325
+New South Wales,Sustainable,146.675,-32.325
+New South Wales,Sustainable,147.025,-32.325
+New South Wales,Sustainable,147.375,-32.325
+New South Wales,Sustainable,147.725,-32.325
+New South Wales,Sustainable,148.075,-32.325
+New South Wales,Sustainable,144.925,-32.675
+New South Wales,Sustainable,145.275,-32.675
+New South Wales,Recovering,145.625,-32.675
+New South Wales,Depleting,145.975,-32.675
+New South Wales,Depleting,146.325,-32.675
+New South Wales,Depleting,146.675,-32.675
+New South Wales,Depleted,147.025,-32.675
+New South Wales,Depleted,147.375,-32.675
+New South Wales,Depleted,147.725,-32.675
+New South Wales,Depleted,148.075,-32.675
+New South Wales,Depleted,144.925,-33.025
+New South Wales,Depleted,145.275,-33.025
+New South Wales,Depleted,145.625,-33.025
+New South Wales,Depleted,145.975,-33.025
+New South Wales,Depleted,146.325,-33.025
+New South Wales,Depleted,146.675,-33.025
+New South Wales,Depleted,147.025,-33.025
+New South Wales,Depleted,147.375,-33.025
+New South Wales,Depleted,147.725,-33.025
+New South Wales,Undefined,148.075,-33.025
+New South Wales,Undefined,144.925,-33.375
+New South Wales,Undefined,145.275,-33.375
+New South Wales,Undefined,145.625,-33.375
+New South Wales,Undefined,145.975,-33.375
+New South Wales,Undefined,146.325,-33.375
+New South Wales,Undefined,146.675,-33.375
+New South Wales,Undefined,147.025,-33.375
+New South Wales,Undefined,147.375,-33.375
+New South Wales,Undefined,147.725,-33.375
+New South Wales,Undefined,148.075,-33.375
+New South Wales,Negligible,144.925,-33.725
+New South Wales,Negligible,145.275,-33.725
+New South Wales,Negligible,145.625,-33.725
+New South Wales,Negligible,145.975,-33.725
+New South Wales,Negligible,146.325,-33.725
+New South Wales,Negligible,146.675,-33.725
+New South Wales,Negligible,147.025,-33.725
+New South Wales,Negligible,147.375,-33.725
+New South Wales,Negligible,147.725,-33.725
+New South Wales,Negligible,148.075,-33.725
+New South Wales,Negligible,144.925,-34.075
+Victoria,Sustainable,143.075,-35.775
+Victoria,Sustainable,143.425,-35.775
+Victoria,Sustainable,143.775,-35.775
+Victoria,Sustainable,144.125,-35.775
+Victoria,Sustainable,144.475,-35.775
+Victoria,Sustainable,144.825,-35.775
+Victoria,Sustainable,145.175,-35.775
+Victoria,Sustainable,145.525,-35.775
+Victoria,Sustainable,143.075,-36.125
+Victoria,Sustainable,143.425,-36.125
+Victoria,Sustainable,143.775,-36.125
+Victoria,Sustainable,144.125,-36.125
+Victoria,Sustainable,144.475,-36.125
+Victoria,Sustainable,144.825,-36.125
+Victoria,Sustainable,145.175,-36.125
+Victoria,Sustainable,145.525,-36.125
+Victoria,Sustainable,143.075,-36.475
+Victoria,Sustainable,143.425,-36.475
+Victoria,Sustainable,143.775,-36.475
+Victoria,Sustainable,144.125,-36.475
+Victoria,Sustainable,144.475,-36.475
+Victoria,Sustainable,144.825,-36.475
+Victoria,Sustainable,145.175,-36.475
+Victoria,Sustainable,145.525,-36.475
+Victoria,Sustainable,143.075,-36.825
+Victoria,Sustainable,143.425,-36.825
+Victoria,Sustainable,143.775,-36.825
+Victoria,Sustainable,144.125,-36.825
+Victoria,Sustainable,144.475,-36.825
+Victoria,Recovering,144.825,-36.825
+Victoria,Recovering,145.175,-36.825
+Victoria,Recovering,145.525,-36.825
+Victoria,Recovering,143.075,-37.175
+Victoria,Depleting,143.425,-37.175
+Victoria,Depleting,143.775,-37.175
+Victoria,Depleted,144.125,-37.175
+Victoria,Depleted,144.475,-37.175
+Victoria,Depleted,144.825,-37.175
+Victoria,Depleted,145.175,-37.175
+Victoria,Depleted,145.525,-37.175
+Victoria,Depleted,143.075,-37.525
+Victoria,Depleted,143.425,-37.525
+Victoria,Depleted,143.775,-37.525
+Victoria,Undefined,144.125,-37.525
+Victoria,Undefined,144.475,-37.525
+Victoria,Undefined,144.825,-37.525
+Victoria,Undefined,145.175,-37.525
+Victoria,Undefined,145.525,-37.525
+Victoria,Undefined,143.075,-37.875
+Victoria,Undefined,143.425,-37.875
+Victoria,Undefined,143.775,-37.875
+Victoria,Undefined,144.125,-37.875
+Victoria,Undefined,144.475,-37.875
+Victoria,Undefined,144.825,-37.875
+Victoria,Undefined,145.175,-37.875
+Victoria,Undefined,145.525,-37.875
+Victoria,Undefined,143.075,-38.225
+Victoria,Undefined,143.425,-38.225
+Victoria,Undefined,143.775,-38.225
+Victoria,Negligible,144.125,-38.225
+Queensland,Sustainable,142.75,-20.75
+Queensland,Sustainable,143.1,-20.75
+Queensland,Sustainable,143.45,-20.75
+Queensland,Sustainable,143.8,-20.75
+Queensland,Sustainable,144.15,-20.75
+Queensland,Sustainable,144.5,-20.75
+Queensland,Sustainable,144.85,-20.75
+Queensland,Sustainable,145.2,-20.75
+Queensland,Sustainable,145.55,-20.75
+Queensland,Sustainable,145.9,-20.75
+Queensland,Sustainable,146.25,-20.75
+Queensland,Sustainable,142.75,-21.1
+Queensland,Sustainable,143.1,-21.1
+Queensland,Sustainable,143.45,-21.1
+Queensland,Sustainable,143.8,-21.1
+Queensland,Sustainable,144.15,-21.1
+Queensland,Sustainable,144.5,-21.1
+Queensland,Sustainable,144.85,-21.1
+Queensland,Sustainable,145.2,-21.1
+Queensland,Sustainable,145.55,-21.1
+Queensland,Sustainable,145.9,-21.1
+Queensland,Sustainable,146.25,-21.1
+Queensland,Sustainable,142.75,-21.45
+Queensland,Sustainable,143.1,-21.45
+Queensland,Sustainable,143.45,-21.45
+Queensland,Sustainable,143.8,-21.45
+Queensland,Sustainable,144.15,-21.45
+Queensland,Sustainable,144.5,-21.45
+Queensland,Sustainable,144.85,-21.45
+Queensland,Sustainable,145.2,-21.45
+Queensland,Sustainable,145.55,-21.45
+Queensland,Sustainable,145.9,-21.45
+Queensland,Sustainable,146.25,-21.45
+Queensland,Sustainable,142.75,-21.8
+Queensland,Sustainable,143.1,-21.8
+Queensland,Sustainable,143.45,-21.8
+Queensland,Sustainable,143.8,-21.8
+Queensland,Sustainable,144.15,-21.8
+Queensland,Sustainable,144.5,-21.8
+Queensland,Sustainable,144.85,-21.8
+Queensland,Sustainable,145.2,-21.8
+Queensland,Sustainable,145.55,-21.8
+Queensland,Sustainable,145.9,-21.8
+Queensland,Sustainable,146.25,-21.8
+Queensland,Sustainable,142.75,-22.15
+Queensland,Sustainable,143.1,-22.15
+Queensland,Sustainable,143.45,-22.15
+Queensland,Sustainable,143.8,-22.15
+Queensland,Sustainable,144.15,-22.15
+Queensland,Sustainable,144.5,-22.15
+Queensland,Sustainable,144.85,-22.15
+Queensland,Sustainable,145.2,-22.15
+Queensland,Sustainable,145.55,-22.15
+Queensland,Sustainable,145.9,-22.15
+Queensland,Sustainable,146.25,-22.15
+Queensland,Sustainable,142.75,-22.5
+Queensland,Sustainable,143.1,-22.5
+Queensland,Sustainable,143.45,-22.5
+Queensland,Sustainable,143.8,-22.5
+Queensland,Sustainable,144.15,-22.5
+Queensland,Sustainable,144.5,-22.5
+Queensland,Sustainable,144.85,-22.5
+Queensland,Sustainable,145.2,-22.5
+Queensland,Sustainable,145.55,-22.5
+Queensland,Sustainable,145.9,-22.5
+Queensland,Sustainable,146.25,-22.5
+Queensland,Sustainable,142.75,-22.85
+Queensland,Sustainable,143.1,-22.85
+Queensland,Sustainable,143.45,-22.85
+Queensland,Depleting,143.8,-22.85
+Queensland,Depleted,144.15,-22.85
+Queensland,Depleted,144.5,-22.85
+Queensland,Depleted,144.85,-22.85
+Queensland,Depleted,145.2,-22.85
+Queensland,Depleted,145.55,-22.85
+Queensland,Depleted,145.9,-22.85
+Queensland,Depleted,146.25,-22.85
+Queensland,Undefined,142.75,-23.2
+Queensland,Undefined,143.1,-23.2
+Queensland,Undefined,143.45,-23.2
+Queensland,Undefined,143.8,-23.2
+Queensland,Undefined,144.15,-23.2
+Queensland,Undefined,144.5,-23.2
+Queensland,Undefined,144.85,-23.2
+Queensland,Undefined,145.2,-23.2
+Queensland,Undefined,145.55,-23.2
+Queensland,Undefined,145.9,-23.2
+Queensland,Undefined,146.25,-23.2
+Queensland,Undefined,142.75,-23.55
+Queensland,Undefined,143.1,-23.55
+Queensland,Undefined,143.45,-23.55
+Queensland,Undefined,143.8,-23.55
+Queensland,Undefined,144.15,-23.55
+Queensland,Undefined,144.5,-23.55
+Queensland,Undefined,144.85,-23.55
+Queensland,Undefined,145.2,-23.55
+Queensland,Undefined,145.55,-23.55
+Queensland,Undefined,145.9,-23.55
+Queensland,Undefined,146.25,-23.55
+Queensland,Undefined,142.75,-23.9
+Queensland,Undefined,143.1,-23.9
+Queensland,Undefined,143.45,-23.9
+Queensland,Undefined,143.8,-23.9
+Queensland,Undefined,144.15,-23.9
+Queensland,Undefined,144.5,-23.9
+Queensland,Undefined,144.85,-23.9
+Queensland,Undefined,145.2,-23.9
+Queensland,Undefined,145.55,-23.9
+Queensland,Negligible,145.9,-23.9
+Queensland,Negligible,146.25,-23.9
+Queensland,Negligible,142.75,-24.25
+Queensland,Negligible,143.1,-24.25
+Queensland,Negligible,143.45,-24.25
+Queensland,Negligible,143.8,-24.25
+South Australia,Sustainable,134.1,-29.275
+South Australia,Sustainable,134.45,-29.275
+South Australia,Sustainable,134.8,-29.275
+South Australia,Sustainable,135.15,-29.275
+South Australia,Sustainable,135.5,-29.275
+South Australia,Sustainable,135.85,-29.275
+South Australia,Sustainable,136.2,-29.275
+South Australia,Sustainable,136.55,-29.275
+South Australia,Sustainable,136.9,-29.275
+South Australia,Sustainable,134.1,-29.625
+South Australia,Sustainable,134.45,-29.625
+South Australia,Sustainable,134.8,-29.625
+South Australia,Sustainable,135.15,-29.625
+South Australia,Sustainable,135.5,-29.625
+South Australia,Sustainable,135.85,-29.625
+South Australia,Sustainable,136.2,-29.625
+South Australia,Sustainable,136.55,-29.625
+South Australia,Sustainable,136.9,-29.625
+South Australia,Sustainable,134.1,-29.975
+South Australia,Sustainable,134.45,-29.975
+South Australia,Sustainable,134.8,-29.975
+South Australia,Sustainable,135.15,-29.975
+South Australia,Sustainable,135.5,-29.975
+South Australia,Sustainable,135.85,-29.975
+South Australia,Sustainable,136.2,-29.975
+South Australia,Sustainable,136.55,-29.975
+South Australia,Sustainable,136.9,-29.975
+South Australia,Sustainable,134.1,-30.325
+South Australia,Sustainable,134.45,-30.325
+South Australia,Sustainable,134.8,-30.325
+South Australia,Sustainable,135.15,-30.325
+South Australia,Sustainable,135.5,-30.325
+South Australia,Sustainable,135.85,-30.325
+South Australia,Sustainable,136.2,-30.325
+South Australia,Sustainable,136.55,-30.325
+South Australia,Sustainable,136.9,-30.325
+South Australia,Sustainable,134.1,-30.675
+South Australia,Sustainable,134.45,-30.675
+South Australia,Sustainable,134.8,-30.675
+South Australia,Sustainable,135.15,-30.675
+South Australia,Sustainable,135.5,-30.675
+South Australia,Recovering,135.85,-30.675
+South Australia,Recovering,136.2,-30.675
+South Australia,Depleting,136.55,-30.675
+South Australia,Depleting,136.9,-30.675
+South Australia,Depleting,134.1,-31.025
+South Australia,Depleted,134.45,-31.025
+South Australia,Depleted,134.8,-31.025
+South Australia,Depleted,135.15,-31.025
+South Australia,Depleted,135.5,-31.025
+South Australia,Depleted,135.85,-31.025
+South Australia,Depleted,136.2,-31.025
+South Australia,Depleted,136.55,-31.025
+South Australia,Depleted,136.9,-31.025
+South Australia,Depleted,134.1,-31.375
+South Australia,Undefined,134.45,-31.375
+South Australia,Undefined,134.8,-31.375
+South Australia,Undefined,135.15,-31.375
+South Australia,Undefined,135.5,-31.375
+South Australia,Undefined,135.85,-31.375
+South Australia,Undefined,136.2,-31.375
+South Australia,Undefined,136.55,-31.375
+South Australia,Undefined,136.9,-31.375
+South Australia,Undefined,134.1,-31.725
+South Australia,Negligible,134.45,-31.725
+South Australia,Negligible,134.8,-31.725
+South Australia,Negligible,135.15,-31.725
+South Australia,Negligible,135.5,-31.725
+Western Australia,Sustainable,119.575,-24.075
+Western Australia,Sustainable,119.925,-24.075
+Western Australia,Sustainable,120.275,-24.075
+Western Australia,Sustainable,120.625,-24.075
+Western Australia,Sustainable,120.975,-24.075
+Western Australia,Sustainable,121.325,-24.075
+Western Australia,Sustainable,121.675,-24.075
+Western Australia,Sustainable,122.025,-24.075
+Western Australia,Sustainable,122.375,-24.075
+Western Australia,Sustainable,122.725,-24.075
+Western Australia,Sustainable,123.075,-24.075
+Western Australia,Sustainable,123.425,-24.075
+Western Australia,Sustainable,119.575,-24.425
+Western Australia,Sustainable,119.925,-24.425
+Western Australia,Sustainable,120.275,-24.425
+Western Australia,Sustainable,120.625,-24.425
+Western Australia,Sustainable,120.975,-24.425
+Western Australia,Sustainable,121.325,-24.425
+Western Australia,Sustainable,121.675,-24.425
+Western Australia,Sustainable,122.025,-24.425
+Western Australia,Sustainable,122.375,-24.425
+Western Australia,Sustainable,122.725,-24.425
+Western Australia,Sustainable,123.075,-24.425
+Western Australia,Sustainable,123.425,-24.425
+Western Australia,Sustainable,119.575,-24.775
+Western Australia,Sustainable,119.925,-24.775
+Western Australia,Sustainable,120.275,-24.775
+Western Australia,Sustainable,120.625,-24.775
+Western Australia,Sustainable,120.975,-24.775
+Western Australia,Sustainable,121.325,-24.775
+Western Australia,Sustainable,121.675,-24.775
+Western Australia,Sustainable,122.025,-24.775
+Western Australia,Sustainable,122.375,-24.775
+Western Australia,Sustainable,122.725,-24.775
+Western Australia,Sustainable,123.075,-24.775
+Western Australia,Sustainable,123.425,-24.775
+Western Australia,Sustainable,119.575,-25.125
+Western Australia,Sustainable,119.925,-25.125
+Western Australia,Sustainable,120.275,-25.125
+Western Australia,Sustainable,120.625,-25.125
+Western Australia,Sustainable,120.975,-25.125
+Western Australia,Sustainable,121.325,-25.125
+Western Australia,Sustainable,121.675,-25.125
+Western Australia,Sustainable,122.025,-25.125
+Western Australia,Sustainable,122.375,-25.125
+Western Australia,Sustainable,122.725,-25.125
+Western Australia,Sustainable,123.075,-25.125
+Western Australia,Sustainable,123.425,-25.125
+Western Australia,Sustainable,119.575,-25.475
+Western Australia,Sustainable,119.925,-25.475
+Western Australia,Sustainable,120.275,-25.475
+Western Australia,Sustainable,120.625,-25.475
+Western Australia,Sustainable,120.975,-25.475
+Western Australia,Sustainable,121.325,-25.475
+Western Australia,Sustainable,121.675,-25.475
+Western Australia,Sustainable,122.025,-25.475
+Western Australia,Sustainable,122.375,-25.475
+Western Australia,Sustainable,122.725,-25.475
+Western Australia,Sustainable,123.075,-25.475
+Western Australia,Sustainable,123.425,-25.475
+Western Australia,Sustainable,119.575,-25.825
+Western Australia,Sustainable,119.925,-25.825
+Western Australia,Sustainable,120.275,-25.825
+Western Australia,Sustainable,120.625,-25.825
+Western Australia,Sustainable,120.975,-25.825
+Western Australia,Sustainable,121.325,-25.825
+Western Australia,Sustainable,121.675,-25.825
+Western Australia,Sustainable,122.025,-25.825
+Western Australia,Sustainable,122.375,-25.825
+Western Australia,Sustainable,122.725,-25.825
+Western Australia,Sustainable,123.075,-25.825
+Western Australia,Sustainable,123.425,-25.825
+Western Australia,Sustainable,119.575,-26.175
+Western Australia,Sustainable,119.925,-26.175
+Western Australia,Sustainable,120.275,-26.175
+Western Australia,Sustainable,120.625,-26.175
+Western Australia,Sustainable,120.975,-26.175
+Western Australia,Sustainable,121.325,-26.175
+Western Australia,Sustainable,121.675,-26.175
+Western Australia,Sustainable,122.025,-26.175
+Western Australia,Sustainable,122.375,-26.175
+Western Australia,Sustainable,122.725,-26.175
+Western Australia,Sustainable,123.075,-26.175
+Western Australia,Sustainable,123.425,-26.175
+Western Australia,Sustainable,119.575,-26.525
+Western Australia,Sustainable,119.925,-26.525
+Western Australia,Sustainable,120.275,-26.525
+Western Australia,Sustainable,120.625,-26.525
+Western Australia,Sustainable,120.975,-26.525
+Western Australia,Sustainable,121.325,-26.525
+Western Australia,Sustainable,121.675,-26.525
+Western Australia,Sustainable,122.025,-26.525
+Western Australia,Sustainable,122.375,-26.525
+Western Australia,Sustainable,122.725,-26.525
+Western Australia,Sustainable,123.075,-26.525
+Western Australia,Sustainable,123.425,-26.525
+Western Australia,Sustainable,119.575,-26.875
+Western Australia,Sustainable,119.925,-26.875
+Western Australia,Sustainable,120.275,-26.875
+Western Australia,Sustainable,120.625,-26.875
+Western Australia,Sustainable,120.975,-26.875
+Western Australia,Sustainable,121.325,-26.875
+Western Australia,Sustainable,121.675,-26.875
+Western Australia,Sustainable,122.025,-26.875
+Western Australia,Recovering,122.375,-26.875
+Western Australia,Recovering,122.725,-26.875
+Western Australia,Recovering,123.075,-26.875
+Western Australia,Recovering,123.425,-26.875
+Western Australia,Recovering,119.575,-27.225
+Western Australia,Recovering,119.925,-27.225
+Western Australia,Recovering,120.275,-27.225
+Western Australia,Recovering,120.625,-27.225
+Western Australia,Depleted,120.975,-27.225
+Western Australia,Depleted,121.325,-27.225
+Western Australia,Depleted,121.675,-27.225
+Western Australia,Depleted,122.025,-27.225
+Western Australia,Depleted,122.375,-27.225
+Western Australia,Depleted,122.725,-27.225
+Western Australia,Depleted,123.075,-27.225
+Western Australia,Depleted,123.425,-27.225
+Western Australia,Undefined,119.575,-27.575
+Western Australia,Undefined,119.925,-27.575
+Western Australia,Negligible,120.275,-27.575
+Western Australia,Negligible,120.625,-27.575
+Western Australia,Negligible,120.975,-27.575
+Western Australia,Negligible,121.325,-27.575
+Western Australia,Negligible,121.675,-27.575
+Western Australia,Negligible,122.025,-27.575
+Western Australia,Negligible,122.375,-27.575
+Western Australia,Negligible,122.725,-27.575
+Western Australia,Negligible,123.075,-27.575
+Western Australia,Negligible,123.425,-27.575
+Western Australia,Negligible,119.575,-27.925
+Western Australia,Negligible,119.925,-27.925
+Tasmania,Sustainable,145.375,-40.95
+Tasmania,Sustainable,145.725,-40.95
+Tasmania,Sustainable,146.075,-40.95
+Tasmania,Sustainable,146.425,-40.95
+Tasmania,Sustainable,146.775,-40.95
+Tasmania,Sustainable,147.125,-40.95
+Tasmania,Sustainable,147.475,-40.95
+Tasmania,Sustainable,147.825,-40.95
+Tasmania,Sustainable,145.375,-41.3
+Tasmania,Sustainable,145.725,-41.3
+Tasmania,Sustainable,146.075,-41.3
+Tasmania,Sustainable,146.425,-41.3
+Tasmania,Sustainable,146.775,-41.3
+Tasmania,Sustainable,147.125,-41.3
+Tasmania,Sustainable,147.475,-41.3
+Tasmania,Sustainable,147.825,-41.3
+Tasmania,Sustainable,145.375,-41.65
+Tasmania,Sustainable,145.725,-41.65
+Tasmania,Sustainable,146.075,-41.65
+Tasmania,Sustainable,146.425,-41.65
+Tasmania,Sustainable,146.775,-41.65
+Tasmania,Sustainable,147.125,-41.65
+Tasmania,Sustainable,147.475,-41.65
+Tasmania,Sustainable,147.825,-41.65
+Tasmania,Sustainable,145.375,-42.0
+Tasmania,Sustainable,145.725,-42.0
+Tasmania,Sustainable,146.075,-42.0
+Tasmania,Sustainable,146.425,-42.0
+Tasmania,Sustainable,146.775,-42.0
+Tasmania,Sustainable,147.125,-42.0
+Tasmania,Sustainable,147.475,-42.0
+Tasmania,Sustainable,147.825,-42.0
+Tasmania,Sustainable,145.375,-42.35
+Tasmania,Recovering,145.725,-42.35
+Tasmania,Depleting,146.075,-42.35
+Tasmania,Depleting,146.425,-42.35
+Tasmania,Depleted,146.775,-42.35
+Tasmania,Depleted,147.125,-42.35
+Tasmania,Depleted,147.475,-42.35
+Tasmania,Depleted,147.825,-42.35
+Tasmania,Depleted,145.375,-42.7
+Tasmania,Depleted,145.725,-42.7
+Tasmania,Depleted,146.075,-42.7
+Tasmania,Depleted,146.425,-42.7
+Tasmania,Depleted,146.775,-42.7
+Tasmania,Depleted,147.125,-42.7
+Tasmania,Depleted,147.475,-42.7
+Tasmania,Depleted,147.825,-42.7
+Tasmania,Undefined,145.375,-43.05
+Tasmania,Undefined,145.725,-43.05
+Tasmania,Undefined,146.075,-43.05
+Tasmania,Undefined,146.425,-43.05
+Tasmania,Undefined,146.775,-43.05
+Tasmania,Undefined,147.125,-43.05
+Tasmania,Negligible,147.475,-43.05
+Northern Territory,Sustainable,132.175,-18.275
+Northern Territory,Sustainable,132.525,-18.275
+Northern Territory,Sustainable,132.875,-18.275
+Northern Territory,Sustainable,133.225,-18.275
+Northern Territory,Sustainable,133.575,-18.275
+Northern Territory,Sustainable,133.925,-18.275
+Northern Territory,Sustainable,134.275,-18.275
+Northern Territory,Sustainable,134.625,-18.275
+Northern Territory,Sustainable,132.175,-18.625
+Northern Territory,Sustainable,132.525,-18.625
+Northern Territory,Sustainable,132.875,-18.625
+Northern Territory,Sustainable,133.225,-18.625
+Northern Territory,Sustainable,133.575,-18.625
+Northern Territory,Sustainable,133.925,-18.625
+Northern Territory,Sustainable,134.275,-18.625
+Northern Territory,Sustainable,134.625,-18.625
+Northern Territory,Sustainable,132.175,-18.975
+Northern Territory,Sustainable,132.525,-18.975
+Northern Territory,Sustainable,132.875,-18.975
+Northern Territory,Sustainable,133.225,-18.975
+Northern Territory,Sustainable,133.575,-18.975
+Northern Territory,Sustainable,133.925,-18.975
+Northern Territory,Sustainable,134.275,-18.975
+Northern Territory,Sustainable,134.625,-18.975
+Northern Territory,Sustainable,132.175,-19.325
+Northern Territory,Sustainable,132.525,-19.325
+Northern Territory,Sustainable,132.875,-19.325
+Northern Territory,Sustainable,133.225,-19.325
+Northern Territory,Sustainable,133.575,-19.325
+Northern Territory,Sustainable,133.925,-19.325
+Northern Territory,Sustainable,134.275,-19.325
+Northern Territory,Sustainable,134.625,-19.325
+Northern Territory,Sustainable,132.175,-19.675
+Northern Territory,Sustainable,132.525,-19.675
+Northern Territory,Sustainable,132.875,-19.675
+Northern Territory,Sustainable,133.225,-19.675
+Northern Territory,Sustainable,133.575,-19.675
+Northern Territory,Sustainable,133.925,-19.675
+Northern Territory,Sustainable,134.275,-19.675
+Northern Territory,Sustainable,134.625,-19.675
+Northern Territory,Sustainable,132.175,-20.025
+Northern Territory,Sustainable,132.525,-20.025
+Northern Territory,Sustainable,132.875,-20.025
+Northern Territory,Recovering,133.225,-20.025
+Northern Territory,Recovering,133.575,-20.025
+Northern Territory,Depleted,133.925,-20.025
+Northern Territory,Undefined,134.275,-20.025
+Northern Territory,Undefined,134.625,-20.025
+Northern Territory,Undefined,132.175,-20.375
+Northern Territory,Undefined,132.525,-20.375
+Northern Territory,Undefined,132.875,-20.375
+Northern Territory,Undefined,133.225,-20.375
+Northern Territory,Negligible,133.575,-20.375
+Northern Territory,Negligible,133.925,-20.375
+Northern Territory,Negligible,134.275,-20.375
+Northern Territory,Negligible,134.625,-20.375
+Northern Territory,Negligible,132.175,-20.725
+Australian Capital Territory,Depleted,149.1,-35.3
+Commonwealth,Sustainable,131.425,-39.425
+Commonwealth,Sustainable,131.775,-39.425
+Commonwealth,Sustainable,132.125,-39.425
+Commonwealth,Sustainable,132.475,-39.425
+Commonwealth,Sustainable,132.825,-39.425
+Commonwealth,Sustainable,133.175,-39.425
+Commonwealth,Sustainable,133.525,-39.425
+Commonwealth,Sustainable,133.875,-39.425
+Commonwealth,Sustainable,134.225,-39.425
+Commonwealth,Sustainable,134.575,-39.425
+Commonwealth,Sustainable,131.425,-39.775
+Commonwealth,Sustainable,131.775,-39.775
+Commonwealth,Sustainable,132.125,-39.775
+Commonwealth,Sustainable,132.475,-39.775
+Commonwealth,Sustainable,132.825,-39.775
+Commonwealth,Sustainable,133.175,-39.775
+Commonwealth,Sustainable,133.525,-39.775
+Commonwealth,Sustainable,133.875,-39.775
+Commonwealth,Sustainable,134.225,-39.775
+Commonwealth,Sustainable,134.575,-39.775
+Commonwealth,Sustainable,131.425,-40.125
+Commonwealth,Sustainable,131.775,-40.125
+Commonwealth,Sustainable,132.125,-40.125
+Commonwealth,Sustainable,132.475,-40.125
+Commonwealth,Sustainable,132.825,-40.125
+Commonwealth,Sustainable,133.175,-40.125
+Commonwealth,Sustainable,133.525,-40.125
+Commonwealth,Sustainable,133.875,-40.125
+Commonwealth,Sustainable,134.225,-40.125
+Commonwealth,Sustainable,134.575,-40.125
+Commonwealth,Sustainable,131.425,-40.475
+Commonwealth,Sustainable,131.775,-40.475
+Commonwealth,Sustainable,132.125,-40.475
+Commonwealth,Sustainable,132.475,-40.475
+Commonwealth,Sustainable,132.825,-40.475
+Commonwealth,Sustainable,133.175,-40.475
+Commonwealth,Sustainable,133.525,-40.475
+Commonwealth,Sustainable,133.875,-40.475
+Commonwealth,Sustainable,134.225,-40.475
+Commonwealth,Sustainable,134.575,-40.475
+Commonwealth,Sustainable,131.425,-40.825
+Commonwealth,Sustainable,131.775,-40.825
+Commonwealth,Sustainable,132.125,-40.825
+Commonwealth,Sustainable,132.475,-40.825
+Commonwealth,Sustainable,132.825,-40.825
+Commonwealth,Sustainable,133.175,-40.825
+Commonwealth,Sustainable,133.525,-40.825
+Commonwealth,Sustainable,133.875,-40.825
+Commonwealth,Sustainable,134.225,-40.825
+Commonwealth,Sustainable,134.575,-40.825
+Commonwealth,Sustainable,131.425,-41.175
+Commonwealth,Sustainable,131.775,-41.175
+Commonwealth,Sustainable,132.125,-41.175
+Commonwealth,Sustainable,132.475,-41.175
+Commonwealth,Sustainable,132.825,-41.175
+Commonwealth,Sustainable,133.175,-41.175
+Commonwealth,Sustainable,133.525,-41.175
+Commonwealth,Sustainable,133.875,-41.175
+Commonwealth,Sustainable,134.225,-41.175
+Commonwealth,Sustainable,134.575,-41.175
+Commonwealth,Sustainable,131.425,-41.525
+Commonwealth,Sustainable,131.775,-41.525
+Commonwealth,Sustainable,132.125,-41.525
+Commonwealth,Recovering,132.475,-41.525
+Commonwealth,Depleting,132.825,-41.525
+Commonwealth,Depleting,133.175,-41.525
+Commonwealth,Depleted,133.525,-41.525
+Commonwealth,Depleted,133.875,-41.525
+Commonwealth,Depleted,134.225,-41.525
+Commonwealth,Depleted,134.575,-41.525
+Commonwealth,Depleted,131.425,-41.875
+Commonwealth,Depleted,131.775,-41.875
+Commonwealth,Depleted,132.125,-41.875
+Commonwealth,Depleted,132.475,-41.875
+Commonwealth,Depleted,132.825,-41.875
+Commonwealth,Depleted,133.175,-41.875
+Commonwealth,Depleted,133.525,-41.875
+Commonwealth,Depleted,133.875,-41.875
+Commonwealth,Depleted,134.225,-41.875
+Commonwealth,Depleted,134.575,-41.875
+Commonwealth,Depleted,131.425,-42.225
+Commonwealth,Undefined,131.775,-42.225
+Commonwealth,Undefined,132.125,-42.225
+Commonwealth,Undefined,132.475,-42.225
+Commonwealth,Undefined,132.825,-42.225
+Commonwealth,Undefined,133.175,-42.225
+Commonwealth,Undefined,133.525,-42.225
+Commonwealth,Undefined,133.875,-42.225
+Commonwealth,Undefined,134.225,-42.225
+Commonwealth,Undefined,134.575,-42.225
+Commonwealth,Undefined,131.425,-42.575
+Commonwealth,Undefined,131.775,-42.575
+Commonwealth,Undefined,132.125,-42.575
+Commonwealth,Negligible,132.475,-42.575
+Commonwealth,Negligible,132.825,-42.575
+Commonwealth,Negligible,133.175,-42.575
