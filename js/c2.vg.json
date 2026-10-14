@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Tasmania out-earns every other state",
+    "subtitle": "Value of seafood caught and farmed in each state, 2023-24. Click a state.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 340,
+  "params": [{"name": "selected_state", "value": null}],
+  "projection": {"type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-133, 0]},
+  "layer": [
+    {
+      "data": {"url": "data/aus_states.topojson", "format": {"type": "topojson", "feature": "states"}},
+      "transform": [
+        {
+          "lookup": "properties.STE_NAME21",
+          "from": {
+            "data": {"url": "data/c2_state_value_2023_24.csv"},
+            "key": "state",
+            "fields": ["wild_000", "farmed_000"]
+          }
+        },
+        {"calculate": "toNumber(datum.wild_000) / 1000", "as": "wild_musd"},
+        {"calculate": "toNumber(datum.farmed_000) / 1000", "as": "farmed_musd"},
+        {
+          "calculate": "isValid(datum.wild_000) ? datum.wild_musd + datum.farmed_musd : null",
+          "as": "total_musd"
+        }
+      ],
+      "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1, "cursor": "pointer"},
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "isValid(datum.wild_000)",
+            "field": "total_musd",
+            "type": "quantitative",
+            "scale": {"type": "log", "scheme": "blues"},
+            "title": "Value ($M)",
+            "legend": {"orient": "bottom-left", "format": ",.0f", "gradientLength": 140}
+          },
+          "value": "#e0e0e0"
+        },
+        "opacity": {
+          "condition": {
+            "test": "selected_state == null || datum.properties.STE_NAME21 == selected_state",
+            "value": 1
+          },
+          "value": 0.3
+        },
+        "tooltip": [
+          {"field": "properties.STE_NAME21", "title": "State"},
+          {"field": "total_musd", "title": "Total ($M)", "format": ",.0f"},
+          {"field": "wild_musd", "title": "Wild-caught ($M)", "format": ",.0f"},
+          {"field": "farmed_musd", "title": "Farmed ($M)", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"lon": 150.3, "lat": -42.6, "label": "Tasmania: $1.45B,"},
+          {"lon": 150.3, "lat": -43.9, "label": "more than WA, Qld"},
+          {"lon": 150.3, "lat": -45.2, "label": "and SA combined"}
+        ]
+      },
+      "mark": {"type": "text", "align": "left", "fontSize": 11, "fontWeight": "bold", "color": "#0c3b55"},
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

@@ -1,0 +1,130 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "A trade ban cut lobster exports by almost a third",
+    "subtitle": "Value of Australian rock lobster exports, $M per year. Dashed = ABARES forecast.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 300,
+  "layer": [
+    {
+      "data": {"url": "data/c9_rock_lobster_exports_by_year.csv"},
+      "transform": [
+        {
+          "fold": [
+            "1989–90", "1990–91", "1991–92", "1992–93", "1993–94", "1994–95", "1995–96", "1996–97", "1997–98", "1998–99", "1999–00", "2000–01", "2001–02", "2002–03", "2003–04", "2004–05", "2005–06", "2006–07", "2007–08", "2008–09", "2009–10", "2010–11", "2011–12", "2012–13", "2013–14", "2014–15", "2015–16", "2016–17", "2017–18", "2018–19", "2019–20", "2020–21", "2021–22", "2022–23", "2023–24", "2024–25"
+          ],
+          "as": ["year", "value_000"]
+        },
+        {"calculate": "toNumber(datum.value_000) / 1000", "as": "export_musd"},
+        {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"}
+      ],
+      "layer": [
+        {"mark": {"type": "line", "color": "#D85A30", "strokeWidth": 2.5}},
+        {
+          "mark": {"type": "point", "filled": true, "color": "#D85A30", "size": 20},
+          "encoding": {
+            "tooltip": [
+              {"field": "year", "title": "Year"},
+              {"field": "export_musd", "title": "Exports ($M)", "format": ",.0f"}
+            ]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "year_end",
+          "type": "quantitative",
+          "title": null,
+          "scale": {"domain": [1990, 2031]},
+          "axis": {"format": "d", "grid": false, "tickCount": 8}
+        },
+        "y": {
+          "field": "export_musd",
+          "type": "quantitative",
+          "title": "Exports ($M)",
+          "scale": {"domain": [0, 1000]},
+          "axis": {"format": ",.0f", "tickCount": 5}
+        }
+      }
+    },
+    {
+      "data": {"url": "data/c9_rock_lobster_exports_forecast.csv"},
+      "transform": [
+        {
+          "fold": ["2024–25", "2025–26", "2026–27", "2027–28", "2028–29", "2029–30", "2030–31"],
+          "as": ["year", "value_m"]
+        },
+        {"calculate": "toNumber(datum.value_m)", "as": "export_musd"},
+        {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"}
+      ],
+      "mark": {"type": "line", "color": "#D85A30", "strokeWidth": 2, "strokeDash": [5, 4], "opacity": 0.7},
+      "encoding": {
+        "x": {
+          "field": "year_end",
+          "type": "quantitative",
+          "title": null,
+          "scale": {"domain": [1990, 2031]},
+          "axis": {"format": "d", "grid": false, "tickCount": 8}
+        },
+        "y": {
+          "field": "export_musd",
+          "type": "quantitative",
+          "title": "Exports ($M)",
+          "scale": {"domain": [0, 1000]},
+          "axis": {"format": ",.0f", "tickCount": 5}
+        },
+        "tooltip": [
+          {"field": "year", "title": "Year (forecast)"},
+          {"field": "export_musd", "title": "Exports ($M)", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"x": 2020.9}, {"x": 2025}]},
+      "mark": {"type": "rule", "strokeDash": [4, 3], "color": "#1f2a30"},
+      "encoding": {"x": {"field": "x", "type": "quantitative", "scale": {"domain": [1990, 2031]}}}
+    },
+    {
+      "data": {
+        "values": [
+          {"x": 2020.9, "y": 930, "t": "Nov 2020: China halts"},
+          {"x": 2020.9, "y": 890, "t": "live lobster imports"}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -5,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#1f2a30"
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [1990, 2031]}},
+        "y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 1000]}},
+        "text": {"field": "t"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"x": 2025, "y": 200, "t": "Dec 2024:"}, {"x": 2025, "y": 160, "t": "trade resumes"}]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -5,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#1f2a30"
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [1990, 2031]}},
+        "y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 1000]}},
+        "text": {"field": "t"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Production is concentrated in a few coastal regions",
+    "subtitle": "Main production centre for each major species, 2023-24. Circle area = value.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 340,
+  "projection": {"type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-133, 0]},
+  "layer": [
+    {
+      "data": {"url": "data/aus_states.topojson", "format": {"type": "topojson", "feature": "states"}},
+      "mark": {"type": "geoshape", "fill": "#ece9e2", "stroke": "white", "strokeWidth": 1}
+    },
+    {
+      "data": {"url": "data/regions.csv"},
+      "transform": [
+        {"calculate": "datum.production_type == 'Farmed' ? 'Farmed' : 'Wild-caught'", "as": "type"},
+        {
+          "calculate": "datum.species == 'Salmonids' ? 'Salmon & trout' : datum.species",
+          "as": "species_name"
+        }
+      ],
+      "mark": {"type": "circle", "opacity": 0.8, "stroke": "white", "strokeWidth": 1},
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "size": {
+          "field": "value_musd_2023_24",
+          "type": "quantitative",
+          "scale": {"range": [40, 2600]},
+          "title": "Value ($M)",
+          "legend": {
+            "orient": "top-left",
+            "values": [50, 300, 1000],
+            "symbolFillColor": "#bbb",
+            "symbolStrokeColor": "white"
+          }
+        },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#1D9E75", "#D85A30"]},
+          "legend": {"orient": "top-right", "title": null}
+        },
+        "order": {"field": "value_musd_2023_24", "sort": "descending"},
+        "tooltip": [
+          {"field": "region", "title": "Region"},
+          {"field": "state", "title": "State"},
+          {"field": "species_name", "title": "Species"},
+          {"field": "type", "title": "Type"},
+          {"field": "value_musd_2023_24", "title": "Value ($M)", "format": ",.0f"},
+          {"field": "note", "title": "Note"}
+        ]
+      }
+    },
+    {
+      "data": {"url": "data/regions.csv"},
+      "transform": [
+        {"filter": "toNumber(datum.value_musd_2023_24) >= 90"},
+        {
+          "calculate": "datum.species == 'Salmonids' ? 'Salmon' : datum.species",
+          "as": "species_name"
+        },
+        {"calculate": "datum.region + ': ' + datum.species_name", "as": "label"},
+        {
+          "calculate": "toNumber(datum.lon) + (toNumber(datum.value_musd_2023_24) > 500 ? 3.6 : toNumber(datum.value_musd_2023_24) > 150 ? 1.8 : 1.2)",
+          "as": "label_lon"
+        }
+      ],
+      "mark": {"type": "text", "align": "left", "fontSize": 11, "fontWeight": "bold", "color": "#1f2a30"},
+      "encoding": {
+        "longitude": {"field": "label_lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

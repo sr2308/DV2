@@ -1,0 +1,137 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Farmed seafood overtook wild-caught in 2019-20",
+    "subtitle": "Value of production, $M per year. Faded area = ABARES forecast.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 300,
+  "layer": [
+    {
+      "data": {"url": "data/c5_sector_value_by_year.csv"},
+      "transform": [
+        {
+          "fold": [
+            "1998-99", "1999-00", "2000-01", "2001-02", "2002-03", "2003-04", "2004-05", "2005-06",
+            "2006-07", "2007-08", "2008-09", "2009-10", "2010-11", "2011-12", "2012-13", "2013-14",
+            "2014-15", "2015-16", "2016-17", "2017-18", "2018-19", "2019-20", "2020-21", "2021-22",
+            "2022-23", "2023-24", "2024-25p"
+          ],
+          "as": ["year", "value_000"]
+        },
+        {"pivot": "series", "value": "value_000", "groupby": ["year"]},
+        {
+          "calculate": "(toNumber(datum.state_wild) + toNumber(datum.commonwealth_wild)) / 1000",
+          "as": "Wild-caught"
+        },
+        {"calculate": "toNumber(datum.farmed) / 1000", "as": "Farmed"},
+        {"fold": ["Wild-caught", "Farmed"], "as": ["sector", "value_musd"]},
+        {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"},
+        {"calculate": "datum.sector == 'Wild-caught' ? 1 : 2", "as": "stack_order"}
+      ],
+      "mark": {"type": "area", "opacity": 0.9},
+      "encoding": {
+        "x": {
+          "field": "year_end",
+          "type": "quantitative",
+          "title": null,
+          "scale": {"domain": [1999, 2031]},
+          "axis": {"format": "d", "tickCount": 8, "grid": false}
+        },
+        "y": {
+          "field": "value_musd",
+          "type": "quantitative",
+          "stack": "zero",
+          "title": "$M",
+          "axis": {"format": ",.0f", "tickCount": 5}
+        },
+        "color": {
+          "field": "sector",
+          "type": "nominal",
+          "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#1D9E75", "#D85A30"]},
+          "legend": {"orient": "top-left", "title": null, "direction": "horizontal"}
+        },
+        "order": {"field": "stack_order"},
+        "tooltip": [
+          {"field": "year", "title": "Year"},
+          {"field": "sector", "title": "Sector"},
+          {"field": "value_musd", "title": "Value ($M)", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "data": {"url": "data/c5_forecast_value.csv"},
+      "transform": [
+        {
+          "fold": ["2024-25p", "2025-26", "2026-27", "2027-28", "2028-29", "2029-30", "2030-31"],
+          "as": ["year", "value_m"]
+        },
+        {"calculate": "datum.series == 'farmed' ? 'Farmed' : 'Wild-caught'", "as": "sector"},
+        {"calculate": "toNumber(datum.value_m)", "as": "value_musd"},
+        {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"},
+        {"calculate": "datum.sector == 'Wild-caught' ? 1 : 2", "as": "stack_order"}
+      ],
+      "mark": {"type": "area", "opacity": 0.35},
+      "encoding": {
+        "x": {
+          "field": "year_end",
+          "type": "quantitative",
+          "title": null,
+          "scale": {"domain": [1999, 2031]},
+          "axis": {"format": "d", "tickCount": 8, "grid": false}
+        },
+        "y": {
+          "field": "value_musd",
+          "type": "quantitative",
+          "stack": "zero",
+          "title": "$M",
+          "axis": {"format": ",.0f", "tickCount": 5}
+        },
+        "color": {
+          "field": "sector",
+          "type": "nominal",
+          "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#1D9E75", "#D85A30"]},
+          "legend": {"orient": "top-left", "title": null, "direction": "horizontal"}
+        },
+        "order": {"field": "stack_order"},
+        "tooltip": [
+          {"field": "year", "title": "Year (forecast)"},
+          {"field": "sector", "title": "Sector"},
+          {"field": "value_musd", "title": "Value ($M)", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"x": 2020}]},
+      "mark": {"type": "rule", "strokeDash": [4, 3], "color": "#1f2a30"},
+      "encoding": {"x": {"field": "x", "type": "quantitative", "scale": {"domain": [1999, 2031]}}}
+    },
+    {
+      "data": {"values": [{"x": 2020, "y": 4150, "t": "2019-20: farming overtakes fishing"}]},
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -6,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#1f2a30"
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [1999, 2031]}},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "t"}
+      }
+    },
+    {
+      "data": {"values": [{"x": 2028, "y": 4800, "t": "ABARES forecast"}]},
+      "mark": {"type": "text", "fontSize": 11, "fontStyle": "italic", "color": "#5a676e"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [1999, 2031]}},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "t"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

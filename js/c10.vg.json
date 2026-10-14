@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Salmon climbed from 6th to 1st",
+    "subtitle": "Rank of Australia's eight most valuable seafoods each year (1 = most valuable). Hover a line.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 300,
+  "data": {"url": "data/c10_species_value_by_year.csv"},
+  "transform": [
+    {
+      "fold": [
+        "1998–99", "1999–00", "2000–01", "2001–02", "2002–03", "2003–04", "2004–05", "2005–06", "2006–07", "2007–08", "2008–09", "2009–10", "2010–11", "2011–12", "2012–13", "2013–14", "2014–15", "2015–16", "2016–17", "2017–18", "2018–19", "2019–20", "2020–21", "2021–22", "2022–23", "2023–24"
+      ],
+      "as": ["year", "value_000"]
+    },
+    {"calculate": "toNumber(datum.value_000) / 1000", "as": "value_musd"},
+    {
+      "aggregate": [{"op": "sum", "field": "value_musd", "as": "value_musd"}],
+      "groupby": ["species", "year"]
+    },
+    {
+      "window": [{"op": "row_number", "as": "rank"}],
+      "groupby": ["year"],
+      "sort": [{"field": "value_musd", "order": "descending"}]
+    },
+    {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"},
+    {"calculate": "datum.species == 'Salmonids' ? 'Salmon & trout' : datum.species", "as": "name"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "year_end",
+      "type": "quantitative",
+      "title": null,
+      "scale": {"domain": [1999, 2030]},
+      "axis": {"format": "d", "grid": false, "values": [1999, 2004, 2009, 2014, 2019, 2024]}
+    },
+    "y": {
+      "field": "rank",
+      "type": "quantitative",
+      "title": "Rank",
+      "scale": {"domain": [8.5, 0.5]},
+      "axis": {"values": [1, 2, 3, 4, 5, 6, 7, 8], "grid": false}
+    },
+    "color": {
+      "field": "name",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "Salmon & trout", "Rock lobster", "Prawns", "Tuna", "Abalone", "Pearls", "Oysters", "Crabs"
+        ],
+        "range": ["#1D9E75", "#D85A30", "#7F77DD", "#9a9890", "#b8b6ae", "#a8a69e", "#8e8c85", "#c4c2ba"]
+      }
+    },
+    "opacity": {"condition": [{"param": "hover", "empty": true, "value": 1}], "value": 0.15}
+  },
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 3, "interpolate": "monotone"},
+      "encoding": {"order": {"field": "year_end"}}
+    },
+    {
+      "mark": {"type": "circle", "size": 40},
+      "params": [
+        {
+          "name": "hover",
+          "select": {"type": "point", "fields": ["name"], "on": "pointerover", "clear": "pointerout"}
+        }
+      ],
+      "encoding": {
+        "tooltip": [
+          {"field": "name", "title": "Species"},
+          {"field": "year", "title": "Year"},
+          {"field": "rank", "title": "Rank"},
+          {"field": "value_musd", "title": "Value ($M)", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year == '2023–24'"}],
+      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 11, "fontWeight": "bold"},
+      "encoding": {"text": {"field": "name"}}
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

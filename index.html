@@ -3,34 +3,388 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Australia's seafood industry</title>
+  <title>From ocean to plate: Australia's seafood industry</title>
+  <meta name="description" content="A data story about how Australia's seafood industry has changed: what we produce, where it comes from, farmed vs wild-caught, exports, and the health of fish stocks.">
+
+  <!-- Fonts: Bricolage Grotesque (headlines, numbers, charts) + Source Serif 4 (reading text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Vega libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
-  <h1>Australia's seafood industry</h1>
 
-  <h2>01 · What does Australia produce?</h2>
-  <div id="c1"></div>
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="hero-inner wrap">
+    <h1>From ocean to plate</h1>
+    <p class="hero-sub">In 2019-20, seafood farms in Australia earned more than wild-catch fishing for the first time. This page looks at how the industry got there, where our seafood comes from and how much of what we eat is imported.</p>
+  </div>
+  <p class="photo-credit wrap">Cover image: AI-generated illustration (see footer).</p>
+</header>
 
-  <h2>02 · Where does it come from?</h2>
-  <div id="c2"></div> <div id="c3"></div> <div id="c4"></div>
 
-  <h2>03 · Farmed or caught?</h2>
-  <div id="c5"></div> <div id="c6"></div>
+<!-- ===================== KEY NUMBERS ===================== -->
+<section class="numbers">
+  <div class="wrap">
+    <div class="ledger">
+      <div><span class="num">$3.7B</span><span class="label">value of seafood caught and farmed in 2023-24</span></div>
+      <div><span class="num farmed">58%</span><span class="label">of that value now comes from farms</span></div>
+      <div><span class="num">35%</span><span class="label">comes from one product: farmed salmon and trout</span></div>
+      <div><span class="num">61%</span><span class="label">of the seafood Australians eat is imported</span></div>
+      <div><span class="num">63%</span><span class="label">of assessed wild fish stocks are sustainable</span></div>
+    </div>
+    <dl class="glossary">
+      <div><dt>Value of production</dt><dd>What fishers and farmers are paid for their catch or harvest, in Australian dollars, not adjusted for inflation.</dd></div>
+      <div><dt>Farmed (aquaculture)</dt><dd>Seafood raised in sea pens, ponds or racks, such as salmon, prawns and oysters.</dd></div>
+      <div><dt>Wild-caught</dt><dd>Seafood caught by commercial fishers, such as rock lobster, abalone and most fish.</dd></div>
+    </dl>
+  </div>
+</section>
 
-  <h2>04 · From Australia to the world</h2>
-  <div id="c7"></div> <div id="c8"></div> <div id="c9"></div>
+<!-- Chapter links: jump within the single page; nothing is hidden -->
+<nav class="toc" aria-label="Chapters">
+  <ol>
+    <li><a href="#produce">What we produce</a></li>
+    <li><a href="#where">Where it comes from</a></li>
+    <li><a href="#farmed">Farmed or caught</a></li>
+    <li><a href="#trade">Exports</a></li>
+    <li><a href="#transition">An industry in transition</a></li>
+  </ol>
+</nav>
 
-  <h2>05 · An industry in transition</h2>
-  <div id="c10"></div> <div id="c11"></div> <div id="c12"></div>
+<main>
 
-  <footer>Sources · Author · Date · AI acknowledgement</footer>
+<!-- ===================== 1 PRODUCE ===================== -->
+<section class="chapter" id="produce">
+  <div class="wrap">
+    <div class="chapter-head">
+      <div>
+        <span class="chapter-no">Chapter 1</span>
+        <h2>What does Australia produce?</h2>
+      </div>
+      <p class="intro">
+        <span class="question">Which seafood is the industry built on?</span>
+        Australia produces hundreds of seafood species, but only a few of them make up
+        most of the value. In Figure 1, each box is sized by value and coloured by
+        whether it was <span class="key farmed">farmed</span> or
+        <span class="key wild">wild-caught</span>.
+      </p>
+    </div>
 
-  <script>
-    // add one line per chart as you build it, e.g.
-    // vegaEmbed('#c2', 'js/c2.vg.json', {actions: false});
-  </script>
+    <div class="figures wide-left">
+      <figure class="fig">
+        <div class="fig-no">Figure 1</div>
+        <div id="c1" class="chart"></div>
+        <figcaption>
+          <p class="how-to">Smaller species are grouped into "Other". Hover over a box for its exact value.</p>
+          <p class="source">Source: ABARES, Australian fisheries and aquaculture statistics 2025 (Tables 3 and 4).</p>
+        </figcaption>
+      </figure>
+      <div class="aside">
+        <span class="figure-big">$1.3B</span>
+        <p>
+          Farmed salmon and trout, almost all from Tasmania, were worth
+          <strong>$1.3 billion</strong> in 2023-24. That is more than rock lobster, prawns
+          and oysters added together.
+        </p>
+        <p>
+          Rock lobster ($489M) is still the most valuable <em>wild</em> catch, followed by
+          wild prawns ($225M). The rest is split between tuna, abalone, pearls and
+          hundreds of fish species.
+        </p>
+      </div>
+    </div>
+
+    <p class="conclusion">Five products (salmon, rock lobster, prawns, oysters and tuna) make up about two-thirds of the industry's value.</p>
+  </div>
+</section>
+
+<!-- ===================== 2 WHERE ===================== -->
+<section class="chapter mist" id="where">
+  <div class="wrap">
+    <div class="chapter-head">
+      <div>
+        <span class="chapter-no">Chapter 2</span>
+        <h2>Where does it come from?</h2>
+      </div>
+      <p class="intro">
+        <span class="question">Which parts of Australia produce the most seafood?</span>
+        Most of the value comes from a few states and a few coastal areas, and each state
+        tends to focus on different seafood. <strong>Click a state in Figure 2</strong> to
+        highlight it in Figure 4, and click it again to reset.
+      </p>
+    </div>
+
+    <div class="figures">
+      <figure class="fig">
+        <div class="fig-no">Figure 2</div>
+        <div id="c2" class="chart"></div>
+        <figcaption>
+          <p class="finding">Tasmania's $1.45 billion comes almost entirely (88%) from farmed salmon.</p>
+          <p class="source">Source: ABARES AFAS 2025 (Table 1); ABS state boundaries. Commonwealth-managed fisheries are not assigned to a state and are not shown. No data for the ACT.</p>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-no">Figure 3</div>
+        <div id="c3" class="chart"></div>
+        <figcaption>
+          <p class="finding wild">Production is grouped in a few coastal areas, with salmon in southern Tasmania, rock lobster around Geraldton and farmed prawns in north Queensland.</p>
+          <p class="source">Source: ABARES AFAS 2025 (Tables 5-10); Gazetteer of Australia. Each circle is the state's total for that species, placed at its main production centre.</p>
+        </figcaption>
+      </figure>
+      <figure class="fig full">
+        <div class="fig-no">Figure 4</div>
+        <div id="c4" class="chart"></div>
+        <figcaption>
+          <p class="finding neutral">Reading down a column shows each state's mix. Tasmania is mostly salmon and Western Australia is mostly wild crustaceans (mainly rock lobster). Queensland and South Australia rely more on other farmed seafood like prawns, tuna and oysters.</p>
+          <p class="source">Source: ABARES AFAS 2025, state tables (Tables 5-11). A dash means none recorded.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="conclusion">Tasmania's salmon farms and Western Australia's lobster fishery make up a large part of the industry.</p>
+  </div>
+</section>
+
+<!-- ===================== 3 FARMED OR CAUGHT ===================== -->
+<section class="chapter" id="farmed">
+  <div class="wrap">
+    <div class="chapter-head">
+      <div>
+        <span class="chapter-no">Chapter 3</span>
+        <h2>Farmed or caught?</h2>
+      </div>
+      <p class="intro">
+        <span class="question">Is farming replacing fishing?</span>
+        Most of Australia's seafood used to be caught in the wild. In 2019-20 farmed
+        seafood was worth more than wild-caught for the first time, and the Australian
+        Bureau of Agricultural and Resource Economics (ABARES) expects the gap to keep
+        growing.
+      </p>
+    </div>
+
+    <div class="figures">
+      <figure class="fig">
+        <div class="fig-no">Figure 5</div>
+        <div id="c5" class="chart"></div>
+        <figcaption>
+          <p class="finding">Farmed value has grown more than threefold since 1998-99 ($605M to $2.2B), while wild-caught has stayed between $1.3B and $1.8B.</p>
+          <p class="source">Source: ABARES AFAS 2025 (Table 1); ABARES Agricultural commodities, March 2026 (forecasts to 2030-31).</p>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-no">Figure 6</div>
+        <div id="c6" class="chart"></div>
+        <figcaption>
+          <p class="how-to">Each dot is one year. Follow a line from its 1999 label to its 2024 label. Click the legend to focus on one species.</p>
+          <p class="finding">Salmon production grew 6.5 times and its value grew 16 times. The rock lobster catch dropped by about 40%, but it is still worth more now than in 1999.</p>
+          <p class="source">Source: ABARES AFAS 2025 (Tables 3 and 4). Prawns include wild-caught and farmed.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="conclusion">Australia now earns more from farming seafood than from catching it, and ABARES expects the gap to get bigger.</p>
+  </div>
+</section>
+
+<!-- ===================== 4 TRADE ===================== -->
+<section class="chapter mist" id="trade">
+  <div class="wrap">
+    <div class="chapter-head">
+      <div>
+        <span class="chapter-no">Chapter 4</span>
+        <h2>From Australia to the world</h2>
+      </div>
+      <p class="intro">
+        <span class="question">Who buys our seafood, and what do we keep?</span>
+        A lot of Australia's most valuable seafood is mainly sold overseas.
+        <strong>Drag the slider under Figure 7</strong> to see how export destinations
+        have changed since 1990.
+      </p>
+    </div>
+
+    <div class="figures">
+      <figure class="fig full">
+        <div class="fig-no">Figure 7</div>
+        <div id="c7" class="chart"></div>
+        <figcaption>
+          <p class="finding wild">Exports to China went from $170M in 2016-17 to $888M in 2018-19, which was more than all other markets combined. After China stopped live lobster imports in late 2020, this trade fell by more than half.</p>
+          <p class="source">Source: ABARES AFAS 2025 (Table 17, ABS trade data); world map: Natural Earth via vega-datasets. Edible seafood exports, including live seafood.</p>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-no">Figure 8</div>
+        <div id="c8" class="chart"></div>
+        <figcaption>
+          <p class="finding wild">About four in five rock lobsters are exported. Almost all oysters and around 70% of farmed salmon are eaten in Australia.</p>
+          <p class="source">Source: ABARES AFAS 2025 (Tables 3, 4, 13, 14). Export tonnes are processed weight and production tonnes are live weight, so shares are approximate.</p>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-no">Figure 9</div>
+        <div id="c9" class="chart"></div>
+        <figcaption>
+          <p class="finding wild">Rock lobster exports dropped from $544M to $381M in one year. Now that trade with China has resumed, ABARES forecasts a record $869M by 2030-31.</p>
+          <p class="source">Source: ABARES AFAS 2025 (Table 13); ABARES Agricultural commodities, March 2026 (forecasts).</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="conclusion">Australia's most valuable wild catch relies heavily on one export market.</p>
+  </div>
+</section>
+
+<!-- ===================== 5 TRANSITION ===================== -->
+<section class="chapter" id="transition">
+  <div class="wrap">
+    <div class="chapter-head">
+      <div>
+        <span class="chapter-no">Chapter 5</span>
+        <h2>An industry in transition</h2>
+      </div>
+      <p class="intro">
+        <span class="question">What has changed, and what ends up on our plates?</span>
+        In 1998-99, rock lobster was Australia's most valuable seafood and salmon was
+        sixth. Salmon is now first. At the same time, most of the seafood Australians
+        eat is imported, and some wild fish stocks are depleted.
+      </p>
+    </div>
+
+    <div class="figures">
+      <figure class="fig">
+        <div class="fig-no">Figure 10</div>
+        <div id="c10" class="chart"></div>
+        <figcaption>
+          <p class="finding">Salmon passed prawns in 2006-07 and lobster in 2010-11, and it has been number one every year since 2015-16.</p>
+          <p class="source">Source: ABARES AFAS 2025 (Tables 3 and 4). Wild-caught and farmed values are combined for each species.</p>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-no">Figure 11</div>
+        <div id="c11" class="chart"></div>
+        <figcaption>
+          <p class="finding neutral">The imported share went up from 55% in 1998-99 to 61% in 2023-24. By weight, Australia imports about four times as much seafood as it exports (215,000 t compared with 51,000 t).</p>
+          <p class="source">Source: ABARES AFAS 2025 (Table 18). Seafood eaten = production + imports - exports, by weight.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="figures wide-left" style="margin-top:56px">
+      <figure class="fig">
+        <div class="fig-no">Figure 12</div>
+        <div id="c12" class="chart"></div>
+        <figcaption>
+          <p class="finding wild">Leaving out the ACT, which has only one stock, Tasmania has the highest share of depleted stocks, with 12 of its 55 (22%).</p>
+          <p class="source">Source: FRDC, Status of Australian Fish Stocks Reports 2024 - Key results. Stocks shared between jurisdictions appear in each, so there are more dots than stocks.</p>
+        </figcaption>
+      </figure>
+      <div class="closing">
+        <h3>Farming has overtaken fishing in Australia, but most of the seafood we eat still comes from overseas.</h3>
+        <ul>
+          <li>Farming now earns more than fishing, and the gap is expected to grow.</li>
+          <li>Rock lobster, the most valuable wild catch, depends mostly on one export market.</li>
+          <li>About six in every ten kilograms of seafood eaten here is imported.</li>
+          <li>Most assessed wild stocks are sustainable, but some are depleted, especially in Tasmania.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <h3>Data sources</h3>
+      <ul>
+        <li>ABARES (2025). <a href="https://www.agriculture.gov.au/abares/research-topics/fisheries/fisheries-and-aquaculture-statistics">Australian fisheries and aquaculture statistics</a>, statistical tables, data to 2024-25. CC BY 4.0.</li>
+        <li>ABARES (2026). Agricultural commodities: March quarter 2026, fisheries forecasts. CC BY 4.0. <a href="https://doi.org/10.25814/98pm-3f48">doi.org/10.25814/98pm-3f48</a></li>
+        <li>Fisheries Research and Development Corporation (2024). <a href="https://fish.gov.au/reports/data-tools/key-results">Status of Australian Fish Stocks Reports 2024 - Key results</a>.</li>
+        <li>Australian Bureau of Statistics. <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files">ASGS Edition 3 State and Territory boundaries</a>, simplified with mapshaper. CC BY 4.0.</li>
+        <li>World map: Natural Earth via <a href="https://github.com/vega/vega-datasets">vega-datasets</a>. Coordinates: <a href="https://data.gov.au/data/dataset/geography-placenames-gazetteer9">Gazetteer of Australia</a> and <a href="https://developers.google.com/public-data/docs/canonical/countries_csv">Google countries.csv</a>.</li>
+      </ul>
+      <h3>Notes on the data</h3>
+      <p>
+        Years are financial years (July to June). Dollar values are nominal Australian
+        dollars. 2024-25 figures are preliminary, and 2025-26 onwards are ABARES forecasts.
+        Data was taken from the source tables and reshaped for the charts. No values
+        were changed.
+      </p>
+    </div>
+    <div>
+      <h3>About</h3>
+      <p>
+        Created by <strong>YOUR NAME</strong> for FIT3179 Data Visualisation, Monash
+        University, October 2026. Charts built with
+        <a href="https://vega.github.io/vega-lite/">Vega-Lite</a> and
+        <a href="https://vega.github.io/vega/">Vega</a>. Typefaces: Bricolage Grotesque
+        and Source Serif 4 (Google Fonts, SIL Open Font License).
+      </p>
+      <h3>Use of AI</h3>
+      <p>
+        The cover image is AI-generated (TOOL NAME, DATE) and is illustrative only; it does not show a real place or data.
+        Claude (Anthropic) was used to help find data sources, prepare the data
+        extracts, draft chart specifications and review the layout and text. All figures
+        were checked against the source data.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // One shared chart style so every figure matches the page typography and colours.
+  var FONT = "Bricolage Grotesque, Helvetica Neue, Arial, sans-serif";
+  var theme = {
+    font: FONT,
+    background: null,
+    title: {
+      font: FONT, fontSize: 19, fontWeight: 700, color: "#0F2530",
+      subtitleFont: FONT, subtitleFontSize: 13, subtitleColor: "#4A6470",
+      anchor: "start", offset: 16, subtitlePadding: 5
+    },
+    axis: {
+      labelFont: FONT, labelFontSize: 12, labelColor: "#4A6470",
+      titleFont: FONT, titleFontSize: 12, titleColor: "#4A6470", titleFontWeight: 600,
+      domainColor: "#b7cbcf", tickColor: "#b7cbcf", gridColor: "#e3eced"
+    },
+    legend: {
+      labelFont: FONT, labelFontSize: 12, labelColor: "#0F2530",
+      titleFont: FONT, titleFontSize: 12, titleColor: "#4A6470", titleFontWeight: 600
+    },
+    text: {font: FONT},
+    view: {stroke: null}
+  };
+  var options = {actions: false, renderer: "svg", config: theme};
+
+  function draw(id) {
+    return vegaEmbed('#' + id, 'js/' + id + '.vg.json', options);
+  }
+
+  // Wait for the web fonts, so chart labels are measured with the right font.
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
+    ['c1', 'c3', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11', 'c12'].forEach(draw);
+
+    // Figures 2 and 4 are linked: clicking a state on the map highlights it in both.
+    Promise.all([draw('c2'), draw('c4')]).then(function (results) {
+      var map = results[0].view, heat = results[1].view;
+      map.addEventListener('click', function (event, item) {
+        var state = (item && item.datum && item.datum.properties) ? item.datum.properties.STE_NAME21 : null;
+        if (state === map.signal('selected_state')) state = null;   // click again to reset
+        map.signal('selected_state', state).runAsync();
+        heat.signal('selected_state', state).runAsync();
+      });
+    });
+  });
+</script>
+
 </body>
 </html>

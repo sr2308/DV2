@@ -1,0 +1,170 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Exports to China grew fast, then fell sharply",
+    "subtitle": "Edible seafood exports by destination. Line width = value. Drag the slider below the map.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 420,
+  "params": [
+    {
+      "name": "year",
+      "value": 2019,
+      "bind": {"input": "range", "min": 1990, "max": 2025, "step": 1, "name": "Financial year ending: "}
+    }
+  ],
+  "projection": {
+    "type": "equalEarth",
+    "rotate": [-150, 0, 0],
+    "fit": {
+      "type": "Feature",
+      "geometry": {"type": "MultiPoint", "coordinates": [[92, 50], [-88, 50], [92, -45], [-88, -45]]}
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2/data/world-110m.json",
+        "format": {"type": "topojson", "feature": "countries"}
+      },
+      "mark": {"type": "geoshape", "fill": "#ece9e2", "stroke": "white", "strokeWidth": 0.5, "clip": true}
+    },
+    {
+      "data": {"url": "data/c7_exports_by_country.csv"},
+      "transform": [
+        {
+          "fold": [
+            "1989–90", "1990–91", "1991–92", "1992–93", "1993–94", "1994–95", "1995–96", "1996–97",
+            "1997–98", "1998–99", "1999–00", "2000–01", "2001–02", "2002–03", "2003–04", "2004–05",
+            "2005–06", "2006–07", "2007–08", "2008–09", "2009–10", "2010–11", "2011–12", "2012–13",
+            "2013–14", "2014–15", "2015–16", "2016–17", "2017–18", "2018–19", "2019–20", "2020–21",
+            "2021–22", "2022–23", "2023–24", "2024–25"
+          ],
+          "as": ["year", "value_m"]
+        },
+        {"calculate": "toNumber(datum.value_m)", "as": "export_musd"},
+        {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"},
+        {"filter": "datum.year_end == year"},
+        {
+          "lookup": "country",
+          "from": {
+            "data": {"url": "data/export_destinations.csv"},
+            "key": "country",
+            "fields": ["lat", "lon"]
+          }
+        },
+        {"calculate": "toNumber(datum.lon)", "as": "lon"},
+        {"calculate": "toNumber(datum.lat)", "as": "lat"},
+        {"calculate": "133.78", "as": "o_lon"},
+        {"calculate": "-25.27", "as": "o_lat"},
+        {
+          "calculate": "datum.country + ' $' + format(datum.export_musd, ',.0f') + 'M'",
+          "as": "label"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {"type": "rule", "color": "#D85A30", "opacity": 0.7, "strokeCap": "round"},
+          "encoding": {
+            "longitude": {"field": "o_lon", "type": "quantitative"},
+            "latitude": {"field": "o_lat", "type": "quantitative"},
+            "longitude2": {"field": "lon"},
+            "latitude2": {"field": "lat"},
+            "strokeWidth": {
+              "field": "export_musd",
+              "type": "quantitative",
+              "scale": {"domain": [0, 900], "range": [0.5, 14]},
+              "legend": null
+            },
+            "tooltip": [
+              {"field": "country", "title": "Destination"},
+              {"field": "year", "title": "Year"},
+              {"field": "export_musd", "title": "Exports ($M)", "format": ",.0f"}
+            ]
+          }
+        },
+        {
+          "mark": {"type": "circle", "color": "#1f2a30", "size": 30},
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "tooltip": [
+              {"field": "country", "title": "Destination"},
+              {"field": "year", "title": "Year"},
+              {"field": "export_musd", "title": "Exports ($M)", "format": ",.0f"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 6,
+            "dy": -6,
+            "fontSize": 11,
+            "fontWeight": "bold",
+            "color": "#1f2a30"
+          },
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "text": {"field": "label"}
+          },
+          "transform": [{"filter": "datum.export_musd >= 40"}]
+        }
+      ]
+    },
+    {
+      "data": {"values": [{"lon": 133.78, "lat": -25.27}]},
+      "mark": {"type": "circle", "color": "#1D9E75", "size": 120},
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {"values": [{"lon": -125, "lat": -30}]},
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 28,
+        "fontWeight": "bold",
+        "color": "#0c3b55",
+        "opacity": 0.8,
+        "text": {"expr": "(year - 1) + '–' + substring(year + '', 2, 4)"},
+        "baseline": "bottom"
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": -125,
+            "lat": -33,
+            "t": "China fell from $888M (2018-19) to $361M (2020-21)\nafter live lobster imports were halted in late 2020.\nHover a line for smaller markets."
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 11,
+        "color": "#5a676e",
+        "lineBreak": "\n",
+        "baseline": "top",
+        "lineHeight": 15
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "t"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

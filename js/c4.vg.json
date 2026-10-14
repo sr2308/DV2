@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Each state relies on different seafood",
+    "subtitle": "Value by state and type of seafood, 2023-24 ($M). Darker = more valuable.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 230,
+  "params": [{"name": "selected_state", "value": null}],
+  "data": {"url": "data/c4_state_categories_2023_24.csv"},
+  "transform": [
+    {"calculate": "datum.farmed_total_000 - datum.farmed_salmonids_000", "as": "farmed_other_000"},
+    {
+      "fold": [
+        "wild_crustaceans_000", "wild_molluscs_000", "wild_finfish_000", "farmed_salmonids_000",
+        "farmed_other_000"
+      ],
+      "as": ["category_key", "value_000"]
+    },
+    {"calculate": "datum.value_000 / 1000", "as": "value_musd"},
+    {
+      "calculate": "{'wild_crustaceans_000': 'Wild crustaceans', 'wild_molluscs_000': 'Wild molluscs', 'wild_finfish_000': 'Wild fish', 'farmed_salmonids_000': 'Farmed salmon & trout', 'farmed_other_000': 'Other farmed'}[datum.category_key]",
+      "as": "category"
+    },
+    {
+      "calculate": "{'New South Wales': 'NSW', 'Victoria': 'Vic', 'Queensland': 'Qld', 'South Australia': 'SA', 'Western Australia': 'WA', 'Tasmania': 'Tas', 'Northern Territory': 'NT'}[datum.state]",
+      "as": "state_short"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "state_short",
+      "type": "nominal",
+      "title": null,
+      "sort": ["Tas", "WA", "Qld", "SA", "NSW", "NT", "Vic"],
+      "axis": {
+        "orient": "top",
+        "labelAngle": 0,
+        "labelFontSize": 12,
+        "labelFontWeight": "bold",
+        "domain": false,
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "category",
+      "type": "nominal",
+      "title": null,
+      "sort": ["Farmed salmon & trout", "Other farmed", "Wild crustaceans", "Wild fish", "Wild molluscs"],
+      "axis": {"labelFontSize": 12, "domain": false, "ticks": false, "labelLimit": 200}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "rect", "stroke": "white", "strokeWidth": 2},
+      "encoding": {
+        "color": {
+          "field": "value_musd",
+          "type": "quantitative",
+          "scale": {"type": "symlog", "constant": 10, "scheme": "blues"},
+          "legend": null
+        },
+        "opacity": {
+          "condition": {"test": "selected_state == null || datum.state == selected_state", "value": 1},
+          "value": 0.25
+        },
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "category", "title": "Type"},
+          {"field": "value_musd", "title": "Value ($M)", "format": ",.1f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "fontSize": 12},
+      "encoding": {
+        "text": {
+          "condition": {"test": "datum.value_musd < 0.5", "value": "–"},
+          "field": "value_musd",
+          "type": "quantitative",
+          "format": ",.0f"
+        },
+        "color": {"condition": {"test": "datum.value_musd > 150", "value": "white"}, "value": "#1f2a30"},
+        "opacity": {
+          "condition": {"test": "selected_state == null || datum.state == selected_state", "value": 1},
+          "value": 0.3
+        }
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

@@ -1,0 +1,427 @@
+/* =========================================================
+   From ocean to plate — Australia's seafood industry
+   FIT3179 Data Visualisation 2
+
+   Concept: the page starts in the deep ocean and rises to the
+   surface. Charts are presented as numbered figures, like an atlas.
+   ========================================================= */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  /* data colours: the same meaning in every chart */
+  --farmed: #1D9E75;   /* teal  = aquaculture */
+  --wild:   #D85A30;   /* coral = wild-caught */
+
+  /* ocean depth palette */
+  --abyss: #062A3A;    /* hero + footer */
+  --deep:  #0B4258;
+  --tide:  #2C7A8C;    /* accents, links, figure numbers */
+  --spray: #8FC8CF;    /* light accent on dark backgrounds */
+  --mist:  #EAF2F2;    /* alternate chapter background */
+  --white: #FFFFFF;
+
+  --ink:      #0F2530;
+  --ink-soft: #4A6470;
+  --rule:     #CFDFE1;
+
+  /* type */
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --text:    "Source Serif 4", Georgia, "Times New Roman", serif;
+
+  /* layout */
+  --max: 1200px;
+  --gutter: 28px;
+}
+
+/* ---------- 2. Base ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 19px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 { font-family: var(--display); color: inherit; margin: 0; }
+p { margin: 0 0 1em; }
+a { color: var(--tide); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--tide);
+  outline-offset: 3px;
+}
+strong { font-weight: 600; }
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ---------- 3. Cover photo ---------- */
+.hero {
+  position: relative;
+  min-height: min(88vh, 820px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fff;
+  background-color: var(--abyss);           /* shows while the photo loads */
+  background-image:
+    linear-gradient(to right, rgba(6, 42, 58, 0.7) 0%, rgba(6, 42, 58, 0.3) 45%, rgba(6, 42, 58, 0) 65%),
+    linear-gradient(to top, rgba(6, 42, 58, 1) 0%, rgba(6, 42, 58, 0.4) 30%, rgba(6, 42, 58, 0) 55%),
+    url("../images/hero.png");
+  background-size: cover;
+  background-position: center 40%;
+}
+
+.hero-inner { width: 100%; margin: 0 auto; padding-bottom: 28px; }
+
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  max-width: 11ch;
+}
+
+.hero-sub {
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  line-height: 1.6;
+  color: #e3eef0;
+  max-width: 46ch;
+  margin: 22px 0 0;
+}
+
+.photo-credit {
+  font-family: var(--display);
+  font-size: 0.78rem;
+  color: rgba(227, 238, 240, 0.7);
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 18px;
+}
+
+/* ---------- Key numbers (just below the cover) ---------- */
+.numbers {
+  background: var(--abyss);
+  color: #fff;
+  padding: 8px 0 40px;
+}
+
+.ledger {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid rgba(143, 200, 207, 0.35);
+}
+.ledger div {
+  padding: 22px 20px 26px 0;
+  border-right: 1px solid rgba(143, 200, 207, 0.18);
+}
+.ledger div + div { padding-left: 20px; }
+.ledger div:last-child { border-right: 0; }
+.ledger .num {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 10px;
+}
+.ledger .num.farmed { color: #5fd6aa; }
+.ledger .label { display: block; font-size: 0.95rem; line-height: 1.4; color: #a9c4ca; }
+
+.glossary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 40px;
+  margin: 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(143, 200, 207, 0.18);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #a9c4ca;
+}
+.glossary dt { font-family: var(--display); font-weight: 600; color: #fff; }
+.glossary dd { margin: 2px 0 0; }
+
+/* ---------- 4. Chapter links ---------- */
+.toc {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.toc ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 28px;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 12px var(--gutter);
+  counter-reset: chap;
+}
+.toc li { counter-increment: chap; }
+.toc a {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.toc a::before { content: counter(chap) "  "; color: var(--tide); font-weight: 700; white-space: pre; }
+.toc a:hover { color: var(--ink); }
+
+/* ---------- 5. Chapters ---------- */
+.chapter {
+  padding: 88px 0 72px;
+  scroll-margin-top: 50px;
+}
+.chapter.mist { background: var(--mist); }
+
+.chapter-head {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 16px 64px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+
+.chapter-no {
+  display: block;
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--tide);
+  margin-bottom: 14px;
+}
+
+.chapter h2 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.intro {
+  font-size: 1.2rem;
+  line-height: 1.65;
+  margin: 6px 0 0;
+  max-width: 56ch;
+}
+.intro .question {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+
+/* ---------- 6. Figures ---------- */
+.figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px 48px;
+}
+.figures.wide-left  { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+.full { grid-column: 1 / -1; }
+
+.fig {
+  margin: 0;
+  min-width: 0;                       /* prevents horizontal scrolling */
+  border-top: 2px solid var(--ink);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.fig-no {
+  font-family: var(--display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--tide);
+  margin-bottom: 10px;
+}
+
+.chart { width: 100%; min-height: 240px; }
+.chart > .vega-embed { display: block; width: 100%; }
+.chart svg { max-width: 100%; height: auto; }   /* never wider than its column */
+#c11 > .vega-embed { display: inline-block; width: auto; max-width: 100%; }
+
+.fig figcaption {
+  max-width: 72ch;
+  margin-top: 16px;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+.finding { margin: 0 0 8px; }
+.finding::before {
+  content: "";
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--farmed);
+  margin-right: 10px;
+  vertical-align: 1px;
+}
+.finding.wild::before { background: var(--wild); }
+.finding.neutral::before { background: var(--tide); }
+
+.how-to {
+  font-family: var(--display);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+.source {
+  font-family: var(--display);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* text placed beside a chart */
+.aside {
+  align-self: center;
+  font-size: 1.12rem;
+}
+.aside p { max-width: 40ch; }
+.aside .figure-big {
+  display: block;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--farmed);
+  margin-bottom: 18px;
+}
+
+/* chapter conclusion */
+.conclusion {
+  margin: 64px 0 0;
+  padding-top: 26px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  max-width: 34ch;
+}
+
+/* closing panel in the last chapter */
+.closing {
+  align-self: stretch;
+  background: var(--abyss);
+  color: #fff;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.closing h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 22px;
+}
+.closing ul { margin: 0; padding: 0; list-style: none; }
+.closing li {
+  padding: 12px 0;
+  border-top: 1px solid rgba(143, 200, 207, 0.25);
+  color: #c3d8dd;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+/* colour keys used inside sentences */
+.key {
+  font-family: var(--display);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.key::before {
+  content: "";
+  display: inline-block;
+  width: 11px; height: 11px;
+  border-radius: 2px;
+  margin-right: 6px;
+  vertical-align: 0;
+}
+.key.farmed { color: #137a5a; }
+.key.farmed::before { background: var(--farmed); }
+.key.wild { color: #b5461f; }
+.key.wild::before { background: var(--wild); }
+
+/* Vega slider and radio buttons */
+.vega-bindings { font-family: var(--display); font-size: 0.92rem; color: var(--ink-soft); margin-top: 10px; }
+.vega-bind { display: inline-flex; align-items: center; gap: 10px; margin-right: 18px; }
+.vega-bind-name { font-weight: 600; color: var(--ink); }
+.vega-bind input[type="range"] { width: 260px; accent-color: var(--wild); }
+.vega-bind input[type="radio"] { accent-color: var(--deep); }
+
+#vg-tooltip-element {
+  font-family: var(--display);
+  font-size: 13px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(6, 42, 58, 0.12);
+}
+
+/* ---------- 7. Footer: back to the deep ---------- */
+footer {
+  background: var(--abyss);
+  color: #a9c4ca;
+  padding: 72px 0 56px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 56px;
+}
+footer h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 12px;
+}
+footer ul { margin: 0 0 28px; padding-left: 1.1em; }
+footer li { margin-bottom: 8px; }
+footer p { margin-bottom: 24px; }
+footer a { color: #d7e8eb; }
+
+/* ---------- 8. Smaller screens ---------- */
+@media (max-width: 980px) {
+  .ledger { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ledger div:nth-child(3) { border-right: 0; }
+  .ledger div:nth-child(4) { padding-left: 0; }
+  .glossary { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+}
+
+@media (max-width: 820px) {
+  body { font-size: 18px; }
+  .chapter { padding: 64px 0 56px; }
+  .chapter-head,
+  .figures,
+  .figures.wide-left,
+  .footer-grid { grid-template-columns: minmax(0, 1fr); }
+  .ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ledger div { border-right: 0; padding-left: 0 !important; }
+  .vega-bind input[type="range"] { width: 160px; }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Most assessed fish stocks are sustainable",
+    "subtitle": "One dot per wild fish stock, grouped by who manages it. 316 of 503 (63%) are sustainable.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 400,
+  "projection": {"type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-133, 0]},
+  "layer": [
+    {
+      "data": {"url": "data/aus_states.topojson", "format": {"type": "topojson", "feature": "states"}},
+      "mark": {"type": "geoshape", "fill": "#ece9e2", "stroke": "white", "strokeWidth": 1}
+    },
+    {
+      "data": {"url": "data/c12_stock_status_dots.csv"},
+      "params": [{"name": "pick", "select": {"type": "point", "fields": ["status"]}, "bind": "legend"}],
+      "mark": {"type": "circle", "size": 22, "stroke": "white", "strokeWidth": 0.3},
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "color": {
+          "field": "status",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Sustainable", "Recovering", "Depleting", "Depleted", "Undefined", "Negligible"],
+            "range": ["#639922", "#97C459", "#EF9F27", "#E24B4A", "#d6d4cd", "#e8e6e0"]
+          },
+          "legend": {"orient": "top-right", "title": "Stock status"}
+        },
+        "opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.08},
+        "tooltip": [{"field": "jurisdiction", "title": "Managed by"}, {"field": "status", "title": "Status"}]
+      }
+    },
+    {
+      "data": {"values": [{"lon": 133.0, "lat": -44.4, "t": "Commonwealth waters"}]},
+      "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "color": "#1f2a30"},
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "t"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

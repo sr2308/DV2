@@ -1,0 +1,189 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "title": {
+    "text": "Salmon and trout are worth more than lobster, prawns and oysters combined",
+    "subtitle": "Value of seafood caught or farmed in Australia, 2023-24. Box size = value.",
+    "anchor": "start",
+    "offset": 6
+  },
+  "height": 380,
+  "padding": 5,
+  "signals": [
+    {
+      "name": "width",
+      "init": "containerSize()[0] || 600",
+      "on": [{"events": "window:resize", "update": "containerSize()[0] || 600"}]
+    }
+  ],
+  "data": [
+    {
+      "name": "species",
+      "url": "data/c1_species_value_2023_24.csv",
+      "format": {"type": "csv", "parse": {"value_000": "number"}},
+      "transform": [
+        {"type": "formula", "as": "value_musd", "expr": "datum.value_000 / 1000"},
+        {
+          "type": "formula",
+          "as": "box",
+          "expr": "datum.value_musd < 40 || indexof(datum.species, 'Other') === 0 ? 'Other' : datum.species"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["group", "production_type", "box"],
+          "fields": ["value_musd", "value_musd"],
+          "ops": ["sum", "count"],
+          "as": ["value_musd", "n_species"]
+        },
+        {
+          "type": "formula",
+          "as": "name",
+          "expr": "datum.box === 'Other' ? (datum.group === 'Finfish' ? 'Other fish' : 'Other ' + lower(datum.group)) : datum.box === 'Salmonids' ? 'Salmon & trout' : datum.box === 'Rock Lobsters' ? 'Rock lobster' : datum.box === 'Tunas' ? 'Tuna' : datum.box"
+        },
+        {"type": "formula", "as": "label", "expr": "datum.name"}
+      ]
+    },
+    {
+      "name": "tree",
+      "source": "species",
+      "transform": [
+        {"type": "nest", "keys": ["group"], "generate": true},
+        {
+          "type": "treemap",
+          "field": "value_musd",
+          "sort": {"field": "value_musd"},
+          "round": true,
+          "method": "squarify",
+          "paddingInner": 3,
+          "paddingOuter": 0,
+          "paddingTop": 20,
+          "size": [{"signal": "width"}, {"signal": "height"}]
+        }
+      ]
+    },
+    {
+      "name": "groups",
+      "source": "tree",
+      "transform": [{"type": "filter", "expr": "datum.depth === 1"}]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [{"type": "filter", "expr": "!datum.children"}]
+    },
+    {
+      "name": "total",
+      "source": "species",
+      "transform": [{"type": "aggregate", "fields": ["value_musd"], "ops": ["sum"], "as": ["all"]}]
+    }
+  ],
+  "scales": [
+    {
+      "name": "colour",
+      "type": "ordinal",
+      "domain": ["Farmed", "Wild-caught"],
+      "range": ["#1D9E75", "#D85A30"]
+    }
+  ],
+  "legends": [
+    {
+      "fill": "colour",
+      "orient": "top-right",
+      "direction": "horizontal",
+      "title": null,
+      "symbolType": "square",
+      "labelFontSize": 12,
+      "offset": 0
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "from": {"data": "groups"},
+      "encode": {
+        "enter": {
+          "x": {"field": "x0", "offset": 2},
+          "y": {"field": "y0", "offset": 14},
+          "text": {"signal": "datum.key"},
+          "fontSize": {"value": 13},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "#1f2a30"}
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data": "leaves"},
+      "encode": {
+        "enter": {
+          "stroke": {"value": "white"},
+          "strokeWidth": {"value": 1},
+          "tooltip": {
+            "signal": "{'Seafood': datum.label, 'Type': datum.production_type, 'Value': '$' + format(datum.value_musd, ',.0f') + 'M', 'Share of total': format(datum.value_musd / data('total')[0].all, '.1%'), 'Species groups included': datum.n_species}"
+          }
+        },
+        "update": {
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"},
+          "fill": {"scale": "colour", "field": "production_type"},
+          "fillOpacity": {"value": 0.92}
+        },
+        "hover": {"fillOpacity": {"value": 1}}
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "leaves"},
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {"field": "x0", "offset": 6},
+          "y": {"field": "y0", "offset": 17},
+          "text": {"signal": "(datum.x1 - datum.x0) > 44 && (datum.y1 - datum.y0) > 34 ? datum.label : ''"},
+          "fontSize": {"value": 12},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "white"},
+          "limit": {"signal": "datum.x1 - datum.x0 - 10"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "leaves"},
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {"field": "x0", "offset": 6},
+          "y": {"field": "y0", "offset": 32},
+          "text": {
+            "signal": "(datum.x1 - datum.x0) > 44 && (datum.y1 - datum.y0) > 34 ? '$' + format(datum.value_musd, ',.0f') + 'M' : ''"
+          },
+          "fontSize": {"value": 11},
+          "fill": {"value": "white"},
+          "limit": {"signal": "datum.x1 - datum.x0 - 10"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "leaves"},
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {"signal": "(datum.x0 + datum.x1) / 2"},
+          "y": {"signal": "(datum.y0 + datum.y1) / 2"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "text": {
+            "signal": "datum.box === 'Salmonids' ? format(datum.value_musd / data('total')[0].all, '.0%') + ' of all seafood value' : ''"
+          },
+          "fontSize": {"value": 18},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "white"},
+          "limit": {"signal": "datum.x1 - datum.x0 - 16"}
+        }
+      }
+    }
+  ]
+}

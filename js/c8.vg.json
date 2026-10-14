@@ -1,0 +1,108 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Most rock lobster is exported, but oysters are eaten here",
+    "subtitle": "% of production exported, 2023-24. Circle size = value of production.",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 300,
+  "data": {"url": "data/c8_production_exports_2023_24.csv"},
+  "transform": [
+    {"calculate": "datum.species == 'Salmonids' ? 'Salmon' : datum.species", "as": "species"},
+    {
+      "calculate": "toNumber(datum.wild_production_t) + toNumber(datum.farmed_production_t)",
+      "as": "production_t"
+    },
+    {
+      "calculate": "(toNumber(datum.wild_production_value_000) + toNumber(datum.farmed_production_value_000)) / 1000",
+      "as": "value_musd"
+    },
+    {
+      "calculate": "min(100, toNumber(datum.export_t) / datum.production_t * 100)",
+      "as": "export_pct"
+    },
+    {
+      "calculate": "toNumber(datum.farmed_production_t) > toNumber(datum.wild_production_t) ? 'Mostly farmed' : 'Mostly wild-caught'",
+      "as": "type"
+    },
+    {"calculate": "datum.species + ' ' + format(datum.export_pct, '.0f') + '%'", "as": "label"}
+  ],
+  "layer": [
+    {
+      "data": {"values": [{"y": 50}]},
+      "mark": {"type": "rule", "strokeDash": [4, 3], "color": "#999"},
+      "encoding": {"y": {"field": "y", "type": "quantitative"}}
+    },
+    {
+      "data": {"values": [{"y": 50, "t": "Half exported"}]},
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dy": -6,
+        "x": {"expr": "width"},
+        "fontSize": 10,
+        "color": "#777"
+      },
+      "encoding": {"y": {"field": "y", "type": "quantitative"}, "text": {"field": "t"}}
+    },
+    {
+      "mark": {"type": "circle", "opacity": 0.8, "stroke": "white", "strokeWidth": 1},
+      "encoding": {
+        "x": {
+          "field": "production_t",
+          "type": "quantitative",
+          "scale": {"type": "log", "domain": [1000, 100000]},
+          "title": "Tonnes produced per year (log scale)",
+          "axis": {"format": "~s", "values": [1000, 3000, 10000, 30000, 100000], "grid": false}
+        },
+        "y": {
+          "field": "export_pct",
+          "type": "quantitative",
+          "scale": {"domain": [0, 100]},
+          "title": "% exported",
+          "axis": {"format": ".0f"}
+        },
+        "size": {
+          "field": "value_musd",
+          "type": "quantitative",
+          "scale": {"range": [60, 2500]},
+          "legend": {"title": "Value ($M)", "values": [50, 500, 1300], "orient": "right"}
+        },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "scale": {"domain": ["Mostly farmed", "Mostly wild-caught"], "range": ["#1D9E75", "#D85A30"]},
+          "legend": {"title": null, "orient": "bottom", "direction": "horizontal"}
+        },
+        "tooltip": [
+          {"field": "species", "title": "Species"},
+          {"field": "production_t", "title": "Produced (t)", "format": ",.0f"},
+          {"field": "export_t", "title": "Exported (t)", "format": ",.0f"},
+          {"field": "export_pct", "title": "% exported", "format": ".0f"},
+          {"field": "value_musd", "title": "Value ($M)", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#1f2a30"
+      },
+      "encoding": {
+        "x": {
+          "field": "production_t",
+          "type": "quantitative",
+          "scale": {"type": "log", "domain": [1000, 100000]}
+        },
+        "y": {"field": "export_pct", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}
