@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Most assessed fish stocks are sustainable",
-    "subtitle": "One dot per wild fish stock, grouped by who manages it. 316 of 503 (63%) are sustainable.",
+    "subtitle": "One dot per wild fish stock, grouped by who manages it. 63% are sustainable.",
     "anchor": "start"
   },
   "width": "container",
@@ -25,7 +25,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Sustainable", "Recovering", "Depleting", "Depleted", "Undefined", "Negligible"],
-            "range": ["#639922", "#97C459", "#EF9F27", "#E24B4A", "#d6d4cd", "#e8e6e0"]
+            "range": ["#0072B2", "#8DBEE0", "#EF9F27", "#E24B4A", "#d6d4cd", "#e8e6e0"]
           },
           "legend": {"orient": "top-right", "title": "Stock status"}
         },
@@ -36,6 +36,20 @@
     {
       "data": {"values": [{"lon": 133.0, "lat": -44.4, "t": "Commonwealth waters"}]},
       "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "color": "#1f2a30"},
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "t"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"lon": 150.2, "lat": -43.2, "t": "Tasmania: 12 of 55"},
+          {"lon": 150.2, "lat": -44.6, "t": "stocks depleted"}
+        ]
+      },
+      "mark": {"type": "text", "align": "left", "fontSize": 11, "fontWeight": "bold", "color": "#b5461f"},
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
         "latitude": {"field": "lat", "type": "quantitative"},

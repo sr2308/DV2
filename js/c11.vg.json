@@ -2,16 +2,21 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Most seafood eaten in Australia is imported",
-    "subtitle": "Each square = 1% of the seafood Australians eat (by weight). In 2023–24, 61% was imported.",
+    "subtitle": "Each square = 1% of the seafood Australians eat, by weight.",
     "anchor": "start"
   },
-  "width": 300,
-  "height": 300,
+  "width": 360,
+  "height": 360,
   "params": [
     {
       "name": "year",
       "value": "2023–24",
-      "bind": {"input": "radio", "options": ["1998–99", "2010–11", "2023–24"], "name": "Year: "}
+      "bind": {
+        "input": "radio",
+        "options": ["1998–99", "2010–11", "2023–24"],
+        "labels": ["1998-99", "2010-11", "2023-24"],
+        "name": "Year: "
+      }
     }
   ],
   "data": {"sequence": {"start": 0, "stop": 100, "as": "i"}},
@@ -32,7 +37,7 @@
   ],
   "layer": [
     {
-      "mark": {"type": "square", "size": 420, "opacity": 1},
+      "mark": {"type": "square", "size": 960, "opacity": 1},
       "encoding": {
         "x": {"field": "col", "type": "ordinal", "axis": null},
         "y": {"field": "row_n", "type": "ordinal", "axis": null},
@@ -40,10 +45,69 @@
           "field": "source",
           "type": "nominal",
           "scale": {"domain": ["Imported", "Produced in Australia"], "range": ["#B4B2A9", "#0c3b55"]},
-          "legend": {"orient": "bottom", "title": null, "direction": "horizontal"}
+          "legend": {"orient": "bottom", "title": null, "direction": "horizontal", "labelLimit": 220}
         },
         "tooltip": [{"field": "source", "title": "Source"}, {"field": "imported_pct", "title": "% imported"}]
       }
+    },
+    {
+      "transform": [{"filter": "datum.i == 0"}, {"calculate": "datum.imported_pct + '%'", "as": "big"}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "x": 388,
+        "y": 0,
+        "fontSize": 44,
+        "fontWeight": "bold",
+        "color": "#5f5d55"
+      },
+      "encoding": {"text": {"field": "big"}}
+    },
+    {
+      "transform": [{"filter": "datum.i == 0"}, {"calculate": "'imported'", "as": "t"}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "x": 388,
+        "y": 48,
+        "fontSize": 13,
+        "color": "#4A6470"
+      },
+      "encoding": {"text": {"field": "t"}}
+    },
+    {
+      "transform": [
+        {"filter": "datum.i == 0"},
+        {"calculate": "100 - datum.imported_pct", "as": "local"},
+        {"calculate": "datum.local + '%'", "as": "big"}
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "x": 388,
+        "y": 300,
+        "fontSize": 44,
+        "fontWeight": "bold",
+        "color": "#0c3b55"
+      },
+      "encoding": {"text": {"field": "big"}}
+    },
+    {
+      "transform": [{"filter": "datum.i == 0"}, {"calculate": "'produced in Australia'", "as": "t"}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "x": 388,
+        "y": 304,
+        "fontSize": 13,
+        "color": "#4A6470"
+      },
+      "encoding": {"text": {"field": "t"}}
     }
-  ]
+  ],
+  "config": {"view": {"stroke": null}}
 }

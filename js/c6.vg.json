@@ -2,78 +2,127 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Salmon grew bigger and far more valuable",
-    "subtitle": "Each dot is one year, 1999-2024. Right = more tonnes, up = more value.",
+    "subtitle": "Growth since 1998-99 (1998-99 = 1). Log scale, so equal steps mean equal growth.",
     "anchor": "start"
   },
-  "width": "container",
-  "height": 300,
   "data": {"url": "data/c6_species_value_quantity_by_year.csv"},
   "transform": [
     {
       "fold": [
-        "1998–99", "1999–00", "2000–01", "2001–02", "2002–03", "2003–04", "2004–05", "2005–06",
-        "2006–07", "2007–08", "2008–09", "2009–10", "2010–11", "2011–12", "2012–13", "2013–14",
-        "2014–15", "2015–16", "2016–17", "2017–18", "2018–19", "2019–20", "2020–21", "2021–22",
-        "2022–23", "2023–24"
+        "1998–99", "1998-99", "1999–00", "1999-00", "2000–01", "2000-01", "2001–02", "2001-02",
+        "2002–03", "2002-03", "2003–04", "2003-04", "2004–05", "2004-05", "2005–06", "2005-06",
+        "2006–07", "2006-07", "2007–08", "2007-08", "2008–09", "2008-09", "2009–10", "2009-10",
+        "2010–11", "2010-11", "2011–12", "2011-12", "2012–13", "2012-13", "2013–14", "2013-14",
+        "2014–15", "2014-15", "2015–16", "2015-16", "2016–17", "2016-17", "2017–18", "2017-18",
+        "2018–19", "2018-19", "2019–20", "2019-20", "2020–21", "2020-21", "2021–22", "2021-22",
+        "2022–23", "2022-23", "2023–24", "2023-24"
       ],
-      "as": ["year", "amount"]
+      "as": ["year_key", "amount"]
     },
+    {"filter": "isValid(datum.amount) && datum.amount !== ''"},
+    {"calculate": "toNumber(substring(datum.year_key, 0, 4)) + 1", "as": "year_end"},
     {"calculate": "toNumber(datum.amount)", "as": "amount"},
     {
       "aggregate": [{"op": "sum", "field": "amount", "as": "amount"}],
-      "groupby": ["species", "measure", "year"]
+      "groupby": ["species", "measure", "year_end"]
     },
-    {"pivot": "measure", "value": "amount", "groupby": ["species", "year"]},
-    {"calculate": "datum.value_000 / 1000", "as": "value_musd"},
+    {
+      "window": [{"op": "first_value", "field": "amount", "as": "base"}],
+      "groupby": ["species", "measure"],
+      "sort": [{"field": "year_end"}],
+      "frame": [null, null]
+    },
+    {"calculate": "datum.amount / datum.base", "as": "index"},
+    {
+      "calculate": "datum.measure == 'value_000' ? 'Value' : 'Production (tonnes)'",
+      "as": "measure_label"
+    },
     {
       "calculate": "datum.species == 'Salmonids' ? 'Salmon & trout' : datum.species",
       "as": "species_name"
     },
-    {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"}
-  ],
-  "encoding": {
-    "x": {
-      "field": "quantity_t",
-      "type": "quantitative",
-      "title": "Tonnes per year",
-      "axis": {"format": "~s", "grid": false}
-    },
-    "y": {
-      "field": "value_musd",
-      "type": "quantitative",
-      "title": "Value ($M)",
-      "axis": {"format": ",.0f"}
-    },
-    "color": {
-      "field": "species_name",
-      "type": "nominal",
-      "scale": {
-        "domain": ["Salmon & trout", "Rock lobster", "Prawns"],
-        "range": ["#1D9E75", "#D85A30", "#7F77DD"]
-      },
-      "legend": {"orient": "top-left", "title": "Click to highlight"}
-    },
-    "opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.15}
-  },
-  "layer": [
-    {"mark": {"type": "line", "strokeWidth": 2}, "encoding": {"order": {"field": "year_end"}}},
     {
-      "mark": {"type": "point", "filled": true, "size": 30},
-      "encoding": {
-        "tooltip": [
-          {"field": "species_name", "title": "Species"},
-          {"field": "year", "title": "Year"},
-          {"field": "quantity_t", "title": "Tonnes", "format": ",.0f"},
-          {"field": "value_musd", "title": "Value ($M)", "format": ",.0f"}
-        ]
-      },
-      "params": [{"name": "pick", "select": {"type": "point", "fields": ["species_name"]}, "bind": "legend"}]
-    },
-    {
-      "transform": [{"filter": "datum.year == '1998–99' || datum.year == '2023–24'"}],
-      "mark": {"type": "text", "dx": 8, "align": "left", "fontSize": 10, "fontWeight": "bold"},
-      "encoding": {"text": {"field": "year_end"}}
+      "calculate": "datum.index >= 2 ? format(datum.index, '.1f') + ' times' : format(datum.index - 1, '+.0%')",
+      "as": "change_label"
     }
   ],
+  "facet": {
+    "column": {
+      "field": "measure_label",
+      "type": "nominal",
+      "sort": ["Production (tonnes)", "Value"],
+      "title": null,
+      "header": {
+        "labelFontSize": 13,
+        "labelFontWeight": "bold",
+        "labelAnchor": "start",
+        "labelColor": "#0F2530"
+      }
+    }
+  },
+  "spacing": 28,
+  "spec": {
+    "width": 178,
+    "height": 239,
+    "encoding": {
+      "x": {
+        "field": "year_end",
+        "type": "quantitative",
+        "title": null,
+        "scale": {"domain": [1999, 2024]},
+        "axis": {"format": "d", "values": [1999, 2024], "grid": false}
+      },
+      "y": {
+        "field": "index",
+        "type": "quantitative",
+        "title": null,
+        "scale": {"type": "log", "domain": [0.5, 20]},
+        "axis": {"values": [0.5, 1, 2, 5, 10, 20], "labelExpr": "datum.value + '×'", "grid": true}
+      },
+      "color": {
+        "field": "species_name",
+        "type": "nominal",
+        "legend": {
+          "orient": "bottom",
+          "title": null,
+          "direction": "horizontal",
+          "symbolType": "stroke",
+          "symbolStrokeWidth": 3
+        },
+        "scale": {
+          "domain": ["Salmon & trout", "Rock lobster", "Prawns"],
+          "range": ["#0072B2", "#D85A30", "#9a9890"]
+        }
+      }
+    },
+    "layer": [
+      {
+        "data": {"values": [{"y": 1}]},
+        "mark": {"type": "rule", "color": "#4A6470", "strokeDash": [3, 3]},
+        "encoding": {"y": {"field": "y", "type": "quantitative"}}
+      },
+      {
+        "mark": {"type": "line", "strokeWidth": 2.5, "interpolate": "monotone"},
+        "encoding": {
+          "tooltip": [
+            {"field": "species_name", "title": "Species"},
+            {"field": "year_end", "title": "Year ending"},
+            {"field": "change_label", "title": "Change since 1998-99"}
+          ]
+        }
+      },
+      {"transform": [{"filter": "datum.year_end == 2024"}], "mark": {"type": "circle", "size": 45}},
+      {
+        "transform": [{"filter": "datum.year_end == 2024 && datum.species != 'Prawns'"}],
+        "mark": {"type": "text", "align": "left", "dx": 7, "dy": -5, "fontSize": 11, "fontWeight": "bold"},
+        "encoding": {"text": {"field": "change_label"}}
+      },
+      {
+        "transform": [{"filter": "datum.year_end == 2024 && datum.species == 'Prawns'"}],
+        "mark": {"type": "text", "align": "left", "dx": 7, "dy": 7, "fontSize": 11, "fontWeight": "bold"},
+        "encoding": {"text": {"field": "change_label"}}
+      }
+    ]
+  },
   "config": {"view": {"stroke": null}}
 }

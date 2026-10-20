@@ -6,7 +6,7 @@
     "anchor": "start"
   },
   "width": "container",
-  "height": 340,
+  "height": 356,
   "params": [{"name": "selected_state", "value": null}],
   "projection": {"type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-133, 0]},
   "layer": [

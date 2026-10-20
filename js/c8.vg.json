@@ -72,7 +72,7 @@
         "color": {
           "field": "type",
           "type": "nominal",
-          "scale": {"domain": ["Mostly farmed", "Mostly wild-caught"], "range": ["#1D9E75", "#D85A30"]},
+          "scale": {"domain": ["Mostly farmed", "Mostly wild-caught"], "range": ["#0072B2", "#D85A30"]},
           "legend": {"title": null, "orient": "bottom", "direction": "horizontal"}
         },
         "tooltip": [

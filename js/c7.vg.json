@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Exports to China grew fast, then fell sharply",
+    "text": "Where Australia's seafood exports go",
     "subtitle": "Edible seafood exports by destination. Line width = value. Drag the slider below the map.",
     "anchor": "start"
   },
@@ -117,7 +117,7 @@
     },
     {
       "data": {"values": [{"lon": 133.78, "lat": -25.27}]},
-      "mark": {"type": "circle", "color": "#1D9E75", "size": 120},
+      "mark": {"type": "circle", "color": "#0072B2", "size": 120},
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
         "latitude": {"field": "lat", "type": "quantitative"}
@@ -132,37 +132,12 @@
         "fontWeight": "bold",
         "color": "#0c3b55",
         "opacity": 0.8,
-        "text": {"expr": "(year - 1) + '–' + substring(year + '', 2, 4)"},
+        "text": {"expr": "(year - 1) + '-' + substring(year + '', 2, 4)"},
         "baseline": "bottom"
       },
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
         "latitude": {"field": "lat", "type": "quantitative"}
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {
-            "lon": -125,
-            "lat": -33,
-            "t": "China fell from $888M (2018-19) to $361M (2020-21)\nafter live lobster imports were halted in late 2020.\nHover a line for smaller markets."
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "fontSize": 11,
-        "color": "#5a676e",
-        "lineBreak": "\n",
-        "baseline": "top",
-        "lineHeight": 15
-      },
-      "encoding": {
-        "longitude": {"field": "lon", "type": "quantitative"},
-        "latitude": {"field": "lat", "type": "quantitative"},
-        "text": {"field": "t"}
       }
     }
   ],

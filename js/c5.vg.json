@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Farmed seafood overtook wild-caught in 2019-20",
-    "subtitle": "Value of production, $M per year. Faded area = ABARES forecast.",
+    "subtitle": "Value of production, $M per year. Farmed at the bottom. Faded area = ABARES forecast.",
     "anchor": "start"
   },
   "width": "container",
@@ -28,9 +28,9 @@
         {"calculate": "toNumber(datum.farmed) / 1000", "as": "Farmed"},
         {"fold": ["Wild-caught", "Farmed"], "as": ["sector", "value_musd"]},
         {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"},
-        {"calculate": "datum.sector == 'Wild-caught' ? 1 : 2", "as": "stack_order"}
+        {"calculate": "datum.sector == 'Farmed' ? 1 : 2", "as": "stack_order"}
       ],
-      "mark": {"type": "area", "opacity": 0.9},
+      "mark": {"type": "area"},
       "encoding": {
         "x": {
           "field": "year_end",
@@ -49,7 +49,7 @@
         "color": {
           "field": "sector",
           "type": "nominal",
-          "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#1D9E75", "#D85A30"]},
+          "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#0072B2", "#D85A30"]},
           "legend": {"orient": "top-left", "title": null, "direction": "horizontal"}
         },
         "order": {"field": "stack_order"},
@@ -57,7 +57,8 @@
           {"field": "year", "title": "Year"},
           {"field": "sector", "title": "Sector"},
           {"field": "value_musd", "title": "Value ($M)", "format": ",.0f"}
-        ]
+        ],
+        "opacity": {"condition": {"test": "datum.sector == 'Farmed'", "value": 0.95}, "value": 0.55}
       }
     },
     {
@@ -70,9 +71,9 @@
         {"calculate": "datum.series == 'farmed' ? 'Farmed' : 'Wild-caught'", "as": "sector"},
         {"calculate": "toNumber(datum.value_m)", "as": "value_musd"},
         {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"},
-        {"calculate": "datum.sector == 'Wild-caught' ? 1 : 2", "as": "stack_order"}
+        {"calculate": "datum.sector == 'Farmed' ? 1 : 2", "as": "stack_order"}
       ],
-      "mark": {"type": "area", "opacity": 0.35},
+      "mark": {"type": "area"},
       "encoding": {
         "x": {
           "field": "year_end",
@@ -91,7 +92,7 @@
         "color": {
           "field": "sector",
           "type": "nominal",
-          "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#1D9E75", "#D85A30"]},
+          "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#0072B2", "#D85A30"]},
           "legend": {"orient": "top-left", "title": null, "direction": "horizontal"}
         },
         "order": {"field": "stack_order"},
@@ -99,7 +100,8 @@
           {"field": "year", "title": "Year (forecast)"},
           {"field": "sector", "title": "Sector"},
           {"field": "value_musd", "title": "Value ($M)", "format": ",.0f"}
-        ]
+        ],
+        "opacity": {"condition": {"test": "datum.sector == 'Farmed'", "value": 0.4}, "value": 0.22}
       }
     },
     {
