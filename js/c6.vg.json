@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Salmon grew bigger and far more valuable",
-    "subtitle": "Growth since 1998-99 (1998-99 = 1). Log scale, so equal steps mean equal growth.",
+    "subtitle": "Size compared with 1998-99, for three single species.",
     "anchor": "start"
   },
   "data": {"url": "data/c6_species_value_quantity_by_year.csv"},
@@ -52,18 +52,13 @@
       "type": "nominal",
       "sort": ["Production (tonnes)", "Value"],
       "title": null,
-      "header": {
-        "labelFontSize": 13,
-        "labelFontWeight": "bold",
-        "labelAnchor": "start",
-        "labelColor": "#0F2530"
-      }
+      "header": {"labels": false, "title": null, "labelPadding": 0, "titlePadding": 0}
     }
   },
-  "spacing": 28,
+  "spacing": 64,
   "spec": {
-    "width": 178,
-    "height": 239,
+    "width": 200,
+    "height": 300,
     "encoding": {
       "x": {
         "field": "year_end",
@@ -76,18 +71,23 @@
         "field": "index",
         "type": "quantitative",
         "title": null,
-        "scale": {"type": "log", "domain": [0.5, 20]},
-        "axis": {"values": [0.5, 1, 2, 5, 10, 20], "labelExpr": "datum.value + '×'", "grid": true}
+        "scale": {"type": "log", "domain": [0.5, 20], "nice": false},
+        "axis": {
+          "values": [0.5, 1, 2, 5, 10, 20],
+          "labelExpr": "datum.value == 1 ? 'no change' : datum.value + '×'",
+          "grid": true
+        }
       },
       "color": {
         "field": "species_name",
         "type": "nominal",
         "legend": {
-          "orient": "bottom",
+          "orient": "top",
           "title": null,
           "direction": "horizontal",
           "symbolType": "stroke",
-          "symbolStrokeWidth": 3
+          "symbolStrokeWidth": 3,
+          "offset": 1
         },
         "scale": {
           "domain": ["Salmon & trout", "Rock lobster", "Prawns"],
@@ -96,6 +96,25 @@
       }
     },
     "layer": [
+      {
+        "transform": [{"filter": "datum.year_end == 1999 && datum.species == 'Salmonids'"}],
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "baseline": "top",
+          "fontSize": 13,
+          "fontWeight": "bold",
+          "color": "#0F2530",
+          "x": 0,
+          "y": 0
+        },
+        "encoding": {
+          "text": {"field": "measure_label"},
+          "color": {"value": "#0F2530"},
+          "x": {"value": 0},
+          "y": {"value": 0}
+        }
+      },
       {
         "data": {"values": [{"y": 1}]},
         "mark": {"type": "rule", "color": "#4A6470", "strokeDash": [3, 3]},
@@ -113,13 +132,17 @@
       },
       {"transform": [{"filter": "datum.year_end == 2024"}], "mark": {"type": "circle", "size": 45}},
       {
-        "transform": [{"filter": "datum.year_end == 2024 && datum.species != 'Prawns'"}],
-        "mark": {"type": "text", "align": "left", "dx": 7, "dy": -5, "fontSize": 11, "fontWeight": "bold"},
-        "encoding": {"text": {"field": "change_label"}}
-      },
-      {
-        "transform": [{"filter": "datum.year_end == 2024 && datum.species == 'Prawns'"}],
-        "mark": {"type": "text", "align": "left", "dx": 7, "dy": 7, "fontSize": 11, "fontWeight": "bold"},
+        "transform": [{"filter": "datum.year_end == 2024"}],
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "dx": 7,
+          "dy": {
+            "expr": "datum.species == 'Salmonids' ? -5 : (datum.species == 'Prawns') == (datum.measure_label == 'Value') ? 8 : -6"
+          },
+          "fontSize": 12,
+          "fontWeight": "bold"
+        },
         "encoding": {"text": {"field": "change_label"}}
       }
     ]

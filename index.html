@@ -169,15 +169,15 @@
         <div class="fig-no">Figure 5</div>
         <div id="c5" class="chart"></div>
         <figcaption>
-          <p class="finding">Farmed value has grown <strong>more than threefold</strong> since 1998-99 ($605M to $2.2B), while wild-caught has stayed between $1.3B and $1.8B.</p>
+          <p class="finding">Across all farmed species, value has grown <strong>more than threefold</strong> since <span class="nowrap">1998-99</span> ($605M to $2.2B), while wild-caught has stayed between $1.3B and $1.8B.</p>
         </figcaption>
       </figure>
       <figure class="fig">
         <div class="fig-no">Figure 6</div>
         <div id="c6" class="chart"></div>
         <figcaption>
-          <p class="finding">Salmon production grew <strong>6.6 times</strong> and its value grew <strong>16 times</strong>. The rock lobster catch dropped by <strong>42%</strong>, but it is still worth more now than in 1998-99.</p>
-          <p class="how-to">Hover over a line to see the change in any year.</p>
+          <p class="finding">Salmon production grew <strong>6.6 times</strong> and its value grew <strong>16 times</strong>. The rock lobster catch dropped by <strong>42%</strong>, but it is still worth more now than in <span class="nowrap">1998-99</span>.</p>
+          <p class="how-to">Figure 5 adds up all farmed and wild seafood; this chart follows single species. The vertical scale counts multiples (a log scale), so going from 1× to 2× takes the same space as 10× to 20×. Hover over a line to see the change in any year.</p>
         </figcaption>
       </figure>
     </div>
@@ -216,13 +216,14 @@
         <div id="c8" class="chart"></div>
         <figcaption>
           <p class="finding wild">About <strong>four in five</strong> rock lobsters are exported. Almost all oysters and around 70% of farmed salmon are eaten in Australia.</p>
+          <p class="how-to">Export shares are estimates. Exports are weighed after processing (for example, without shells or heads), while production is weighed whole, so the real shares are probably a little higher.</p>
         </figcaption>
       </figure>
       <figure class="fig">
         <div class="fig-no">Figure 9</div>
         <div id="c9" class="chart"></div>
         <figcaption>
-          <p class="finding wild">Rock lobster exports dropped from <strong>$544M to $381M</strong> in one year. Now that trade with China has resumed, ABARES forecasts a record <strong>$869M</strong> by 2030-31.</p>
+          <p class="finding wild">Rock lobster exports dropped from <strong>$544M to $381M</strong> in one year. Now that trade with China has resumed, ABARES forecasts a record <strong>$869M</strong> by <span class="nowrap">2030-31</span>.</p>
         </figcaption>
       </figure>
     </div>
@@ -269,7 +270,8 @@
         <div class="fig-no">Figure 12</div>
         <div id="c12" class="chart"></div>
         <figcaption>
-          <p class="finding wild">Leaving out the ACT, which has only one stock, Tasmania has the highest share of depleted stocks, with <strong>12 of its 55 (22%)</strong>.</p>
+          <p class="finding wild">Leaving out the ACT, which has only one stock, Tasmania has the highest share of depleted stocks, with <strong>12 of its 55 (22%)</strong>. Every other group has fewer than one in six depleted.</p>
+          <p class="how-to">Hover over a label for the full count. Click a status in the legend to show only those stocks. A stock shared by two states appears in both groups.</p>
         </figcaption>
       </figure>
       <div class="closing">
@@ -278,7 +280,7 @@
           <li>Farming now earns more than fishing, and the gap is expected to grow.</li>
           <li>Rock lobster, the most valuable wild catch, depends mostly on one export market.</li>
           <li>About six in every ten kilograms of seafood eaten here is imported.</li>
-          <li>Most assessed wild stocks are sustainable, but some are depleted, especially in Tasmania.</li>
+          <li>Most assessed wild stocks (63%) are sustainable. A smaller number are depleted, and Tasmania has the highest share.</li>
         </ul>
       </div>
     </div>
@@ -292,7 +294,7 @@
   <div class="wrap">
     <div class="footer-top">
       <p class="footer-title">From ocean to plate</p>
-      <p class="footer-meta">By YOUR NAME, FIT3179 Data Visualisation 2, Monash University, October 2026</p>
+      <p class="footer-meta">By Sanjay Rajkumar Sathiyanarayanan, FIT3179 Data Visualisation 2, Monash University, October 2026</p>
     </div>
 
     <div class="footer-grid">
@@ -322,7 +324,7 @@
         <h3>Tools</h3>
         <p>Charts made with <a href="https://vega.github.io/vega-lite/">Vega-Lite</a> and <a href="https://vega.github.io/vega/">Vega</a>. Fonts: Bricolage Grotesque and Source Serif 4 (Google Fonts).</p>
         <h3>Use of AI</h3>
-        <p>The cover image is AI-generated (TOOL NAME, DATE) and does not show a real place. Claude (Anthropic) helped find data sources, prepare the data files, draft chart code and review the text. All figures were checked against the source data.</p>
+        <p>The cover image is AI-generated (ChatGPT) and does not show a real place. Claude (Anthropic) helped find data sources, prepare the data files, draft chart code and review the text. All figures were checked against the source data.</p>
       </div>
     </div>
   </div>
@@ -358,12 +360,22 @@
     // On narrow screens, use smaller chart titles so they fit inside the chart.
     var width = document.getElementById(id).clientWidth;
     var opts = options;
-    if (width < 520) {
+    if (width < 440) {
       opts = JSON.parse(JSON.stringify(options));
       opts.config.title.fontSize = 15;
       opts.config.title.subtitleFontSize = 11;
       opts.config.title.limit = width;
       opts.config.title.subtitleLimit = width;
+    }
+    // Figures 6 and 10 need their width worked out from the column width:
+    // Figure 6 has two panels side by side, and Figure 10 keeps fixed space
+    // on both sides for its labels so they never get cut off.
+    if (id === 'c6' || id === 'c10') {
+      return fetch('js/' + id + '.vg.json').then(function (r) { return r.json(); }).then(function (spec) {
+        if (id === 'c6') spec.spec.width = Math.max(90, Math.floor((width - spec.spacing - 210) / 2));
+        if (id === 'c10') spec.width = Math.max(100, width - 2 * spec.usermeta.labelSpace);
+        return vegaEmbed('#' + id, spec, opts);
+      });
     }
     return vegaEmbed('#' + id, 'js/' + id + '.vg.json', opts);
   }
@@ -410,12 +422,21 @@
       view.addSignalListener('year', function (name, value) { update(value); });
     });
 
+    // Show the slider value as a financial year ("2018-19") instead of "2019".
+    var slider = document.querySelector('#c7 input[type=range]');
+    var yearLabel = document.createElement('span');
+    yearLabel.className = 'fy-label';
+    slider.parentNode.appendChild(yearLabel);
+    function showYear() { yearLabel.textContent = financialYear(Number(slider.value)); }
+    slider.addEventListener('input', showYear);
+    showYear();
+
     function update(yearEnd) {
       var list = (exportsByYear[yearEnd] || []).slice().sort(function (a, b) { return b.value - a.value; });
       if (!list.length) return;
       var total = list.reduce(function (sum, d) { return sum + d.value; }, 0);
       var top = list[0];
-      var label = (yearEnd - 1) + '-' + String(yearEnd).slice(2);
+      var label = financialYear(yearEnd);
       var text = 'In ' + label + ', Australia sold <strong>$' + money(total) + 'M</strong> of seafood to these ' +
                  list.length + ' markets. The biggest buyer was <strong>' + top.country + '</strong> at $' +
                  money(top.value) + 'M, or ' + Math.round(top.value / total * 100) + '% of the total.';
@@ -426,6 +447,7 @@
     }
 
     function money(x) { return Math.round(x).toLocaleString('en-AU'); }
+    function financialYear(yearEnd) { return (yearEnd - 1) + '-' + String(yearEnd).slice(2); }
   }
 </script>
 

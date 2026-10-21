@@ -18,7 +18,10 @@
   --deep:  #0B4258;
   --tide:  #2C7A8C;    /* accents, links, figure numbers */
   --spray: #8FC8CF;    /* light accent on dark backgrounds */
-  --mist:  #EAF2F2;    /* alternate chapter background */
+  --mist:  #E4EEEF;    /* alternate chapter background */
+  --paper: #F3F5F4;    /* main chapter background, so the white figure cards stand out */
+  --card:  #FFFFFF;    /* figure cards */
+  --card-line: #D8E3E5;
   --white: #FFFFFF;
 
   --ink:      #0F2530;
@@ -176,6 +179,7 @@ strong { font-weight: 600; }
 /* ---------- 4. Chapters ---------- */
 .chapter {
   padding: 88px 0 72px;
+  background: var(--paper);
 }
 .chapter.mist { background: var(--mist); }
 
@@ -238,11 +242,17 @@ strong { font-weight: 600; }
 }
 .full { grid-column: 1 / -1; }
 
+/* Each figure sits on a white card, so the chart (figure) stands out
+   clearly from the tinted page (ground). */
 .fig {
   margin: 0;
   min-width: 0;                       /* prevents horizontal scrolling */
-  border-top: 2px solid var(--ink);
-  padding-top: 14px;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  border-top: 3px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(15, 37, 48, 0.04), 0 6px 18px rgba(15, 37, 48, 0.05);
+  padding: 18px 26px 24px 30px;
   display: flex;
   flex-direction: column;
 }
@@ -298,7 +308,7 @@ strong { font-weight: 600; }
 .finding::before {
   content: "";
   position: absolute;
-  left: -20px;
+  left: -18px;
   top: 0.55em;
   width: 10px; height: 10px;
   border-radius: 50%;
@@ -401,6 +411,11 @@ strong { font-weight: 600; }
 .vega-bind-name { font-weight: 600; color: var(--ink); }
 .vega-bind input[type="range"] { width: 260px; accent-color: var(--wild); }
 .vega-bind input[type="radio"] { accent-color: var(--deep); }
+/* Figure 7: hide the raw slider number and show the financial year instead (set in index.html) */
+#c7 .vega-bind input[type="range"] + span { display: none; }
+
+.nowrap { white-space: nowrap; }
+#c7 .fy-label { font-weight: 700; color: var(--ink); white-space: nowrap; }
 
 #vg-tooltip-element {
   font-family: var(--display);
@@ -480,4 +495,5 @@ footer a { color: #d7e8eb; }
   .ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ledger div { border-right: 0; padding-left: 0 !important; }
   .vega-bind input[type="range"] { width: 160px; }
+  .fig { padding: 14px 16px 18px 22px; }
 }

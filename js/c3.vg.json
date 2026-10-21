@@ -10,7 +10,10 @@
   "projection": {"type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-133, 0]},
   "layer": [
     {
-      "data": {"url": "data/aus_states.topojson", "format": {"type": "topojson", "feature": "states"}},
+      "data": {
+        "url": "data/aus_states.topojson",
+        "format": {"type": "topojson", "feature": "states"}
+      },
       "mark": {"type": "geoshape", "fill": "#ece9e2", "stroke": "white", "strokeWidth": 1}
     },
     {
@@ -41,7 +44,7 @@
         "color": {
           "field": "type",
           "type": "nominal",
-          "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#1D9E75", "#D85A30"]},
+          "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#0072B2", "#D85A30"]},
           "legend": {"orient": "top-right", "title": null}
         },
         "order": {"field": "value_musd_2023_24", "sort": "descending"},
@@ -67,9 +70,23 @@
         {
           "calculate": "toNumber(datum.lon) + (toNumber(datum.value_musd_2023_24) > 500 ? 3.6 : toNumber(datum.value_musd_2023_24) > 150 ? 1.8 : 1.2)",
           "as": "label_lon"
+        },
+        {
+          "calculate": "toNumber(datum.lon) > 139 && datum.region != 'Huon Valley' ? 'right' : 'left'",
+          "as": "side"
+        },
+        {
+          "calculate": "datum.side == 'right' ? 2 * toNumber(datum.lon) - datum.label_lon : datum.label_lon",
+          "as": "label_lon"
         }
       ],
-      "mark": {"type": "text", "align": "left", "fontSize": 11, "fontWeight": "bold", "color": "#1f2a30"},
+      "mark": {
+        "type": "text",
+        "align": {"expr": "datum.side"},
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#1f2a30"
+      },
       "encoding": {
         "longitude": {"field": "label_lon", "type": "quantitative"},
         "latitude": {"field": "lat", "type": "quantitative"},

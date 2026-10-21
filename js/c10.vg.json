@@ -3,9 +3,10 @@
   "title": {
     "text": "Salmon climbed from 6th to 1st",
     "subtitle": "Rank by value each year, 1 = most valuable. Hover a line to follow it.",
-    "anchor": "start"
+    "anchor": "start",
+    "frame": "bounds"
   },
-  "width": "container",
+  "width": 300,
   "height": 397,
   "data": {"url": "data/c10_species_value_by_year.csv"},
   "transform": [
@@ -36,7 +37,7 @@
       "field": "year_end",
       "type": "quantitative",
       "title": null,
-      "scale": {"domain": [1994.5, 2030]},
+      "scale": {"domain": [1999, 2024], "padding": 10},
       "axis": {"format": "d", "grid": false, "values": [1999, 2004, 2009, 2014, 2019, 2024]}
     },
     "y": {
@@ -55,7 +56,9 @@
           "Salmon & trout", "Rock lobster", "Prawns", "Tuna", "Abalone", "Pearls", "Oysters",
           "Crabs"
         ],
-        "range": ["#0072B2", "#D85A30", "#5f6b70", "#9a9890", "#b8b6ae", "#a8a69e", "#8e8c85", "#c4c2ba"]
+        "range": [
+          "#0072B2", "#D85A30", "#5f6b70", "#9a9890", "#b8b6ae", "#a8a69e", "#8e8c85", "#c4c2ba"
+        ]
       }
     },
     "opacity": {"condition": [{"param": "hover", "empty": true, "value": 1}], "value": 0.15}
@@ -70,7 +73,12 @@
       "params": [
         {
           "name": "hover",
-          "select": {"type": "point", "fields": ["name"], "on": "pointerover", "clear": "pointerout"}
+          "select": {
+            "type": "point",
+            "fields": ["name"],
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
         }
       ],
       "encoding": {
@@ -84,14 +92,15 @@
     },
     {
       "transform": [{"filter": "datum.year == '2023–24'"}],
-      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 11, "fontWeight": "bold"},
+      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 12, "fontWeight": "bold"},
       "encoding": {"text": {"field": "name"}}
     },
     {
       "transform": [{"filter": "datum.year == '1998–99'"}],
-      "mark": {"type": "text", "align": "right", "dx": -8, "fontSize": 11, "fontWeight": "bold"},
+      "mark": {"type": "text", "align": "right", "dx": -8, "fontSize": 12, "fontWeight": "bold"},
       "encoding": {"text": {"field": "name"}}
     }
   ],
-  "config": {"view": {"stroke": null}}
+  "config": {"view": {"stroke": null}},
+  "usermeta": {"labelSpace": 118}
 }

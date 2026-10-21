@@ -1,13 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "title": {
-    "text": "Salmon and trout are worth more than lobster, prawns and oysters combined",
+    "text": "Farmed salmon is our most valuable seafood by far",
     "subtitle": "Value of seafood caught or farmed in Australia, 2023-24. Box size = value.",
     "anchor": "start",
     "offset": 6
   },
   "height": 380,
-  "padding": 5,
+  "padding": {"left": 0, "right": 0, "top": 0, "bottom": 4},
   "signals": [
     {
       "name": "width",
@@ -81,7 +81,7 @@
       "name": "colour",
       "type": "ordinal",
       "domain": ["Farmed", "Wild-caught"],
-      "range": ["#1D9E75", "#D85A30"]
+      "range": ["#0072B2", "#D85A30"]
     }
   ],
   "legends": [
@@ -140,7 +140,9 @@
         "update": {
           "x": {"field": "x0", "offset": 6},
           "y": {"field": "y0", "offset": 17},
-          "text": {"signal": "(datum.x1 - datum.x0) > 44 && (datum.y1 - datum.y0) > 34 ? datum.label : ''"},
+          "text": {
+            "signal": "(datum.x1 - datum.x0) > 52 && (datum.y1 - datum.y0) > 40 ? datum.label : ''"
+          },
           "fontSize": {"value": 12},
           "fontWeight": {"value": "bold"},
           "fill": {"value": "white"},
@@ -155,11 +157,11 @@
       "encode": {
         "update": {
           "x": {"field": "x0", "offset": 6},
-          "y": {"field": "y0", "offset": 32},
+          "y": {"field": "y0", "offset": 34},
           "text": {
-            "signal": "(datum.x1 - datum.x0) > 44 && (datum.y1 - datum.y0) > 34 ? '$' + format(datum.value_musd, ',.0f') + 'M' : ''"
+            "signal": "(datum.x1 - datum.x0) > 52 && (datum.y1 - datum.y0) > 40 ? '$' + format(datum.value_musd, ',.0f') + 'M' : ''"
           },
-          "fontSize": {"value": 11},
+          "fontSize": {"value": 12},
           "fill": {"value": "white"},
           "limit": {"signal": "datum.x1 - datum.x0 - 10"}
         }

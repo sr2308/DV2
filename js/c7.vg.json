@@ -2,16 +2,16 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Where Australia's seafood exports go",
-    "subtitle": "Edible seafood exports by destination. Line width = value. Drag the slider below the map.",
+    "subtitle": "Seafood exports by destination. Line width = value.",
     "anchor": "start"
   },
   "width": "container",
-  "height": 420,
+  "height": 340,
   "params": [
     {
       "name": "year",
       "value": 2019,
-      "bind": {"input": "range", "min": 1990, "max": 2025, "step": 1, "name": "Financial year ending: "}
+      "bind": {"input": "range", "min": 1990, "max": 2025, "step": 1, "name": "Financial year: "}
     }
   ],
   "projection": {
@@ -19,16 +19,37 @@
     "rotate": [-150, 0, 0],
     "fit": {
       "type": "Feature",
-      "geometry": {"type": "MultiPoint", "coordinates": [[92, 50], [-88, 50], [92, -45], [-88, -45]]}
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [[98, 46], [-100, 46], [98, -48], [-100, -48]]
+      }
     }
   },
   "layer": [
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "rect",
+        "x": 0,
+        "y": 0,
+        "x2": {"expr": "width"},
+        "y2": {"expr": "height"},
+        "fill": "#D5E6EA",
+        "cornerRadius": 4
+      }
+    },
     {
       "data": {
         "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2/data/world-110m.json",
         "format": {"type": "topojson", "feature": "countries"}
       },
-      "mark": {"type": "geoshape", "fill": "#ece9e2", "stroke": "white", "strokeWidth": 0.5, "clip": true}
+      "mark": {
+        "type": "geoshape",
+        "fill": "#F6F3EC",
+        "stroke": "#D5E6EA",
+        "strokeWidth": 0.5,
+        "clip": true
+      }
     },
     {
       "data": {"url": "data/c7_exports_by_country.csv"},
@@ -59,8 +80,24 @@
         {"calculate": "133.78", "as": "o_lon"},
         {"calculate": "-25.27", "as": "o_lat"},
         {
-          "calculate": "datum.country + ' $' + format(datum.export_musd, ',.0f') + 'M'",
-          "as": "label"
+          "window": [{"op": "row_number", "as": "rank"}],
+          "sort": [{"field": "export_musd", "order": "descending"}]
+        },
+        {
+          "calculate": "datum.rank + '  ' + datum.country + '  $' + format(datum.export_musd, ',.0f') + 'M'",
+          "as": "row"
+        },
+        {
+          "calculate": "datum.lon + (({'China':0.01,'Japan':3,'Taiwan':3,'Hong Kong':3,'Vietnam':2.5,'Singapore':3,'United States':-3})[datum.country] || 3)",
+          "as": "label_lon"
+        },
+        {
+          "calculate": "datum.lat + (({'China':3.5,'Japan':1,'Taiwan':2,'Hong Kong':-4,'Vietnam':-3,'Singapore':2,'United States':3})[datum.country] || 0)",
+          "as": "label_lat"
+        },
+        {
+          "calculate": "({'China':'center','Japan':'left','Taiwan':'left','Hong Kong':'left','Vietnam':'left','Singapore':'left','United States':'right'})[datum.country] || 'left'",
+          "as": "label_side"
         }
       ],
       "layer": [
@@ -97,21 +134,54 @@
           }
         },
         {
+          "transform": [{"filter": "datum.rank <= 5"}],
+          "mark": {
+            "type": "text",
+            "fontSize": {"expr": "width < 500 ? 10 : 12"},
+            "fontWeight": "bold",
+            "color": "#1f2a30",
+            "baseline": "middle",
+            "align": {"expr": "datum.label_side"},
+            "stroke": "#D5E6EA",
+            "strokeWidth": 4,
+            "strokeJoin": "round"
+          },
+          "encoding": {
+            "longitude": {"field": "label_lon", "type": "quantitative"},
+            "latitude": {"field": "label_lat", "type": "quantitative"},
+            "text": {"field": "country"}
+          }
+        },
+        {
+          "transform": [{"filter": "datum.rank <= 5"}],
+          "mark": {
+            "type": "text",
+            "fontSize": {"expr": "width < 500 ? 10 : 12"},
+            "fontWeight": "bold",
+            "color": "#1f2a30",
+            "baseline": "middle",
+            "align": {"expr": "datum.label_side"}
+          },
+          "encoding": {
+            "longitude": {"field": "label_lon", "type": "quantitative"},
+            "latitude": {"field": "label_lat", "type": "quantitative"},
+            "text": {"field": "country"}
+          }
+        },
+        {
+          "transform": [{"filter": "datum.rank <= 5"}],
           "mark": {
             "type": "text",
             "align": "left",
-            "dx": 6,
-            "dy": -6,
-            "fontSize": 11,
-            "fontWeight": "bold",
-            "color": "#1f2a30"
+            "fontSize": {"expr": "width < 500 ? 10 : 12"},
+            "color": "#1f2a30",
+            "dy": {"expr": "datum.rank * (width < 500 ? 14 : 19) + (width < 500 ? 8 : 14)"}
           },
           "encoding": {
-            "longitude": {"field": "lon", "type": "quantitative"},
-            "latitude": {"field": "lat", "type": "quantitative"},
-            "text": {"field": "label"}
-          },
-          "transform": [{"filter": "datum.export_musd >= 40"}]
+            "longitude": {"datum": -172},
+            "latitude": {"datum": -4},
+            "text": {"field": "row"}
+          }
         }
       ]
     },
@@ -124,17 +194,32 @@
       }
     },
     {
-      "data": {"values": [{"lon": -125, "lat": -30}]},
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "fontSize": 28,
-        "fontWeight": "bold",
-        "color": "#0c3b55",
-        "opacity": 0.8,
-        "text": {"expr": "(year - 1) + '-' + substring(year + '', 2, 4)"},
-        "baseline": "bottom"
-      },
+      "data": {"values": [{"lon": -172, "lat": -4}]},
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "bottom",
+            "fontSize": {"expr": "width < 500 ? 20 : 30"},
+            "fontWeight": "bold",
+            "color": "#0c3b55",
+            "text": {"expr": "(year - 1) + '-' + substring(year + '', 2, 4)"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "bottom",
+            "dy": {"expr": "width < 500 ? 12 : 16"},
+            "fontSize": {"expr": "width < 500 ? 10 : 12"},
+            "fontWeight": "bold",
+            "color": "#4A6470",
+            "text": "Top 5 buyers"
+          }
+        }
+      ],
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
         "latitude": {"field": "lat", "type": "quantitative"}

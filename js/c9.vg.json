@@ -2,12 +2,43 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "A trade ban cut lobster exports by almost a third",
-    "subtitle": "Value of Australian rock lobster exports, $M per year. Dashed = ABARES forecast.",
+    "subtitle": "Value of Australian rock lobster exports, $M per year.",
     "anchor": "start"
   },
+  "padding": {"left": 0, "right": 14, "top": 0, "bottom": 4},
   "width": "container",
   "height": 346,
   "layer": [
+    {
+      "data": {
+        "values": [
+          {"x": 2020.9, "x2": 2025, "fill": "#D85A30", "op": 0.1},
+          {"x": 2025, "x2": 2031, "fill": "#4A6470", "op": 0.08}
+        ]
+      },
+      "mark": {"type": "rect"},
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {"domain": [1990, 2031]},
+          "axis": {"format": "d", "grid": false, "tickCount": 8, "labelFlush": true},
+          "title": "Financial year (ending)"
+        },
+        "x2": {"field": "x2"},
+        "fill": {"field": "fill", "type": "nominal", "scale": null},
+        "opacity": {"field": "op", "type": "quantitative", "scale": null}
+      }
+    },
+    {
+      "data": {"values": [{"x": 2028, "t": "Forecast", "c": "#4A6470"}]},
+      "mark": {"type": "text", "fontSize": 12, "fontWeight": "bold", "baseline": "top", "y": 4},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [1990, 2031]}},
+        "text": {"field": "t"},
+        "color": {"field": "c", "type": "nominal", "scale": null}
+      }
+    },
     {
       "data": {"url": "data/c9_rock_lobster_exports_by_year.csv"},
       "transform": [
@@ -25,7 +56,25 @@
         {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"}
       ],
       "layer": [
-        {"mark": {"type": "line", "color": "#D85A30", "strokeWidth": 2.5}},
+        {
+          "mark": {"type": "line", "color": "#D85A30", "strokeWidth": 2.5},
+          "encoding": {
+            "strokeDash": {
+              "datum": "Actual",
+              "scale": {"domain": ["Actual", "ABARES forecast"], "range": [[1, 0], [5, 4]]},
+              "legend": {
+                "title": null,
+                "orient": "top",
+                "direction": "horizontal",
+                "symbolType": "stroke",
+                "symbolStrokeColor": "#D85A30",
+                "symbolStrokeWidth": 2.5,
+                "symbolSize": 300,
+                "offset": 8
+              }
+            }
+          }
+        },
         {
           "mark": {"type": "point", "filled": true, "color": "#D85A30", "size": 20},
           "encoding": {
@@ -40,9 +89,9 @@
         "x": {
           "field": "year_end",
           "type": "quantitative",
-          "title": null,
+          "title": "Financial year (ending)",
           "scale": {"domain": [1990, 2031]},
-          "axis": {"format": "d", "grid": false, "tickCount": 8}
+          "axis": {"format": "d", "grid": false, "tickCount": 8, "labelFlush": true}
         },
         "y": {
           "field": "export_musd",
@@ -63,14 +112,14 @@
         {"calculate": "toNumber(datum.value_m)", "as": "export_musd"},
         {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"}
       ],
-      "mark": {"type": "line", "color": "#D85A30", "strokeWidth": 2, "strokeDash": [5, 4], "opacity": 0.7},
+      "mark": {"type": "line", "color": "#D85A30", "strokeWidth": 2, "opacity": 0.9},
       "encoding": {
         "x": {
           "field": "year_end",
           "type": "quantitative",
-          "title": null,
+          "title": "Financial year (ending)",
           "scale": {"domain": [1990, 2031]},
-          "axis": {"format": "d", "grid": false, "tickCount": 8}
+          "axis": {"format": "d", "grid": false, "tickCount": 8, "labelFlush": true}
         },
         "y": {
           "field": "export_musd",
@@ -82,26 +131,35 @@
         "tooltip": [
           {"field": "year", "title": "Year (forecast)"},
           {"field": "export_musd", "title": "Exports ($M)", "format": ",.0f"}
-        ]
+        ],
+        "strokeDash": {
+          "datum": "ABARES forecast",
+          "scale": {"domain": ["Actual", "ABARES forecast"], "range": [[1, 0], [5, 4]]},
+          "legend": {
+            "title": null,
+            "orient": "top",
+            "direction": "horizontal",
+            "symbolType": "stroke",
+            "symbolStrokeColor": "#D85A30",
+            "symbolStrokeWidth": 2.5,
+            "symbolSize": 300,
+            "offset": 8
+          }
+        }
       }
-    },
-    {
-      "data": {"values": [{"x": 2020.9}, {"x": 2025}]},
-      "mark": {"type": "rule", "strokeDash": [4, 3], "color": "#1f2a30"},
-      "encoding": {"x": {"field": "x", "type": "quantitative", "scale": {"domain": [1990, 2031]}}}
     },
     {
       "data": {
         "values": [
-          {"x": 2020.9, "y": 930, "t": "Nov 2020: China halts"},
-          {"x": 2020.9, "y": 890, "t": "live lobster imports"}
+          {"x": 2020.9, "y": 900, "t": "China bans live lobster"},
+          {"x": 2020.9, "y": 860, "t": "Nov 2020 to Dec 2024 (shaded)"}
         ]
       },
       "mark": {
         "type": "text",
         "align": "right",
         "dx": -5,
-        "fontSize": 11,
+        "fontSize": 12,
         "fontWeight": "bold",
         "color": "#1f2a30"
       },
@@ -112,16 +170,14 @@
       }
     },
     {
-      "data": {
-        "values": [{"x": 2025, "y": 200, "t": "Dec 2024:"}, {"x": 2025, "y": 160, "t": "trade resumes"}]
-      },
+      "data": {"values": [{"x": 2031, "y": 869, "t": "$869M"}]},
       "mark": {
         "type": "text",
         "align": "right",
-        "dx": -5,
-        "fontSize": 11,
+        "dy": -12,
+        "fontSize": 12,
         "fontWeight": "bold",
-        "color": "#1f2a30"
+        "color": "#D85A30"
       },
       "encoding": {
         "x": {"field": "x", "type": "quantitative", "scale": {"domain": [1990, 2031]}},

@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Farmed seafood overtook wild-caught in 2019-20",
-    "subtitle": "Value of production, $M per year. Farmed at the bottom. Faded area = ABARES forecast.",
+    "subtitle": "Value of production, $M per year. Dashed line = wild-caught total. Faded = forecast.",
     "anchor": "start"
   },
   "width": "container",
@@ -50,7 +50,7 @@
           "field": "sector",
           "type": "nominal",
           "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#0072B2", "#D85A30"]},
-          "legend": {"orient": "top-left", "title": null, "direction": "horizontal"}
+          "legend": {"orient": "top", "title": null, "direction": "horizontal", "offset": 8}
         },
         "order": {"field": "stack_order"},
         "tooltip": [
@@ -93,7 +93,7 @@
           "field": "sector",
           "type": "nominal",
           "scale": {"domain": ["Farmed", "Wild-caught"], "range": ["#0072B2", "#D85A30"]},
-          "legend": {"orient": "top-left", "title": null, "direction": "horizontal"}
+          "legend": {"orient": "top", "title": null, "direction": "horizontal", "offset": 8}
         },
         "order": {"field": "stack_order"},
         "tooltip": [
@@ -105,17 +105,59 @@
       }
     },
     {
+      "data": {"url": "data/c5_sector_value_by_year.csv"},
+      "transform": [
+        {
+          "fold": [
+            "1998-99", "1999-00", "2000-01", "2001-02", "2002-03", "2003-04", "2004-05", "2005-06",
+            "2006-07", "2007-08", "2008-09", "2009-10", "2010-11", "2011-12", "2012-13", "2013-14",
+            "2014-15", "2015-16", "2016-17", "2017-18", "2018-19", "2019-20", "2020-21", "2021-22",
+            "2022-23", "2023-24", "2024-25p"
+          ],
+          "as": ["year", "value_000"]
+        },
+        {"pivot": "series", "value": "value_000", "groupby": ["year"]},
+        {
+          "calculate": "(toNumber(datum.state_wild) + toNumber(datum.commonwealth_wild)) / 1000",
+          "as": "Wild-caught"
+        },
+        {"calculate": "toNumber(substring(datum.year, 0, 4)) + 1", "as": "year_end"}
+      ],
+      "mark": {"type": "line", "color": "#0F2530", "strokeWidth": 1.5, "strokeDash": [4, 3]},
+      "encoding": {
+        "x": {"field": "year_end", "type": "quantitative", "scale": {"domain": [1999, 2031]}},
+        "y": {"field": "Wild-caught", "type": "quantitative"},
+        "tooltip": [
+          {"field": "year", "title": "Year"},
+          {"field": "Wild-caught", "title": "Wild-caught total ($M)", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"x": 2020, "y": 1587}]},
+      "mark": {"type": "circle", "size": 60, "color": "#0F2530", "opacity": 1},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [1999, 2031]}},
+        "y": {"field": "y", "type": "quantitative"}
+      }
+    },
+    {
       "data": {"values": [{"x": 2020}]},
       "mark": {"type": "rule", "strokeDash": [4, 3], "color": "#1f2a30"},
       "encoding": {"x": {"field": "x", "type": "quantitative", "scale": {"domain": [1999, 2031]}}}
     },
     {
-      "data": {"values": [{"x": 2020, "y": 4150, "t": "2019-20: farming overtakes fishing"}]},
+      "data": {
+        "values": [
+          {"x": 2020, "y": 4100, "t": "2019-20: farming overtakes fishing"},
+          {"x": 2020, "y": 3800, "t": "Farmed $1,587M, wild-caught $1,578M"}
+        ]
+      },
       "mark": {
         "type": "text",
         "align": "right",
         "dx": -6,
-        "fontSize": 11,
+        "fontSize": 12,
         "fontWeight": "bold",
         "color": "#1f2a30"
       },
@@ -126,8 +168,15 @@
       }
     },
     {
-      "data": {"values": [{"x": 2028, "y": 4800, "t": "ABARES forecast"}]},
-      "mark": {"type": "text", "fontSize": 11, "fontStyle": "italic", "color": "#5a676e"},
+      "data": {"values": [{"x": 2031, "y": 4800, "t": "ABARES forecast"}]},
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#5a676e",
+        "align": "right",
+        "dx": -4
+      },
       "encoding": {
         "x": {"field": "x", "type": "quantitative", "scale": {"domain": [1999, 2031]}},
         "y": {"field": "y", "type": "quantitative"},

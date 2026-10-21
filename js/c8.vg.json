@@ -2,11 +2,11 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Most rock lobster is exported, but oysters are eaten here",
-    "subtitle": "% of production exported, 2023-24. Circle size = value of production.",
+    "subtitle": "Rough % of production exported, 2023-24. Circle size = value ($50M to $1.3B).",
     "anchor": "start"
   },
   "width": "container",
-  "height": 300,
+  "height": 346,
   "data": {"url": "data/c8_production_exports_2023_24.csv"},
   "transform": [
     {"calculate": "datum.species == 'Salmonids' ? 'Salmon' : datum.species", "as": "species"},
@@ -26,7 +26,7 @@
       "calculate": "toNumber(datum.farmed_production_t) > toNumber(datum.wild_production_t) ? 'Mostly farmed' : 'Mostly wild-caught'",
       "as": "type"
     },
-    {"calculate": "datum.species + ' ' + format(datum.export_pct, '.0f') + '%'", "as": "label"}
+    {"calculate": "datum.species + ' ~' + format(datum.export_pct, '.0f') + '%'", "as": "label"}
   ],
   "layer": [
     {
@@ -60,26 +60,29 @@
           "field": "export_pct",
           "type": "quantitative",
           "scale": {"domain": [0, 100]},
-          "title": "% exported",
+          "title": "% exported (estimate)",
           "axis": {"format": ".0f"}
         },
         "size": {
           "field": "value_musd",
           "type": "quantitative",
           "scale": {"range": [60, 2500]},
-          "legend": {"title": "Value ($M)", "values": [50, 500, 1300], "orient": "right"}
+          "legend": null
         },
         "color": {
           "field": "type",
           "type": "nominal",
-          "scale": {"domain": ["Mostly farmed", "Mostly wild-caught"], "range": ["#0072B2", "#D85A30"]},
-          "legend": {"title": null, "orient": "bottom", "direction": "horizontal"}
+          "scale": {
+            "domain": ["Mostly farmed", "Mostly wild-caught"],
+            "range": ["#0072B2", "#D85A30"]
+          },
+          "legend": {"title": null, "orient": "top", "direction": "horizontal", "offset": 8}
         },
         "tooltip": [
           {"field": "species", "title": "Species"},
           {"field": "production_t", "title": "Produced (t)", "format": ",.0f"},
           {"field": "export_t", "title": "Exported (t)", "format": ",.0f"},
-          {"field": "export_pct", "title": "% exported", "format": ".0f"},
+          {"field": "export_pct", "title": "% exported (estimate)", "format": ".0f"},
           {"field": "value_musd", "title": "Value ($M)", "format": ",.0f"}
         ]
       }
@@ -87,11 +90,12 @@
     {
       "mark": {
         "type": "text",
-        "align": "left",
-        "dx": 12,
-        "fontSize": 11,
+        "align": {"expr": "datum.species == 'Salmon' ? 'right' : 'left'"},
+        "dx": {"expr": "datum.species == 'Salmon' ? 28 : 12"},
+        "fontSize": 12,
         "fontWeight": "bold",
-        "color": "#1f2a30"
+        "color": "#1f2a30",
+        "dy": {"expr": "datum.species == 'Salmon' ? -36 : 0"}
       },
       "encoding": {
         "x": {
