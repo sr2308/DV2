@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Farmed seafood overtook wild-caught in 2019-20",
-    "subtitle": "Value of production, $M per year. Dashed line = wild-caught total. Faded = forecast.",
+    "subtitle": "Value of production, $M. Dashed line = wild-caught total. Faded = forecast.",
     "anchor": "start"
   },
   "width": "container",

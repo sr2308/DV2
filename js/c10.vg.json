@@ -6,7 +6,7 @@
     "anchor": "start",
     "frame": "bounds"
   },
-  "width": 300,
+  "width": 254,
   "height": 397,
   "data": {"url": "data/c10_species_value_by_year.csv"},
   "transform": [
@@ -101,6 +101,5 @@
       "encoding": {"text": {"field": "name"}}
     }
   ],
-  "config": {"view": {"stroke": null}},
-  "usermeta": {"labelSpace": 118}
+  "config": {"view": {"stroke": null}}
 }

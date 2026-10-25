@@ -6,10 +6,10 @@
   <title>From ocean to plate: Australia's seafood industry</title>
   <meta name="description" content="A data story about how Australia's seafood industry has changed: what we produce, where it comes from, farmed vs wild-caught, exports, and the health of fish stocks.">
 
-  <!-- Fonts: Bricolage Grotesque (headlines, numbers, charts) + Source Serif 4 (reading text) -->
+  <!-- Fonts: Source Serif 4 (main title and section titles) + Source Sans 3 (everything else, including charts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 
@@ -28,12 +28,41 @@
       <h1>From ocean to plate</h1>
       <p class="hero-sub">In 2019-20, seafood farms in Australia earned more than wild-catch fishing for the first time. This page looks at how the industry got there, where our seafood comes from and how much of what we eat is imported.</p>
     </div>
-    <figure class="hero-photo">
-      <div class="photo-frame">
-        <img src="images/hero.jpg" onerror="this.onerror=null; this.src='images/hero.png';" alt="Salmon pens and a fishing boat in a calm bay, with crates of salmon and rock lobster on the deck in front.">
-      </div>
-      <figcaption>Farmed salmon and wild rock lobster, the two sides of the industry.</figcaption>
-    </figure>
+    <div class="journey">
+      <p class="journey-title">From ocean to plate in five steps</p>
+      <ol>
+        <li>
+          <div class="j-row">
+            <span class="j-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16c4-6 12-8 18-4 1.5 1 3 2.4 4 4-1 1.6-2.5 3-4 4-6 4-14 2-18-4z"/><path d="M4 16l-2-4M4 16l-2 4"/><circle cx="21" cy="14.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+            <span class="j-text"><span class="j-step">01 · What we produce</span><span class="j-fact"><strong>$1.3B</strong> comes from farmed salmon, our most valuable seafood</span></span>
+          </div>
+        </li>
+        <li>
+          <div class="j-row">
+            <span class="j-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 29s-8-8.5-8-15a8 8 0 0 1 16 0c0 6.5-8 15-8 15z"/><circle cx="16" cy="14" r="3"/></svg></span>
+            <span class="j-text"><span class="j-step">02 · Where it comes from</span><span class="j-fact"><strong>Tasmania</strong> earns more than WA, Queensland and SA combined</span></span>
+          </div>
+        </li>
+        <li>
+          <div class="j-row">
+            <span class="j-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 20c2.5 1.6 5 1.6 7.5 0s5-1.6 7.5 0 5 1.6 7.5 0 3.5-1.2 4.5-.6"/><circle cx="16" cy="13" r="7"/><path d="M9 13h14M16 6v14"/></svg></span>
+            <span class="j-text"><span class="j-step">03 · Farmed or caught</span><span class="j-fact">Farmed value grew <strong>more than 3 times</strong> since <span class="nowrap">1998-99</span>, while the wild catch stayed flat</span></span>
+          </div>
+        </li>
+        <li>
+          <div class="j-row">
+            <span class="j-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 20h24l-3 6H7z"/><path d="M8 20v-5h7v5M15 20v-8h8v8"/><path d="M3 29c2.5 1.4 5 1.4 7.5 0s5-1.4 7.5 0 5 1.4 7.5 0"/></svg></span>
+            <span class="j-text"><span class="j-step">04 · Sold overseas</span><span class="j-fact"><strong>4 in 5</strong> rock lobsters are exported, mostly to Asia</span></span>
+          </div>
+        </li>
+        <li>
+          <div class="j-row">
+            <span class="j-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="17" cy="16" r="10"/><circle cx="17" cy="16" r="6"/><path d="M4 7v6M2.5 7v4a1.5 1.5 0 0 0 3 0V7M4 13v13"/></svg></span>
+            <span class="j-text"><span class="j-step">05 · On our plates</span><span class="j-fact"><strong>6 in 10</strong> kilograms of seafood we eat are imported</span></span>
+          </div>
+        </li>
+      </ol>
+    </div>
   </div>
 </header>
 
@@ -113,8 +142,8 @@
       <p class="intro">
         <span class="question">Which parts of Australia produce the most seafood?</span>
         <span class="intro-text">Most of the value comes from a few states and a few coastal areas, and each state
-        tends to focus on different seafood. <strong>Click a state in Figure 2</strong> to
-        highlight it in Figure 4, and click it again to reset.</span>
+        tends to focus on different seafood. <strong>Click a state</strong> on the map or in
+        Figure 4 to highlight it, and click an empty space to reset.</span>
       </p>
     </div>
 
@@ -138,7 +167,7 @@
         <div id="c4" class="chart"></div>
         <figcaption>
           <p class="finding neutral">Reading down a column shows each state's mix. <strong>Tasmania</strong> is mostly salmon and <strong>Western Australia</strong> is mostly wild crustaceans (mainly rock lobster). Queensland and South Australia rely more on other farmed seafood like prawns, tuna and oysters.</p>
-          <p class="how-to">Click a state on the map in Figure 2 to highlight its column here. Hover over a square for the exact value.</p>
+          <p class="how-to">Click a square to highlight that state's column, and click an empty space to reset. Hover over a square for the exact value.</p>
         </figcaption>
       </figure>
     </div>
@@ -207,8 +236,8 @@
         <div class="fig-no">Figure 7</div>
         <div id="c7" class="chart"></div>
         <figcaption>
-          <p class="finding wild" id="c7-text">Exports to China went from $170M in 2016-17 to $888M in 2018-19, which was more than all other markets combined.</p>
-          <p class="how-to">This text changes with the year you pick on the slider.</p>
+          <p class="finding wild">Exports to China went from <strong>$170M</strong> in 2016-17 to <strong>$888M</strong> in 2018-19, more than all other markets combined. After the 2020 ban, China's share fell to about a third and sales to Hong Kong grew.</p>
+          <p class="how-to">Drag the slider to change the year. The panel on the map shows that year's top five buyers, the total and what was happening with China.</p>
         </figcaption>
       </figure>
       <figure class="fig">
@@ -322,9 +351,9 @@
 
       <div>
         <h3>Tools</h3>
-        <p>Charts made with <a href="https://vega.github.io/vega-lite/">Vega-Lite</a> and <a href="https://vega.github.io/vega/">Vega</a>. Fonts: Bricolage Grotesque and Source Serif 4 (Google Fonts).</p>
+        <p>Charts made with <a href="https://vega.github.io/vega-lite/">Vega-Lite</a> and <a href="https://vega.github.io/vega/">Vega</a>. Fonts: Source Serif 4 and Source Sans 3 (Google Fonts).</p>
         <h3>Use of AI</h3>
-        <p>The cover image is AI-generated (ChatGPT) and does not show a real place. Claude (Anthropic) helped find data sources, prepare the data files, draft chart code and review the text. All figures were checked against the source data.</p>
+        <p>Claude (Anthropic) helped find data sources, prepare the data files, draft chart code and review the text. All figures were checked against the source data.</p>
       </div>
     </div>
   </div>
@@ -332,7 +361,7 @@
 
 <script>
   // One shared chart style so every figure matches the page typography and colours.
-  var FONT = "Bricolage Grotesque, Helvetica Neue, Arial, sans-serif";
+  var FONT = "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif";   // all chart text is sans-serif (quotes needed because the name has a number)
   var theme = {
     font: FONT,
     background: null,
@@ -356,99 +385,14 @@
   };
   var options = {actions: false, renderer: "svg", config: theme};
 
-  function draw(id) {
-    // On narrow screens, use smaller chart titles so they fit inside the chart.
-    var width = document.getElementById(id).clientWidth;
-    var opts = options;
-    if (width < 440) {
-      opts = JSON.parse(JSON.stringify(options));
-      opts.config.title.fontSize = 15;
-      opts.config.title.subtitleFontSize = 11;
-      opts.config.title.limit = width;
-      opts.config.title.subtitleLimit = width;
-    }
-    // Figures 6 and 10 need their width worked out from the column width:
-    // Figure 6 has two panels side by side, and Figure 10 keeps fixed space
-    // on both sides for its labels so they never get cut off.
-    if (id === 'c6' || id === 'c10') {
-      return fetch('js/' + id + '.vg.json').then(function (r) { return r.json(); }).then(function (spec) {
-        if (id === 'c6') spec.spec.width = Math.max(90, Math.floor((width - spec.spacing - 210) / 2));
-        if (id === 'c10') spec.width = Math.max(100, width - 2 * spec.usermeta.labelSpace);
-        return vegaEmbed('#' + id, spec, opts);
-      });
-    }
-    return vegaEmbed('#' + id, 'js/' + id + '.vg.json', opts);
-  }
+  // Draw every chart once the web fonts have loaded, so labels are measured with the right font.
+  var charts = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11', 'c12'];
 
-  // Wait for the web fonts, so chart labels are measured with the right font.
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () {
-    ['c1', 'c3', 'c5', 'c6', 'c8', 'c9', 'c10', 'c11', 'c12'].forEach(draw);
-
-    // Figure 7: the text under the map changes when the year slider moves.
-    draw('c7').then(function (result) {
-      followYearSlider(result.view);
-    });
-
-    // Figures 2 and 4 are linked: clicking a state on the map highlights it in both.
-    Promise.all([draw('c2'), draw('c4')]).then(function (results) {
-      var map = results[0].view, heat = results[1].view;
-      map.addEventListener('click', function (event, item) {
-        var state = (item && item.datum && item.datum.properties) ? item.datum.properties.STE_NAME21 : null;
-        if (state === map.signal('selected_state')) state = null;   // click again to reset
-        map.signal('selected_state', state).runAsync();
-        heat.signal('selected_state', state).runAsync();
-      });
+  document.fonts.ready.then(function () {
+    charts.forEach(function (id) {
+      vegaEmbed('#' + id, 'js/' + id + '.vg.json', options);
     });
   });
-
-  // ---------- Figure 7 text ----------
-  // Reads the export CSV, then rewrites the paragraph under the map
-  // each time the slider's "year" value changes.
-  function followYearSlider(view) {
-    var exportsByYear = {};   // e.g. {2019: [{country: "China", value: 888}, ...]}
-
-    vega.loader().load('data/c7_exports_by_country.csv').then(function (text) {
-      var rows = vega.read(text, {type: 'csv', parse: 'auto'});
-      rows.forEach(function (row) {
-        Object.keys(row).forEach(function (column) {
-          var match = column.match(/^(\d{4})\D\d{2}/);    // "2018-19" -> 2018
-          if (!match) return;
-          var yearEnd = Number(match[1]) + 1;
-          (exportsByYear[yearEnd] = exportsByYear[yearEnd] || [])
-            .push({country: row.country, value: Number(row[column]) || 0});
-        });
-      });
-      update(view.signal('year'));
-      view.addSignalListener('year', function (name, value) { update(value); });
-    });
-
-    // Show the slider value as a financial year ("2018-19") instead of "2019".
-    var slider = document.querySelector('#c7 input[type=range]');
-    var yearLabel = document.createElement('span');
-    yearLabel.className = 'fy-label';
-    slider.parentNode.appendChild(yearLabel);
-    function showYear() { yearLabel.textContent = financialYear(Number(slider.value)); }
-    slider.addEventListener('input', showYear);
-    showYear();
-
-    function update(yearEnd) {
-      var list = (exportsByYear[yearEnd] || []).slice().sort(function (a, b) { return b.value - a.value; });
-      if (!list.length) return;
-      var total = list.reduce(function (sum, d) { return sum + d.value; }, 0);
-      var top = list[0];
-      var label = financialYear(yearEnd);
-      var text = 'In ' + label + ', Australia sold <strong>$' + money(total) + 'M</strong> of seafood to these ' +
-                 list.length + ' markets. The biggest buyer was <strong>' + top.country + '</strong> at $' +
-                 money(top.value) + 'M, or ' + Math.round(top.value / total * 100) + '% of the total.';
-      if (yearEnd >= 2017 && yearEnd <= 2020) text += ' Sales to China grew quickly from 2016-17 onwards.';
-      if (yearEnd >= 2021 && yearEnd <= 2024) text += ' China stopped buying Australian live rock lobster in November 2020.';
-      if (yearEnd === 2025) text += ' Trade with China started again in December 2024.';
-      document.getElementById('c7-text').innerHTML = text;   // the text only comes from our own CSV
-    }
-
-    function money(x) { return Math.round(x).toLocaleString('en-AU'); }
-    function financialYear(yearEnd) { return (yearEnd - 1) + '-' + String(yearEnd).slice(2); }
-  }
 </script>
 
 </body>

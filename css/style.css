@@ -28,9 +28,9 @@
   --ink-soft: #4A6470;
   --rule:     #CFDFE1;
 
-  /* type */
-  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
-  --text:    "Source Serif 4", Georgia, "Times New Roman", serif;
+  /* type: serif for the main title and section titles, sans-serif for everything else */
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:  "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
 
   /* layout */
   --max: 1200px;
@@ -46,14 +46,16 @@ body {
   margin: 0;
   background: var(--white);
   color: var(--ink);
-  font-family: var(--text);
+  font-family: var(--sans);
   font-size: 19px;
-  line-height: 1.7;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3 { font-family: var(--display); color: inherit; margin: 0; }
+h1, h2, h3 { color: inherit; margin: 0; }
+h1, h2 { font-family: var(--serif); }   /* main title and section titles are serif */
+h3 { font-family: var(--sans); }
 p { margin: 0 0 1em; }
 a { color: var(--tide); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:focus-visible, button:focus-visible, input:focus-visible {
@@ -83,7 +85,7 @@ strong { font-weight: 600; }
 }
 
 .kicker {
-  font-family: var(--display);
+  font-family: var(--sans);
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--spray);
@@ -92,9 +94,9 @@ strong { font-weight: 600; }
 
 .hero h1 {
   font-size: clamp(3rem, 7.5vw, 6.5rem);
-  font-weight: 800;
-  line-height: 0.92;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   max-width: 10ch;
 }
 
@@ -106,30 +108,58 @@ strong { font-weight: 600; }
   margin: 26px 0 0;
 }
 
-/* The photo is shown in softened, natural colour so it sits quietly
-   beside the title instead of competing with it. */
-.hero-photo { margin: 0; }
-.photo-frame {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--deep);           /* shows while the photo loads */
-}
-.photo-frame img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 88% center;       /* keeps the boat and the catch in view */
-  filter: saturate(0.55) contrast(1.05) brightness(0.92);
-}
-.hero-photo figcaption {
-  font-family: var(--display);
+/* Cover journey: five steps from ocean to plate, one per chapter,
+   like a contents page for the story. */
+.journey { min-width: 0; }
+.journey-title {
+  font-family: var(--sans);
   font-size: 0.8rem;
-  line-height: 1.45;
-  color: #8fb0b7;
-  margin-top: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--spray);
+  margin: 0 0 18px;
 }
+.journey ol { list-style: none; margin: 0; padding: 0; }
+.journey li { position: relative; }
+.journey li + li { margin-top: 10px; }
+.j-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 6px 10px 6px 0;
+}
+.j-icon {
+  flex: 0 0 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid rgba(143, 200, 207, 0.55);
+  border-radius: 50%;
+  color: var(--spray);
+  background: var(--abyss);
+}
+.j-icon svg {
+  width: 28px; height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.j-text { display: flex; flex-direction: column; min-width: 0; }
+.j-step {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--spray);
+}
+.j-fact {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #c3d8dd;
+}
+.j-fact strong { color: #fff; font-weight: 700; }
 
 /* ---------- Key numbers (just below the cover) ---------- */
 .numbers {
@@ -151,7 +181,7 @@ strong { font-weight: 600; }
 .ledger div:last-child { border-right: 0; }
 .ledger .num {
   display: block;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 700;
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   line-height: 1;
@@ -173,7 +203,7 @@ strong { font-weight: 600; }
   line-height: 1.5;
   color: #a9c4ca;
 }
-.glossary dt { font-family: var(--display); font-weight: 600; color: #fff; }
+.glossary dt { font-family: var(--sans); font-weight: 600; color: #fff; }
 .glossary dd { margin: 2px 0 0; }
 
 /* ---------- 4. Chapters ---------- */
@@ -200,7 +230,7 @@ strong { font-weight: 600; }
   display: flex;
   align-items: center;
   gap: 20px;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-size: 1.6rem;
   font-weight: 800;
   line-height: 1;
@@ -219,8 +249,8 @@ strong { font-weight: 600; }
 .chapter h2 {
   font-size: clamp(2.2rem, 4.4vw, 3.4rem);
   font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.025em;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
 }
 
 .intro {
@@ -270,7 +300,7 @@ strong { font-weight: 600; }
 }
 
 .fig-no {
-  font-family: var(--display);
+  font-family: var(--sans);
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--tide);
@@ -318,15 +348,8 @@ strong { font-weight: 600; }
 .finding.neutral::before { background: var(--tide); }
 
 .how-to {
-  font-family: var(--display);
+  font-family: var(--sans);
   font-size: 0.9rem;
-  color: var(--ink-soft);
-  margin: 0;
-}
-.source {
-  font-family: var(--display);
-  font-size: 0.8rem;
-  line-height: 1.45;
   color: var(--ink-soft);
   margin: 0;
 }
@@ -339,7 +362,7 @@ strong { font-weight: 600; }
 .aside p { max-width: 40ch; }
 .aside .figure-big {
   display: block;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 800;
   font-size: clamp(3.5rem, 7vw, 5.5rem);
   line-height: 0.9;
@@ -353,7 +376,7 @@ strong { font-weight: 600; }
   margin: 64px 0 0;                   /* large text, so a full line is still about 12 words */
   padding-top: 26px;
   border-top: 1px solid var(--rule);
-  font-family: var(--display);
+  font-family: var(--sans);
   font-size: clamp(1.35rem, 2.3vw, 1.8rem);
   font-weight: 600;
   line-height: 1.3;
@@ -388,7 +411,7 @@ strong { font-weight: 600; }
 
 /* colour keys used inside sentences */
 .key {
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -406,19 +429,18 @@ strong { font-weight: 600; }
 .key.wild::before { background: var(--wild); }
 
 /* Vega slider and radio buttons */
-.vega-bindings { font-family: var(--display); font-size: 0.92rem; color: var(--ink-soft); margin-top: 10px; }
+.vega-bindings { font-family: var(--sans); font-size: 0.92rem; color: var(--ink-soft); margin-top: 10px; }
 .vega-bind { display: inline-flex; align-items: center; gap: 10px; margin-right: 18px; }
 .vega-bind-name { font-weight: 600; color: var(--ink); }
 .vega-bind input[type="range"] { width: 260px; accent-color: var(--wild); }
 .vega-bind input[type="radio"] { accent-color: var(--deep); }
-/* Figure 7: hide the raw slider number and show the financial year instead (set in index.html) */
+/* Figure 7: hide the raw slider number; the financial year is shown large on the map instead */
 #c7 .vega-bind input[type="range"] + span { display: none; }
 
 .nowrap { white-space: nowrap; }
-#c7 .fy-label { font-weight: 700; color: var(--ink); white-space: nowrap; }
 
 #vg-tooltip-element {
-  font-family: var(--display);
+  font-family: var(--sans);
   font-size: 13px;
   border: 1px solid var(--rule);
   border-radius: 6px;
@@ -430,7 +452,7 @@ footer {
   background: var(--abyss);
   color: #a9c4ca;
   padding: 64px 0 40px;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-size: 0.88rem;
   line-height: 1.6;
 }
@@ -469,31 +491,3 @@ footer li { margin: 0 0 10px; }
 footer p { margin: 0 0 12px; }
 footer p + h3 { margin-top: 24px; }
 footer a { color: #d7e8eb; }
-
-/* ---------- 7. Smaller screens ---------- */
-@media (max-width: 980px) {
-  .ledger { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .ledger div:nth-child(3) { border-right: 0; }
-  .ledger div:nth-child(4) { padding-left: 0; }
-  .glossary { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-}
-
-@media (max-width: 820px) {
-  body { font-size: 18px; }
-  .hero { padding: 32px 0 40px; }
-  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-  .photo-frame { aspect-ratio: 3 / 2; }
-  .chapter { padding: 64px 0 56px; }
-  .chapter-no::before { width: 90px; }
-  .chapter h2 { margin-bottom: 16px; }
-  .chapter-head,
-  .figures,
-  .full figcaption,
-  .footer-grid { grid-template-columns: minmax(0, 1fr); }
-  .figures > .aside,
-  .figures > .closing { grid-row: auto; }
-  .ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ledger div { border-right: 0; padding-left: 0 !important; }
-  .vega-bind input[type="range"] { width: 160px; }
-  .fig { padding: 14px 16px 18px 22px; }
-}

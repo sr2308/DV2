@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Most rock lobster is exported, but oysters are eaten here",
+    "text": "Rock lobster goes overseas, oysters stay here",
     "subtitle": "Rough % of production exported, 2023-24. Circle size = value ($50M to $1.3B).",
     "anchor": "start"
   },

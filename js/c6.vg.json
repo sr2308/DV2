@@ -47,7 +47,7 @@
     }
   ],
   "facet": {
-    "column": {
+    "row": {
       "field": "measure_label",
       "type": "nominal",
       "sort": ["Production (tonnes)", "Value"],
@@ -55,17 +55,17 @@
       "header": {"labels": false, "title": null, "labelPadding": 0, "titlePadding": 0}
     }
   },
-  "spacing": 64,
+  "spacing": 18,
   "spec": {
-    "width": 200,
-    "height": 300,
+    "width": 345,
+    "height": 136,
     "encoding": {
       "x": {
         "field": "year_end",
         "type": "quantitative",
         "title": null,
         "scale": {"domain": [1999, 2024]},
-        "axis": {"format": "d", "values": [1999, 2024], "grid": false}
+        "axis": {"format": "d", "values": [1999, 2004, 2009, 2014, 2019, 2024], "grid": false}
       },
       "y": {
         "field": "index",
@@ -73,7 +73,7 @@
         "title": null,
         "scale": {"type": "log", "domain": [0.5, 20], "nice": false},
         "axis": {
-          "values": [0.5, 1, 2, 5, 10, 20],
+          "values": [1, 2, 5, 10, 20],
           "labelExpr": "datum.value == 1 ? 'no change' : datum.value + '×'",
           "grid": true
         }
