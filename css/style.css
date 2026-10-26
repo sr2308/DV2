@@ -29,7 +29,7 @@
   --rule:     #CFDFE1;
 
   /* type: serif for the main title and section titles, sans-serif for everything else */
-  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;   /* soft, old-style serif that suits the ocean theme */
   --sans:  "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
 
   /* layout */
@@ -393,19 +393,27 @@ strong { font-weight: 600; }
   flex-direction: column;
   justify-content: center;
 }
+.closing-kicker {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--spray);
+  margin: 0 0 18px;
+}
 .closing h3 {
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.015em;
-  margin-bottom: 22px;
+  margin-bottom: 28px;
 }
 .closing ul { margin: 0; padding: 0; list-style: none; }
 .closing li {
-  padding: 12px 0;
+  padding: 18px 0;
   border-top: 1px solid rgba(143, 200, 207, 0.25);
   color: #c3d8dd;
-  font-size: 1.02rem;
+  font-size: 1.1rem;
   line-height: 1.5;
 }
 
@@ -491,3 +499,41 @@ footer li { margin: 0 0 10px; }
 footer p { margin: 0 0 12px; }
 footer p + h3 { margin-top: 24px; }
 footer a { color: #d7e8eb; }
+
+/* ---------- 7. Smaller screens ----------
+   On tablets and narrow windows the two-column layout stacks into one
+   column, so charts and text keep a readable size. The charts redraw to
+   fit their new width automatically. */
+@media (max-width: 900px) {
+  .hero-grid,
+  .chapter-head,
+  .figures,
+  .full figcaption,
+  .footer-grid { grid-template-columns: minmax(0, 1fr); }
+
+  .hero-grid { gap: 36px; }
+  .chapter { padding: 60px 0 52px; }
+  .chapter-head { row-gap: 18px; margin-bottom: 36px; }
+  .figures { gap: 32px; }
+  .conclusion { margin-top: 44px; }
+  .closing { padding: 32px 28px; }
+
+  .ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  .ledger div,
+  .ledger div + div {
+    padding: 18px 0 20px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(143, 200, 207, 0.18);
+  }
+  .glossary { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .footer-grid { gap: 28px; }
+}
+
+@media (max-width: 560px) {
+  :root { --gutter: 16px; }
+  body { font-size: 17px; }
+  .chapter-no::before { width: 120px; }
+  .fig { padding: 16px 16px 20px 24px; }
+  .vega-bind { flex-wrap: wrap; }
+  .vega-bind input[type="range"] { width: 100%; }
+}

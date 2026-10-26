@@ -1,61 +1,187 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Most assessed fish stocks are sustainable",
-    "subtitle": "One dot per wild fish stock, grouped by who manages it. 63% are sustainable.",
+    "text": "Most stocks are sustainable, but not everywhere",
+    "subtitle": [
+      "Status of wild fish stocks by who manages them, 2024.",
+      "Column width = number of stocks assessed."
+    ],
     "anchor": "start"
   },
   "width": "container",
-  "height": 400,
-  "projection": {"type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-133, 0]},
-  "layer": [
+  "height": 360,
+  "data": {"url": "data/c12_stock_status_dots.csv"},
+  "transform": [
+    {"filter": "datum.jurisdiction != 'Australian Capital Territory'"},
     {
-      "data": {"url": "data/aus_states.topojson", "format": {"type": "topojson", "feature": "states"}},
-      "mark": {"type": "geoshape", "fill": "#ece9e2", "stroke": "white", "strokeWidth": 1}
+      "calculate": "datum.status == 'Undefined' || datum.status == 'Negligible' ? 'Not rated' : datum.status",
+      "as": "status"
+    },
+    {"aggregate": [{"op": "count", "as": "count"}], "groupby": ["jurisdiction", "status"]},
+    {
+      "calculate": "indexof(['Depleted','Depleting','Recovering','Sustainable','Not rated'], datum.status)",
+      "as": "order"
+    },
+    {"calculate": "datum.status == 'Depleted' ? datum.count : 0", "as": "depleted_part"},
+    {
+      "joinaggregate": [
+        {"op": "sum", "field": "count", "as": "total"},
+        {"op": "sum", "field": "depleted_part", "as": "depleted"}
+      ],
+      "groupby": ["jurisdiction"]
+    },
+    {"calculate": "datum.depleted / datum.total", "as": "depleted_share"},
+    {"calculate": "datum.count / datum.total", "as": "share"},
+    {
+      "calculate": "({'New South Wales':'NSW','Victoria':'VIC','Queensland':'QLD','South Australia':'SA','Western Australia':'WA','Tasmania':'TAS','Northern Territory':'NT','Commonwealth':'Cwlth'})[datum.jurisdiction]",
+      "as": "short"
     },
     {
-      "data": {"url": "data/c12_stock_status_dots.csv"},
-      "params": [{"name": "pick", "select": {"type": "point", "fields": ["status"]}, "bind": "legend"}],
-      "mark": {"type": "circle", "size": 22, "stroke": "white", "strokeWidth": 0.3},
+      "stack": "count",
+      "groupby": ["jurisdiction"],
+      "sort": [{"field": "order", "order": "ascending"}],
+      "offset": "normalize",
+      "as": ["y0", "y1"]
+    },
+    {
+      "stack": "count",
+      "groupby": [],
+      "sort": [
+        {"field": "depleted_share", "order": "descending"},
+        {"field": "jurisdiction", "order": "ascending"},
+        {"field": "order", "order": "ascending"}
+      ],
+      "offset": "normalize",
+      "as": ["row_x0", "row_x1"]
+    },
+    {
+      "joinaggregate": [
+        {"op": "min", "field": "row_x0", "as": "x0"},
+        {"op": "max", "field": "row_x1", "as": "x1"}
+      ],
+      "groupby": ["jurisdiction"]
+    },
+    {"calculate": "(datum.x0 + datum.x1) / 2", "as": "x_mid"}
+  ],
+  "encoding": {
+    "x": {"type": "quantitative", "axis": null, "scale": {"domain": [0, 1]}},
+    "y": {"type": "quantitative", "scale": {"domain": [0, 1]}}
+  },
+  "layer": [
+    {
+      "params": [
+        {"name": "pick", "select": {"type": "point", "fields": ["status"]}, "bind": "legend"}
+      ],
+      "mark": {"type": "rect", "stroke": "white", "strokeWidth": 1.5},
       "encoding": {
-        "longitude": {"field": "lon", "type": "quantitative"},
-        "latitude": {"field": "lat", "type": "quantitative"},
+        "x": {"field": "x0"},
+        "x2": {"field": "x1"},
+        "y": {
+          "field": "y0",
+          "axis": {
+            "title": null,
+            "format": ".0%",
+            "values": [0, 0.25, 0.5, 0.75, 1],
+            "grid": false,
+            "domain": false,
+            "ticks": false,
+            "labelPadding": 6
+          }
+        },
+        "y2": {"field": "y1"},
         "color": {
           "field": "status",
           "type": "nominal",
           "scale": {
-            "domain": ["Sustainable", "Recovering", "Depleting", "Depleted", "Undefined", "Negligible"],
-            "range": ["#0072B2", "#8DBEE0", "#EF9F27", "#E24B4A", "#d6d4cd", "#e8e6e0"]
+            "domain": ["Depleted", "Depleting", "Recovering", "Sustainable", "Not rated"],
+            "range": ["#E24B4A", "#EF9F27", "#8DBEE0", "#0072B2", "#d6d4cd"]
           },
-          "legend": {"orient": "top-right", "title": "Stock status"}
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "title": null,
+            "symbolType": "square",
+            "offset": 10,
+            "columns": 3,
+            "columnPadding": 16,
+            "rowPadding": 6
+          }
         },
-        "opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.08},
-        "tooltip": [{"field": "jurisdiction", "title": "Managed by"}, {"field": "status", "title": "Status"}]
-      }
-    },
-    {
-      "data": {"values": [{"lon": 133.0, "lat": -44.4, "t": "Commonwealth waters"}]},
-      "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "color": "#1f2a30"},
-      "encoding": {
-        "longitude": {"field": "lon", "type": "quantitative"},
-        "latitude": {"field": "lat", "type": "quantitative"},
-        "text": {"field": "t"}
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {"lon": 150.2, "lat": -43.2, "t": "Tasmania: 12 of 55"},
-          {"lon": 150.2, "lat": -44.6, "t": "stocks depleted"}
+        "opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.15},
+        "tooltip": [
+          {"field": "jurisdiction", "title": "Managed by"},
+          {"field": "status", "title": "Status"},
+          {"field": "count", "title": "Stocks"},
+          {"field": "share", "title": "Share of this group", "format": ".0%"}
         ]
-      },
-      "mark": {"type": "text", "align": "left", "fontSize": 11, "fontWeight": "bold", "color": "#b5461f"},
-      "encoding": {
-        "longitude": {"field": "lon", "type": "quantitative"},
-        "latitude": {"field": "lat", "type": "quantitative"},
-        "text": {"field": "t"}
       }
+    },
+    {
+      "transform": [{"filter": "datum.status == 'Depleted'"}],
+      "mark": {
+        "type": "text",
+        "baseline": "top",
+        "dy": 8,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#0F2530"
+      },
+      "encoding": {"x": {"field": "x_mid"}, "y": {"datum": 0}, "text": {"field": "short"}}
+    },
+    {
+      "transform": [{"filter": "datum.status == 'Depleted'"}],
+      "mark": {"type": "text", "baseline": "top", "dy": 24, "fontSize": 11, "color": "#4A6470"},
+      "encoding": {
+        "x": {"field": "x_mid"},
+        "y": {"datum": 0},
+        "text": {"field": "total", "format": ","}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.status == 'Depleted'"}],
+      "mark": {
+        "type": "text",
+        "baseline": "top",
+        "dy": 39,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#C23B3A"
+      },
+      "encoding": {
+        "x": {"field": "x_mid"},
+        "y": {"datum": 0},
+        "text": {"field": "depleted_share", "format": ".0%"}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.status == 'Depleted' && datum.x0 == 0"}],
+      "mark": {
+        "type": "text",
+        "baseline": "top",
+        "align": "right",
+        "dx": -6,
+        "dy": 24,
+        "fontSize": 11,
+        "fontWeight": "normal",
+        "color": "#4A6470"
+      },
+      "encoding": {"x": {"datum": 0}, "y": {"datum": 0}, "text": {"value": "Stocks"}}
+    },
+    {
+      "transform": [{"filter": "datum.status == 'Depleted' && datum.x0 == 0"}],
+      "mark": {
+        "type": "text",
+        "baseline": "top",
+        "align": "right",
+        "dx": -6,
+        "dy": 39,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#C23B3A"
+      },
+      "encoding": {"x": {"datum": 0}, "y": {"datum": 0}, "text": {"value": "Depleted"}}
     }
   ],
-  "config": {"view": {"stroke": null}}
+  "config": {"view": {"stroke": null}},
+  "padding": {"left": 0, "right": 0, "top": 0, "bottom": 4}
 }

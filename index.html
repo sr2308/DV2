@@ -6,10 +6,10 @@
   <title>From ocean to plate: Australia's seafood industry</title>
   <meta name="description" content="A data story about how Australia's seafood industry has changed: what we produce, where it comes from, farmed vs wild-caught, exports, and the health of fish stocks.">
 
-  <!-- Fonts: Source Serif 4 (main title and section titles) + Source Sans 3 (everything else, including charts) -->
+  <!-- Fonts: Fraunces (main title and section titles) + Source Sans 3 (everything else, including charts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 
@@ -142,8 +142,7 @@
       <p class="intro">
         <span class="question">Which parts of Australia produce the most seafood?</span>
         <span class="intro-text">Most of the value comes from a few states and a few coastal areas, and each state
-        tends to focus on different seafood. <strong>Click a state</strong> on the map or in
-        Figure 4 to highlight it, and click an empty space to reset.</span>
+        tends to focus on different seafood. <strong>Hover over a state</strong> on the map in Figure 2 to highlight it.</span>
       </p>
     </div>
 
@@ -159,7 +158,7 @@
         <div class="fig-no">Figure 3</div>
         <div id="c3" class="chart"></div>
         <figcaption>
-          <p class="finding wild">Production is grouped in <strong>a few coastal areas</strong>, with salmon in southern Tasmania, rock lobster around Geraldton and farmed prawns in north Queensland.</p>
+          <p class="finding neutral">Production is grouped in <strong>a few coastal areas</strong>, with salmon in southern Tasmania, rock lobster around Geraldton and farmed prawns in north Queensland.</p>
         </figcaption>
       </figure>
       <figure class="fig full">
@@ -167,7 +166,7 @@
         <div id="c4" class="chart"></div>
         <figcaption>
           <p class="finding neutral">Reading down a column shows each state's mix. <strong>Tasmania</strong> is mostly salmon and <strong>Western Australia</strong> is mostly wild crustaceans (mainly rock lobster). Queensland and South Australia rely more on other farmed seafood like prawns, tuna and oysters.</p>
-          <p class="how-to">Click a square to highlight that state's column, and click an empty space to reset. Hover over a square for the exact value.</p>
+          <p class="how-to">Hover over a square to highlight it and see the exact value.</p>
         </figcaption>
       </figure>
     </div>
@@ -205,8 +204,8 @@
         <div class="fig-no">Figure 6</div>
         <div id="c6" class="chart"></div>
         <figcaption>
-          <p class="finding">Salmon production grew <strong>6.6 times</strong> and its value grew <strong>16 times</strong>. The rock lobster catch dropped by <strong>42%</strong>, but it is still worth more now than in <span class="nowrap">1998-99</span>.</p>
-          <p class="how-to">Figure 5 adds up all farmed and wild seafood; this chart follows single species. The vertical scale counts multiples (a log scale), so going from 1× to 2× takes the same space as 10× to 20×. Hover over a line to see the change in any year.</p>
+          <p class="finding neutral">Salmon production grew <strong>6.6 times</strong> and its value grew <strong>16 times</strong>. The rock lobster catch dropped by <strong>42%</strong>, but it is still worth more now than in <span class="nowrap">1998-99</span>.</p>
+          <p class="how-to">Figure 5 adds up all farmed and wild seafood; this chart follows single species. The vertical scale counts multiples. Hover over a line to see the change in any year.</p>
         </figcaption>
       </figure>
     </div>
@@ -236,7 +235,7 @@
         <div class="fig-no">Figure 7</div>
         <div id="c7" class="chart"></div>
         <figcaption>
-          <p class="finding wild">Exports to China went from <strong>$170M</strong> in 2016-17 to <strong>$888M</strong> in 2018-19, more than all other markets combined. After the 2020 ban, China's share fell to about a third and sales to Hong Kong grew.</p>
+          <p class="finding neutral">Exports to China went from <strong>$170M</strong> in 2016-17 to <strong>$888M</strong> in 2018-19, more than all other markets combined. After the 2020 ban, China's share fell to about a third and sales to Hong Kong grew.</p>
           <p class="how-to">Drag the slider to change the year. The panel on the map shows that year's top five buyers, the total and what was happening with China.</p>
         </figcaption>
       </figure>
@@ -244,7 +243,7 @@
         <div class="fig-no">Figure 8</div>
         <div id="c8" class="chart"></div>
         <figcaption>
-          <p class="finding wild">About <strong>four in five</strong> rock lobsters are exported. Almost all oysters and around 70% of farmed salmon are eaten in Australia.</p>
+          <p class="finding neutral">About <strong>four in five</strong> rock lobsters are exported. Almost all oysters and around 70% of farmed salmon are eaten in Australia.</p>
           <p class="how-to">Export shares are estimates. Exports are weighed after processing (for example, without shells or heads), while production is weighed whole, so the real shares are probably a little higher.</p>
         </figcaption>
       </figure>
@@ -300,10 +299,11 @@
         <div id="c12" class="chart"></div>
         <figcaption>
           <p class="finding wild">Leaving out the ACT, which has only one stock, Tasmania has the highest share of depleted stocks, with <strong>12 of its 55 (22%)</strong>. Every other group has fewer than one in six depleted.</p>
-          <p class="how-to">Hover over a label for the full count. Click a status in the legend to show only those stocks. A stock shared by two states appears in both groups.</p>
+          <p class="how-to">Each column is one group, and its width shows how many stocks it manages. "Not rated" means there was not enough data to judge the stock, or the catch is too small to matter. Hover over a block for the exact count, and click a status in the legend to show only that status.</p>
         </figcaption>
       </figure>
       <div class="closing">
+        <p class="closing-kicker">The big picture</p>
         <h3>Farming has overtaken fishing in Australia, but most of the seafood we eat still comes from overseas.</h3>
         <ul>
           <li>Farming now earns more than fishing, and the gap is expected to grow.</li>
@@ -330,10 +330,10 @@
       <div>
         <h3>Data sources</h3>
         <ul>
-          <li>ABARES (2025). <a href="https://www.agriculture.gov.au/abares/research-topics/fisheries/fisheries-and-aquaculture-statistics">Australian fisheries and aquaculture statistics</a>, data to 2024-25. CC BY 4.0.</li>
-          <li>ABARES (2026). <a href="https://doi.org/10.25814/98pm-3f48">Agricultural commodities: March quarter 2026</a>, fisheries forecasts. CC BY 4.0.</li>
+          <li>ABARES (2025). <a href="https://www.agriculture.gov.au/abares/research-topics/fisheries/fisheries-and-aquaculture-statistics">Australian fisheries and aquaculture statistics</a>, data to 2024-25.</li>
+          <li>ABARES (2026). <a href="https://doi.org/10.25814/98pm-3f48">Agricultural commodities: March quarter 2026</a>, fisheries forecasts.</li>
           <li>FRDC (2024). <a href="https://fish.gov.au/reports/data-tools/key-results">Status of Australian Fish Stocks Reports 2024, key results</a>.</li>
-          <li>ABS. <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files">ASGS Edition 3 state boundaries</a>, simplified with mapshaper. CC BY 4.0.</li>
+          <li>ABS. <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files">ASGS Edition 3 state boundaries</a>, simplified with mapshaper.</li>
           <li>World map: Natural Earth via <a href="https://github.com/vega/vega-datasets">vega-datasets</a>. Coordinates: <a href="https://data.gov.au/data/dataset/geography-placenames-gazetteer9">Gazetteer of Australia</a> and <a href="https://developers.google.com/public-data/docs/canonical/countries_csv">Google countries.csv</a>.</li>
         </ul>
       </div>
@@ -341,19 +341,18 @@
       <div>
         <h3>Notes on the data</h3>
         <ul>
-          <li>Years are financial years (July to June). Dollars are nominal Australian dollars. 2024-25 is preliminary and later years are ABARES forecasts.</li>
-          <li>State figures (2 to 4) leave out Commonwealth fisheries, which are not assigned to a state. There is no data for the ACT.</li>
-          <li>Figure 8 compares processed export weight with live production weight, so the shares are approximate.</li>
+          <li>Years are financial years (July to June). Dollars are Australian dollars. Years after 2024-25 are ABARES forecasts.</li>
+          <li>Figure 8 compares processed export weight with live production weight.</li>
           <li>Figure 11: seafood eaten = production + imports - exports, by weight.</li>
-          <li>Figure 12: stocks shared between states appear in each one, so there are more dots than stocks.</li>
+          <li>Figure 12: stocks shared between states is counted in each one, so the columns add up to more than the number of stocks.</li>
         </ul>
       </div>
 
       <div>
         <h3>Tools</h3>
-        <p>Charts made with <a href="https://vega.github.io/vega-lite/">Vega-Lite</a> and <a href="https://vega.github.io/vega/">Vega</a>. Fonts: Source Serif 4 and Source Sans 3 (Google Fonts).</p>
+        <p>Charts made with <a href="https://vega.github.io/vega-lite/">Vega-Lite</a> and <a href="https://vega.github.io/vega/">Vega</a></p>
         <h3>Use of AI</h3>
-        <p>Claude (Anthropic) helped find data sources, prepare the data files, draft chart code and review the text. All figures were checked against the source data.</p>
+        <p>Claude (Anthropic) helped with some pre processing, draft chart code and review the text. All figures were checked against the source data.</p>
       </div>
     </div>
   </div>
