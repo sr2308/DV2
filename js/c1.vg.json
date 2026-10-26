@@ -6,7 +6,7 @@
     "anchor": "start",
     "offset": 6
   },
-  "height": 380,
+  "height": 400,
   "padding": {"left": 0, "right": 0, "top": 0, "bottom": 4},
   "signals": [
     {
@@ -108,7 +108,8 @@
           "fontWeight": {"value": "bold"},
           "fill": {"value": "#1f2a30"}
         }
-      }
+      },
+      "clip": true
     },
     {
       "type": "rect",
@@ -148,7 +149,8 @@
           "fill": {"value": "white"},
           "limit": {"signal": "datum.x1 - datum.x0 - 10"}
         }
-      }
+      },
+      "clip": true
     },
     {
       "type": "text",
@@ -165,7 +167,8 @@
           "fill": {"value": "white"},
           "limit": {"signal": "datum.x1 - datum.x0 - 10"}
         }
-      }
+      },
+      "clip": true
     },
     {
       "type": "text",
@@ -185,7 +188,8 @@
           "fill": {"value": "white"},
           "limit": {"signal": "datum.x1 - datum.x0 - 16"}
         }
-      }
+      },
+      "clip": true
     }
   ]
 }

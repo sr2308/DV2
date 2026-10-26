@@ -329,6 +329,7 @@ strong { font-weight: 600; }
   align-items: start;
 }
 .full figcaption .how-to { padding-top: 3px; }
+.full figcaption > :only-child { grid-column: 1 / -1; }   /* a single line can use the full width */
 .finding {
   position: relative;
   margin: 0 0 8px;
@@ -347,6 +348,19 @@ strong { font-weight: 600; }
 .finding.wild::before { background: var(--wild); }
 .finding.neutral::before { background: var(--tide); }
 
+/* A question that leads into the next figure below, marked with a down arrow */
+.bridge {
+  display: block;
+  margin-top: 10px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.bridge::before {
+  content: "\2193";
+  color: var(--tide);
+  margin-right: 8px;
+}
+
 .how-to {
   font-family: var(--sans);
   font-size: 0.9rem;
@@ -360,6 +374,18 @@ strong { font-weight: 600; }
   font-size: 1.12rem;
 }
 .aside p { max-width: 40ch; }
+/* Figure 1: the text sits under the full-width treemap, with the big
+   number on the left and the two paragraphs in the columns beside it */
+.figures > .aside-wide {
+  grid-column: 1 / -1;
+  grid-row: auto;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 48px;
+  align-items: start;
+}
+.aside-wide p { max-width: none; margin: 0; }
+.aside-wide .figure-big { margin: 0; }
 .aside .figure-big {
   display: block;
   font-family: var(--sans);
@@ -526,6 +552,7 @@ footer a { color: #d7e8eb; }
     border-bottom: 1px solid rgba(143, 200, 207, 0.18);
   }
   .glossary { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .figures > .aside-wide { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .footer-grid { gap: 28px; }
 }
 
