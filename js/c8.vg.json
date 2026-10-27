@@ -2,7 +2,10 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Rock lobster goes overseas, oysters stay here",
-    "subtitle": "Rough % of production exported, 2023-24. Circle size = value ($50M to $1.3B).",
+    "subtitle": [
+      "Export share: rough % of production volume sold overseas, 2023-24.",
+      "Circle size = production value ($50M to $1.3B)."
+    ],
     "anchor": "start"
   },
   "width": "container",

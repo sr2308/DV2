@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Salmon grew bigger and far more valuable",
-    "subtitle": "Size compared with 1998-99, for three single species.",
+    "subtitle": "Change since 1998-99 for three species. 1× = the 1998-99 level, 2× = double.",
     "anchor": "start"
   },
   "data": {"url": "data/c6_species_value_quantity_by_year.csv"},

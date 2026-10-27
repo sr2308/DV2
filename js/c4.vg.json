@@ -2,12 +2,11 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Each state relies on different seafood",
-    "subtitle": "Value by state and type of seafood, 2023-24 ($M). Darker = more valuable.",
+    "subtitle": "Production value by state and type of seafood, 2023-24 ($M). Darker = higher value. Hover over a square.",
     "anchor": "start"
   },
   "width": "container",
   "height": 230,
-  "params": [{"name": "selected_state", "value": null}],
   "data": {"url": "data/c4_state_categories_2023_24.csv"},
   "transform": [
     {"calculate": "datum.farmed_total_000 - datum.farmed_salmonids_000", "as": "farmed_other_000"},
@@ -47,30 +46,35 @@
       "field": "category",
       "type": "nominal",
       "title": null,
-      "sort": ["Farmed salmon & trout", "Other farmed", "Wild crustaceans", "Wild fish", "Wild molluscs"],
+      "sort": [
+        "Farmed salmon & trout", "Other farmed", "Wild crustaceans", "Wild fish", "Wild molluscs"
+      ],
       "axis": {"labelFontSize": 12, "domain": false, "ticks": false, "labelLimit": 200}
     }
   },
   "layer": [
     {
-      "mark": {"type": "rect", "stroke": "white", "strokeWidth": 2},
+      "mark": {"type": "rect", "stroke": "white", "strokeWidth": 2, "cursor": "pointer"},
       "encoding": {
         "color": {
           "field": "value_musd",
           "type": "quantitative",
-          "scale": {"type": "symlog", "constant": 10, "scheme": "blues"},
+          "scale": {"type": "symlog", "constant": 10, "scheme": "teals"},
           "legend": null
         },
-        "opacity": {
-          "condition": {"test": "selected_state == null || datum.state == selected_state", "value": 1},
-          "value": 0.25
-        },
+        "opacity": {"condition": {"param": "pick", "empty": true, "value": 1}, "value": 0.25},
         "tooltip": [
           {"field": "state", "title": "State"},
           {"field": "category", "title": "Type"},
           {"field": "value_musd", "title": "Value ($M)", "format": ",.1f"}
         ]
-      }
+      },
+      "params": [
+        {
+          "name": "pick",
+          "select": {"type": "point", "fields": ["state"], "on": "mouseover", "clear": "mouseout"}
+        }
+      ]
     },
     {
       "mark": {"type": "text", "fontSize": 12},
@@ -81,11 +85,11 @@
           "type": "quantitative",
           "format": ",.0f"
         },
-        "color": {"condition": {"test": "datum.value_musd > 150", "value": "white"}, "value": "#1f2a30"},
-        "opacity": {
-          "condition": {"test": "selected_state == null || datum.state == selected_state", "value": 1},
-          "value": 0.3
-        }
+        "color": {
+          "condition": {"test": "datum.value_musd > 150", "value": "white"},
+          "value": "#1f2a30"
+        },
+        "opacity": {"condition": {"param": "pick", "empty": true, "value": 1}, "value": 0.3}
       }
     }
   ],

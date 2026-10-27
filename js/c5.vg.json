@@ -2,12 +2,20 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Farmed seafood overtook wild-caught in 2019-20",
-    "subtitle": "Value of production, $M. Dashed line = wild-caught total. Faded = forecast.",
+    "subtitle": "Production value, $M. Dashed line = wild-caught total. Shaded = ABARES forecast.",
     "anchor": "start"
   },
   "width": "container",
   "height": 300,
   "layer": [
+    {
+      "data": {"values": [{"a": 2025, "b": 2031}]},
+      "mark": {"type": "rect", "color": "#eef1f2"},
+      "encoding": {
+        "x": {"field": "a", "type": "quantitative", "scale": {"domain": [1999, 2031]}},
+        "x2": {"field": "b"}
+      }
+    },
     {
       "data": {"url": "data/c5_sector_value_by_year.csv"},
       "transform": [
@@ -168,7 +176,7 @@
       }
     },
     {
-      "data": {"values": [{"x": 2031, "y": 4800, "t": "ABARES forecast"}]},
+      "data": {"values": [{"x": 2031, "y": 4800, "t": "Forecast"}]},
       "mark": {
         "type": "text",
         "fontSize": 12,

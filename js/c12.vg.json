@@ -4,7 +4,7 @@
     "text": "Most stocks are sustainable, but not everywhere",
     "subtitle": [
       "Status of wild fish stocks by who manages them, 2024.",
-      "Column width = number of stocks assessed."
+      "Width = number of stocks. Height = share with each status."
     ],
     "anchor": "start"
   },
@@ -94,7 +94,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Depleted", "Depleting", "Recovering", "Sustainable", "Not rated"],
-            "range": ["#E24B4A", "#EF9F27", "#8DBEE0", "#0072B2", "#d6d4cd"]
+            "range": ["#A3262A", "#E3A33B", "#9CCBD3", "#2C7A8C", "#d6d4cd"]
           },
           "legend": {
             "orient": "top",
@@ -145,7 +145,7 @@
         "dy": 39,
         "fontSize": 11,
         "fontWeight": 700,
-        "color": "#C23B3A"
+        "color": "#A3262A"
       },
       "encoding": {
         "x": {"field": "x_mid"},
@@ -177,7 +177,7 @@
         "dy": 39,
         "fontSize": 11,
         "fontWeight": 700,
-        "color": "#C23B3A"
+        "color": "#A3262A"
       },
       "encoding": {"x": {"datum": 0}, "y": {"datum": 0}, "text": {"value": "Depleted"}}
     }

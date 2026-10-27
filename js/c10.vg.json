@@ -2,7 +2,10 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Salmon climbed from 6th to 1st",
-    "subtitle": "Rank by value each year, 1 = most valuable. Hover a line to follow it.",
+    "subtitle": [
+      "Rank by production value (not tonnes), 1 = most valuable.",
+      "Hover over a line to follow it."
+    ],
     "anchor": "start",
     "frame": "bounds"
   },

@@ -329,6 +329,9 @@ strong { font-weight: 600; }
   align-items: start;
 }
 .full figcaption .how-to { padding-top: 3px; }
+/* right-hand column of a full-width caption: what the finding means, then how to use the chart */
+.caption-side p { margin: 0 0 10px; }
+.caption-side .how-to { margin: 0; padding-top: 0; }
 .full figcaption > :only-child { grid-column: 1 / -1; }   /* a single line can use the full width */
 .finding {
   position: relative;
